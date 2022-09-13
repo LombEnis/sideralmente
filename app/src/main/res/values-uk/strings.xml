@@ -456,5 +456,6 @@
     <string name="disable_gyro_preference_summary">Не всі пристрої мають гіроскоп - якщо у вас є, то ви отримаєте кращі результати, якщо він буде активованим, і цей поле не буде позначеним. З іншого боку, якщо ваш пристрій не має гіроскопа, Sky Map, ймовірно, не буде працювати, якщо ви знімете позначку з цього поля.</string>
     <string name="rotate_horizon_preference_title">Обертати по горизонту</string>
     <string name="rotate_horizon_preference_summary">Поворот на горизонті 90 градусів (для екранів з примусовим ландшафтом, такими як smartglasses)</string>
+    <string name="events_calendar">Events calendar</string>
 
 </resources>

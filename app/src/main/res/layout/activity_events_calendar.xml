@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.BlogActivity">
+    tools:context=".activities.EventsCalendarActivity">
 
     <WebView
-        android:id="@+id/blog_web_view"
+        android:id="@+id/events_calendar_web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

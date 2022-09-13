@@ -196,4 +196,5 @@
     <string name="disable_gyro_preference_summary">Nie wszystkie urządzenia mają żyroskop – jeśli Twoje posiada, uzyskasz lepsze wyniki z włączonym żyroskopem i odznaczeniem tego pola. Z drugiej strony, jeśli Twoje urządzenie nie ma żyroskopu, Sky Map prawdopodobnie nie będzie działać, jeśli odznaczysz to pole</string>
     <string name="rotate_horizon_preference_title">Obracaj horyzont</string>
     <string name="rotate_horizon_preference_summary">Obracaj horyzont o 90° (dla ekranów z wymuszoną poziomą orientacją ekranu) lub używaj trybu wskaźnika, aby ekran pokazywał, na co wskazuje góra telefonu (zobacz tekst pomocy)</string>
+    <string name="events_calendar">Kalendarz imprez</string>
 </resources>

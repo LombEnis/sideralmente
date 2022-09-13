@@ -377,4 +377,5 @@
     <string name="kml_load_error">Caricamento file KML non riuscito</string>
     <string name="load_kml_dialog_title">Carica KML</string>
     <string name="load_kml_file">Carica</string>
+    <string name="events_calendar">Calendario eventi</string>
 </resources>

@@ -202,4 +202,5 @@
     <string name="disable_gyro_preference_summary">No todos los dispositivos tienen un giroscopio; si el tuyo lo tiene, obtendrás mejores resultados con él activado y esta opción sin marcar. Pero, si tu dispositivo no lo tiene, es probable que Sky Map no funcione si desmarca esta opción.</string>
     <string name="rotate_horizon_preference_title">Rotar horizonte</string>
     <string name="rotate_horizon_preference_summary">Girar el horizonte en 90 grados (para pantallas con paisaje forzado, como lentes inteligentes)</string>
+    <string name="events_calendar">Calendario de eventos</string>
 </resources>

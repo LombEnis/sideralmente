@@ -478,4 +478,5 @@
     <string name="disable_gyro_preference_summary">Ikke alle enheter har gyroskop - hvis din har det vil du få bedre resultater med gyroskop aktivert og denne boksen ikke krysset av.  På den annen side hvis enheten ikke har gyroskop så vil Sky Map sannsynligvis ikke fungere hvis du fjerner avkryssingen av denne boksen.</string>
     <string name="rotate_horizon_preference_title">Roter horisont</string>
     <string name="rotate_horizon_preference_summary">Roter horisont 90 grader (for skjermer med påtvunget landskapsorientering slik som smartbriller)</string>
+    <string name="events_calendar">Arrangementskalender</string>
 </resources>

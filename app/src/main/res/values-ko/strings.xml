@@ -376,5 +376,6 @@
     <string name="kml_load_error">KML 파일 로드 실패</string>
     <string name="load_kml_dialog_title">KML 로드</string>
     <string name="load_kml_file">로드</string>
+    <string name="events_calendar">이벤트 캘린더</string>
 </resources>
 

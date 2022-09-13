@@ -92,7 +92,7 @@
             android:label="@string/title_activity_diagnostic"
             android:screenOrientation="portrait"></activity> <!-- Provides search suggestions. -->
         <activity
-            android:name=".activities.BlogActivity"
+            android:name=".activities.EventsCalendarActivity"
             android:screenOrientation="portrait" />
         <provider
             android:name=".search.SearchTermsProvider"

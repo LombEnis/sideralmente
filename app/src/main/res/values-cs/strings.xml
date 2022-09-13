@@ -459,4 +459,5 @@
     <string name="diagnostics_activity_pointing_ra_dec">Ukazující/ilustrační snapshot</string>
     <string name="connected">Připojeno</string>
     <string name="sensor_accuracy_unknown">Přesnost: Neznámá</string>
+    <string name="events_calendar">Kalendář akcí</string>
 </resources>
