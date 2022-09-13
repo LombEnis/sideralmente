@@ -423,6 +423,10 @@ public class DynamicStarMapActivity extends InjectableActivity
         menuEventBundle.putString(Analytics.MENU_ITEM_EVENT_VALUE, Analytics.DIAGNOSTICS_OPENED_LABEL);
         startActivity(new Intent(this, DiagnosticActivity.class));
         break;
+      case R.id.menu_item_blog:
+        Log.d(TAG, "Loading Blog");
+        startActivity(new Intent(this, BlogActivity.class));
+        break;
       default:
         Log.e(TAG, "Unwired-up menu item");
         return false;

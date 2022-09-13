@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_item_search"
           android:orderInCategory="1"
@@ -56,15 +57,20 @@
           android:title="@string/menu_diagnostics"
           android:showAsAction="never"/>
 
+    <item android:id="@+id/menu_item_blog"
+        android:orderInCategory="9"
+        android:title="Blog"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/menu_item_help"
-          android:orderInCategory="9"
+          android:orderInCategory="10"
           android:title="@string/menu_help"
           android:showAsAction="never"
           android:icon="@android:drawable/ic_menu_info_details"/>
 
     <!-- TODO(serafini): We need an icon for this? -->
     <item android:id="@+id/menu_item_tos"
-          android:orderInCategory="10"
+          android:orderInCategory="11"
           android:showAsAction="never"
           android:title="@string/menu_tos"/>
 </menu>

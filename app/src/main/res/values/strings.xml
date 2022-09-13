@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Settings</string>
@@ -87,8 +86,7 @@
     <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a date">Or select your own date:</string>
     <string name="change_date_prompt">Change the date</string>
     <string name="change_time_prompt">Change the time</string>
-    <string name="now_visiting"
-            translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+    <string name="now_visiting" translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
         Now visiting: %s</string>
     <string name="time_travel_label_past" translation_description="Label showing that we are in the past">Time Travel: Past</string>
     <string name="time_travel_label_future" translation_description="Label showing that we are in the future">Time Travel: Future</string>
@@ -198,13 +196,11 @@
     <string name="compass_calibration_activity_do_not_show_this_again">Do not show this again</string>
     <string name="compass_calibration_activity_warning">Your compass may need to be
         calibrated</string>
-    <string name="compass_calib_what_to_do"
-        translation_description="Information for the user on how to calibrate the compass when the dialog auto-opens. Placeholder is the video URL">Your phone is reporting to Sky
+    <string name="compass_calib_what_to_do" translation_description="Information for the user on how to calibrate the compass when the dialog auto-opens. Placeholder is the video URL">Your phone is reporting to Sky
         Map that its internal compass is uncalibrated.
     This is not a Sky Map issue but we can help you try to fix it. To calibrate the compass try moving your phone in a figure of eight
         motion as demonstrated in this video %s until the accuracy reads \'high\'.</string>
-    <string name="compass_calib_what_to_do_user"
-        transation_description="Information for the user on how to calibrate the compass when they invoke the calibration dialog. Placeholder is the video URL">Your phone\'s
+    <string name="compass_calib_what_to_do_user" transation_description="Information for the user on how to calibrate the compass when they invoke the calibration dialog. Placeholder is the video URL">Your phone\'s
         compass
         accuracy is shown above.
     If it is not \'high\' then the compass may need calibrating. This is not a Sky Map issue, but
