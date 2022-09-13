@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<resources>
+    <string name="app_name" translation_description="Application Title">Sky Map</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_search">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="set" translation_description="Button label. Set the date to the given value">Set</string>
+    <string name="go">Go!</string>
+    <string name="location_prefs">Location Settings</string>
+    <string name="force_gps_pref">Always use GPS</string>
+    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">if enabled, even if network location is available</string>
+    <string name="no_use_gps_pref">Set location manually</string>
+    <string name="no_use_gps_pref_hint">Enter a place or a lat/long below</string>
+    <string name="location_placename">Place name</string>
+    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">e.g. 1400 West Mars Hill Road, Flagstaff, AZ.</string>
+    <string name="location_lat_pref">Latitude</string>
+    <string name="location_long_pref">Longitude</string>
+    <string name="degrees" translation_description="angular degrees">Degrees</string>
+    <string name="preferences">preferences</string>
+    <string name="location_no_auto">Auto-location permission is disabled on your phone.   You can set the location manually in preferences.  Until then the map will be incorrect.</string>
+    <string name="location_offer_to_enable">Auto-location is disabled.  Would you like to enable it?</string>
+    <string name="location_offer_to_enable_gps_title">Auto-location disabled</string>
+    <string name="location_set_auto">Location set from %1$s to %2$s</string>
+    <string name="location_unable_to_geocode">Unable to decode your location - perhaps your network isn\'t available?</string>
+    <string name="location_not_found_title" translation_description="dialog box title when location not found">Sorry</string>
+    <string name="location_not_found" translation_description="dialog message when placename not found">%s not found.</string>
+    <string name="location_long_lat">Longitude:%1$s, Latitude:%2$s</string>
+    <string name="location_place_found">Place found.  Setting latitude %1$f and longitude %2$f</string>
+    <string name="use_magnetic_correction">Use magnetic correction</string>
+    <string name="use_magnetic_correction_hint">Use knowledge of your location to correct orientation from magnetic north to true north</string>
+    <!-- This string is too long and currently unused -->
+    <string name="provider_prefs" translation_description="Dialog box title for a preferences dialog">Show...</string>
+    <string name="show_stars_pref">Stars</string>
+    <string name="show_constellations_pref">Constellations</string>
+    <string name="show_messier_objects_pref" translation_description="The celestial objects catalogued by Charles Messier">Messier Objects</string>
+    <string name="show_planets_pref">Solar System</string>
+    <string name="show_grid_pref">RA/Dec Grid</string>
+    <string name="show_horizon_pref">Horizon</string>
+    <string name="show_sky_gradient" translation_description="This is a shading of the color of the sky used for effect">Sky Gradient</string>
+    <string name="show_meteors_pref">Meteor Showers</string>
+    <string name="show_comet_layer_pref">Comets</string>
+    <string name="show_satellite_layer_pref" translation_description="The layer for satellites">Satellites</string>
+    <!-- Just in case we decide to have such a layer for the 4/24 launch -->
+    <string name="show_hubble_layer_pref">Hubble Images</string>
+    <string name="sensor_prefs">Sensor Settings (experts)</string>
+    <string name="sensor_speed" translation_description="Old, non gyro sensors only: How quickly the sensor should send us data">Sensor Speed</string>
+    <string name="sensor_damping" translation_description="Old, non gyro sensors only: The amount of smoothing applied to the sensor outputs.">Damping</string>
+    <string name="ecliptic">Ecliptic</string>
+    <string name="malformed_loc_error">Latitude or longitude setting isn\'t a number.</string>
+    <string name="dialog_accept" translation_description="accepting the licence agreement">Accept</string>
+    <string name="dialog_decline" translation_description="declining the licence agreement">No Thanks</string>
+    <string name="dialog_ok_button">OK</string>
+    <string name="menu_help" translation_description="menu item to show \'Help\' box">Help</string>
+    <string name="help_dialog_title">Help for Sky Map</string>
+    <string name="eula_dialog_title">End User License Agreement</string>
+    <string name="set_manual">Switching to manual mode</string>
+    <string name="set_auto">Switching to automatic mode</string>
+    <string name="menu_zoom_in">Zoom in</string>
+    <string name="menu_zoom_out">Zoom out</string>
+    <string name="menu_toggle_dim">Toggle night mode</string>
+    <string name="zenith">ZENITH</string>
+    <string name="nadir">NADIR</string>
+    <string name="north">NORTH</string>
+    <string name="east">EAST</string>
+    <string name="west">WEST</string>
+    <string name="south">SOUTH</string>
+    <string name="search_label">Search the Sky</string>
+    <string name="search_hint" translation_description="an example search target">e.g. Mars</string>
+    <string name="no_search_title">No results</string>
+    <string name="no_search_results_text">No results were found.</string>
+    <!-- Hopefully this is a temporary measure until we can fix the search engine -->
+    <string name="no_search_results_text2">No results were found. Perhaps the object is not
+        visible at this time.</string>
+    <string name="many_search_results_title">Did you mean?</string>
+    <string name="many_search_results_text">Please select one</string>
+    <string name="searching_for_text">Searching for %s...</string>
+    <string name="found_target_text">Found %s.</string>
+    <string name="other" translation_description="A preference category (ie preferences that don't belong in any other category)">Other</string>
+    <string name="planetary_images">Show Planet Images</string>
+    <string name="menu_time">Time Travel</string>
+    <string name="time_travel_start_message">Traveling through time ...</string>
+    <string name="time_travel_start_message_alt">Traveling through time to %s ...</string>
+    <string name="time_travel_close_message">Back to the present ...</string>
+    <!--  -->
+    <string name="popular_dates_prompt" translation_description="Label for a list of dates the user can choose from">Popular dates</string>
+    <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a date">Or select your own date:</string>
+    <string name="change_date_prompt">Change the date</string>
+    <string name="change_time_prompt">Change the time</string>
+    <string name="now_visiting"
+            translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+        Now visiting: %s</string>
+    <string name="time_travel_label_past" translation_description="Label showing that we are in the past">Time Travel: Past</string>
+    <string name="time_travel_label_future" translation_description="Label showing that we are in the future">Time Travel: Future</string>
+    <string name="time_travel_stopped" translation_description="Label showing rate of travel through time">Time travel frozen</string>
+    <string name="time_travel_second_speed" translation_description="Label showing rate of travel through time.  The symbol means greater than.">Traveling &gt; @ 1 sec/sec</string>
+    <string name="time_travel_minute_speed" translation_description="Label showing rate of travel through time">Traveling &gt; @ 1 min/sec</string>
+    <string name="time_travel_10minute_speed" translation_description="Label showing rate of travel through time">Traveling &gt; @ 10 min/sec</string>
+    <string name="time_travel_hour_speed" translation_description="Label showing rate of travel through time">Traveling &gt; @ 1 hour/sec</string>
+    <string name="time_travel_day_speed" translation_description="Label showing rate of travel through time">Traveling &gt; @ 1 day/sec</string>
+    <string name="time_travel_week_speed" translation_description="Label showing rate of travel through time">Traveling &gt; @ 1 week/sec</string>
+    <string name="time_travel_second_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 1 sec/sec</string>
+    <string name="time_travel_minute_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 1 min/sec</string>
+    <string name="time_travel_10minute_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 10 min/sec</string>
+    <string name="time_travel_hour_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 1 hour/sec</string>
+    <string name="time_travel_day_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 1 day/sec</string>
+    <string name="time_travel_week_speed_back" translation_description="Label showing rate of travel through time">Traveling &lt; @ 1 week/sec</string>
+    <string name="use_sound_effects" translation_description="A preferences menu label">Enable sound</string>
+
+    <string name="enable_layer_toast">Enabling %s layer</string>
+    <string name="disable_layer_toast">Disabling %s layer</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="gallery_image_search_btn">Find in sky</string>
+    <string name="gallery_image_back_btn">Back to gallery</string>
+    <string name="hubble_image_gallery_title">Sky Map Gallery</string>
+    <string name="hubble_image">Hubble Image</string>
+    <!--  TODO(johntaylor): currently unused -->
+
+    <string name="search_target_found_message" translation_description="displayed when a search target has been located">You found:</string>
+    <string name="search_overlay_title" translation_description="title for search overlay">Point your phone toward the arrow</string>
+    <string name="search_target_looking_message" translation_description="displayed when a search target is being searched for">Looking for:</string>
+    <string name="sun_wont_set_message">The sun will not set during the next 24 hours at your current location.</string>
+    <string name="sun_wont_rise_message">The sun will not rise during the next 24 hours at your current location.</string>
+
+    <string name="missing_label" translation_description="Used to indicate to the developer that they've added a resource with no translation.">MISSING_LBL</string>
+
+
+    <string name="menu_tos">Terms of Service</string>
+    <string name="menu_diagnostics">Diagnostics</string>
+    <!-- TODO(johntaylor): the following might be deleted in favor of an icon -->
+    <string name="control_panel_btn" translation_description="Label for the control panel button">Control Panel</string>
+
+    <string name="north_pole">NP</string>
+    <string name="south_pole">SP</string>
+
+    <string name="kml_load_error">Failed to load KML file</string>
+    <string name="load_kml_dialog_title">Load KML</string>
+    <string name="load_kml_file">Load</string>
+    <string name="enable_analytics">Send usage statistics</string>
+    <string name="enable_analytics_desc">Make Sky Map better by sending anonymous data to Google Analytics</string>
+
+    <string name="no_sensor_warning">Your device may lack orientation sensors - automode may not work</string>
+    <string name="warning_dialog_title">Bad news!</string>
+    <string name="missing_sensor_dialog_text">\n
+        Unfortunately your device might not have one of the
+    sensors that Sky Map needs.\n\n
+        To show you the sky in the direction your phone is pointing Sky Map
+    needs both a built-in compass and an accelerometer.  Your device reports that it is missing
+        one of them.  The good news is that some devices (for example some Moto E phones) falsely claim
+        not to have a compass but actually do.\n\n
+
+        If your device really is missing a sensor then auto-mode will not work.  However, you
+        can still use Sky Map on this device in manual mode where you drag, rotate and stretch the
+        map with your fingers.
+    </string>
+    <string name="do_not_show_again">Do not show this message again</string>
+    <string name="title_activity_diagnostic">Diagnostics</string>
+    <string name="location_rationale_title">Why do we ask for your location?</string>
+    <string name="location_rationale_text">The stars you can see depend on where on planet earth you are.  Without your location we cannot show you an accurate map.  If you do not want your phone to give us your location you can provide it manually in the settings.  You need only provide the nearest city.</string>
+    <string name="play_services_error">Warning: Google Play Services error - Automatic location might not work</string>
+    <string name="sensor_absent">Absent</string>
+    <string name="sensor_accuracy_unknown">Accuracy: Unknown</string>
+    <string name="sensor_accuracy_unreliable">Accuracy: Unreliable</string>
+    <string name="sensor_accuracy_low">Accuracy: Low</string>
+    <string name="sensor_accuracy_medium">Accuracy: Medium</string>
+    <string name="sensor_accuracy_high">Accuracy: High</string>
+    <string name="sensor_accuracy_nocontact">Accuracy: No contact</string>
+    <string name="diagnostics_activity_general_heading">General</string>
+    <string name="diagnostics_activity_phone">Device</string>
+    <string name="diagnostics_activity_android_version">Android version</string>
+    <string name="diagnostics_activity_sky_map_version">Sky Map version</string>
+    <string name="diagnostics_activity_sensors_heading">Sensors</string>
+    <string name="diagnostics_activity_compass">Compass</string>
+    <string name="diagnostics_activity_accelerometer">Accelerometer</string>
+    <string name="diagnostics_activity_rotation_vector">Rotation</string>
+    <string name="diagnostics_activity_gyroscope">Gyroscope</string>
+    <string name="diagnostics_activity_light_level">Light level</string>
+    <string name="diagnostics_activity_location_and_time_heading">Location and Time</string>
+    <string name="diagnostics_activity_gps">GPS</string>
+    <string name="diagnostics_activity_location">Location (lat, long)</string>
+    <string name="diagnostics_activity_pointing_ra_dec">Pointing snapshot</string>
+    <string name="diagnostics_activity_magnetic_correction">Mag correction</string>
+    <string name="diagnostics_activity_local_datetime">Local datetime</string>
+    <string name="diagnostics_activity_universal_time">Universal datetime</string>
+    <string name="diagnostics_activity_network_heading">Network</string>
+    <string name="diagnostics_activity_connection">Connection</string>
+    <string name="diagnostics_activity_rotation_matrix">Rot Matrix</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="permission_disabled">Permission disabled</string>
+    <string name="no_gps">No GPS</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="wifi">" (wifi)"</string>
+    <string name="cell_network">" (cell)"</string>
+    <string name="menu_calibrate">Calibrate</string>
+    <string name="compass_calibration_activity_heading_compass">Compass -</string>
+    <string name="compass_calibration_activity_do_not_show_this_again">Do not show this again</string>
+    <string name="compass_calibration_activity_warning">Your compass may need to be
+        calibrated</string>
+    <string name="compass_calib_what_to_do"
+        translation_description="Information for the user on how to calibrate the compass when the dialog auto-opens. Placeholder is the video URL">Your phone is reporting to Sky
+        Map that its internal compass is uncalibrated.
+    This is not a Sky Map issue but we can help you try to fix it. To calibrate the compass try moving your phone in a figure of eight
+        motion as demonstrated in this video %s until the accuracy reads \'high\'.</string>
+    <string name="compass_calib_what_to_do_user"
+        transation_description="Information for the user on how to calibrate the compass when they invoke the calibration dialog. Placeholder is the video URL">Your phone\'s
+        compass
+        accuracy is shown above.
+    If it is not \'high\' then the compass may need calibrating. This is not a Sky Map issue, but
+    a property of your phone. To calibrate the compass try moving your phone in a figure of eight
+        motion as demonstrated in this video %s.</string>
+    <string name="sensor_reverse_preference_title">Reverse Magnetic Z</string>
+    <string name="sensor_reverse_preference_summary">Fix for phones with incorrectly implemented sensors - requires restart</string>
+    <string name="whats_new_dialog_title">What\'s new</string>
+    <string name="disable_gyro_preference_title">Disable gyroscope</string>
+    <string name="disable_gyro_preference_summary">Not all devices have a gyro - if yours does then you\'ll get better results with it enabled and this box unchecked.  On the other hand if your device does not have a gyro then Sky Map will probably not work if you uncheck this box.</string>
+    <string name="rotate_horizon_preference_title">View direction</string>
+
+    <string name="rotate_horizon_preference_summary">Rotate horizon by 90 degrees (for devices
+        with forced landscape) or use pointer mode for the screen to show
+        what the top of the phone is pointing at (see help text).</string>
+</resources>
