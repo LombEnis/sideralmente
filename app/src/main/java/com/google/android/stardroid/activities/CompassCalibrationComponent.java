@@ -11,6 +11,6 @@ import dagger.Component;
 @PerActivity
 @Component(modules = CompassCalibrationModule.class, dependencies = ApplicationComponent.class)
 public interface CompassCalibrationComponent {
-  void inject(CompassCalibrationActivity activity);
+    void inject(CompassCalibrationActivity activity);
 }
 

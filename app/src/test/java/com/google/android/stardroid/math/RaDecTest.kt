@@ -14,7 +14,7 @@ class RaDecTest {
         assertThat(raDegreesFromHMS(6f, 0f, 0f)).isWithin(EPS).of(90.0f)
         assertThat(raDegreesFromHMS(6f, 30f, 0f)).isWithin(EPS).of(6.5f / 24 * 360)
         assertThat(raDegreesFromHMS(6f, 0f, (30 * 60).toFloat())).isWithin(EPS)
-            .of(6.5f / 24 * 360)
+                .of(6.5f / 24 * 360)
     }
 
     @Test

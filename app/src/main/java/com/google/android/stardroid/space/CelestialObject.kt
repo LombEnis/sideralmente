@@ -1,9 +1,8 @@
 package com.google.android.stardroid.space
 
-import java.util.*
-
 import com.google.android.stardroid.base.TimeConstants
 import com.google.android.stardroid.math.*
+import java.util.*
 import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.floor
@@ -14,7 +13,7 @@ import kotlin.math.sin
  * Base class for any celestial objects.
  */
 abstract class CelestialObject {
-    abstract fun getRaDec(date : Date) : RaDec
+    abstract fun getRaDec(date: Date): RaDec
 
     /**
      * Enum that identifies whether we are interested in rise or set time.
@@ -38,8 +37,8 @@ abstract class CelestialObject {
      * the next day, otherwise null.
      */
     open fun calcNextRiseSetTime(
-        now: Calendar, loc: LatLong,
-        indicator: RiseSetIndicator
+            now: Calendar, loc: LatLong,
+            indicator: RiseSetIndicator
     ): Calendar? {
         // Make a copy of the calendar to return.
         val riseSetTime = Calendar.getInstance()
@@ -77,8 +76,8 @@ abstract class CelestialObject {
     // Internally calculate the rise and set time of an object.
     // Returns a double, the number of hours through the day in UT.
     private fun calcRiseSetTime(
-        d: Date, loc: LatLong,
-        indicator: RiseSetIndicator
+            d: Date, loc: LatLong,
+            indicator: RiseSetIndicator
     ): Double {
         val cal = Calendar.getInstance(TimeZone.getTimeZone("UT"))
         cal.time = d
@@ -146,15 +145,15 @@ abstract class CelestialObject {
     // following equation from the Astronomical Almanac (p487):
     // cos ha = (sin alt - sin lat * sin dec) / (cos lat * cos dec)
     open fun calculateHourAngle(
-        altitude: Float, latitude: Float,
-        declination: Float
+            altitude: Float, latitude: Float,
+            declination: Float
     ): Float {
         val altRads: Float = altitude * DEGREES_TO_RADIANS
         val latRads: Float = latitude * DEGREES_TO_RADIANS
         val decRads: Float = declination * DEGREES_TO_RADIANS
         val cosHa: Float =
-            (sin(altRads) - sin(latRads) * sin(decRads)) /
-                    (cos(latRads) * cos(decRads))
+                (sin(altRads) - sin(latRads) * sin(decRads)) /
+                        (cos(latRads) * cos(decRads))
         return RADIANS_TO_DEGREES * acos(cosHa)
     }
 }

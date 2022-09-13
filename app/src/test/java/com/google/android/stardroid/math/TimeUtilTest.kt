@@ -39,7 +39,7 @@ class TimeUtilTest {
         // http://en.wikipedia.org/wiki/Julian_day#Gregorian_calendar_from_Julian_day_number.
         // So midnight before is half a day earlier.
         assertThat(julianDay(year2000.time)).isWithin(TOL)
-            .of(2451544.5)
+                .of(2451544.5)
     }
 
     // Make sure that we correctly generate Julian dates. Standard values
@@ -107,29 +107,29 @@ class TimeUtilTest {
         // Jan  1, 2009, 12:00 UT1
         testCal[2009, GregorianCalendar.JANUARY, 1, 12, 0] = 0
         assertThat(meanSiderealTime(testCal.time, pit)).isWithin(LMST_TOL)
-            .of(13.42f * HOURS_TO_DEGREES)
+                .of(13.42f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, lon)).isWithin(LMST_TOL)
-            .of(18.74f * HOURS_TO_DEGREES)
+                .of(18.74f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, tok)).isWithin(LMST_TOL)
-            .of(4.07f * HOURS_TO_DEGREES)
+                .of(4.07f * HOURS_TO_DEGREES)
 
         // Sep 20, 2009, 12:00 UT1
         testCal[2009, GregorianCalendar.SEPTEMBER, 20, 12, 0] = 0
         assertThat(meanSiderealTime(testCal.time, pit)).isWithin(LMST_TOL)
-            .of(6.64f * HOURS_TO_DEGREES)
+                .of(6.64f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, lon)).isWithin(LMST_TOL)
-            .of(11.96f * HOURS_TO_DEGREES)
+                .of(11.96f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, tok)).isWithin(LMST_TOL)
-            .of(21.29f * HOURS_TO_DEGREES)
+                .of(21.29f * HOURS_TO_DEGREES)
 
         // Dec 25, 2010, 12:00 UT1
         testCal[2010, GregorianCalendar.DECEMBER, 25, 12, 0] = 0
         assertThat(meanSiderealTime(testCal.time, pit)).isWithin(LMST_TOL)
-            .of(12.92815f * HOURS_TO_DEGREES)
+                .of(12.92815f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, lon)).isWithin(LMST_TOL)
-            .of(18.25f * HOURS_TO_DEGREES)
+                .of(18.25f * HOURS_TO_DEGREES)
         assertThat(meanSiderealTime(testCal.time, tok)).isWithin(LMST_TOL)
-            .of(3.58f * HOURS_TO_DEGREES)
+                .of(3.58f * HOURS_TO_DEGREES)
     }
 
     companion object {

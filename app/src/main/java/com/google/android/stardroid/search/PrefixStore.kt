@@ -21,71 +21,71 @@ import java.util.*
  * @author John Taylor
  */
 class PrefixStore {
-  private class TrieNode {
-    var children: MutableMap<Char, TrieNode> = HashMap()
+    private class TrieNode {
+        var children: MutableMap<Char, TrieNode> = HashMap()
 
-    // we need to store the originals to support insensitive case searching
-    var results: MutableSet<String> = HashSet()
-  }
-
-  private var root = TrieNode()
-  fun clear() {
-    root = TrieNode()
-  }
-
-  /**
-   * Search for any queries matching this prefix.  Note that the prefix is
-   * case-independent.
-   *
-   * TODO(@tcao) refactor this API. Search should return a relevance ranked list.
-   */
-  fun queryByPrefix(prefix: String): Set<String> {
-    val prefixLower = prefix.lowercase()
-    var n = root
-    for (element in prefixLower) {
-      val c = n.children[element] ?: return EMPTY_SET
-      n = c
+        // we need to store the originals to support insensitive case searching
+        var results: MutableSet<String> = HashSet()
     }
-    val coll: MutableSet<String> = HashSet()
-    collect(n, coll)
-    return coll
-  }
 
-  private fun collect(n: TrieNode, coll: MutableCollection<String>) {
-    coll.addAll(n.results)
-    for (trieNode in n.children.values) {
-      collect(trieNode, coll)
+    private var root = TrieNode()
+    fun clear() {
+        root = TrieNode()
     }
-  }
 
-  /**
-   * Put a new string in the store.
-   */
-  fun add(string: String) {
-    var n = root
-    val lower = string.lowercase()
-    for (i in lower.indices) {
-      var c = n.children[lower[i]]
-      if (c == null) {
-        c = TrieNode()
-        n.children[lower[i]] = c
-      }
-      n = c
+    /**
+     * Search for any queries matching this prefix.  Note that the prefix is
+     * case-independent.
+     *
+     * TODO(@tcao) refactor this API. Search should return a relevance ranked list.
+     */
+    fun queryByPrefix(prefix: String): Set<String> {
+        val prefixLower = prefix.lowercase()
+        var n = root
+        for (element in prefixLower) {
+            val c = n.children[element] ?: return EMPTY_SET
+            n = c
+        }
+        val coll: MutableSet<String> = HashSet()
+        collect(n, coll)
+        return coll
     }
-    n.results.add(string)
-  }
 
-  /**
-   * Put a whole load of objects in the store at once.
-   * @param strings a collection of strings.
-   */
-  fun addAll(strings: Collection<String>) {
-    for (string in strings) {
-      add(string)
+    private fun collect(n: TrieNode, coll: MutableCollection<String>) {
+        coll.addAll(n.results)
+        for (trieNode in n.children.values) {
+            collect(trieNode, coll)
+        }
     }
-  }
 
-  companion object {
-    private val EMPTY_SET = Collections.unmodifiableSet(HashSet<String>())
-  }
+    /**
+     * Put a new string in the store.
+     */
+    fun add(string: String) {
+        var n = root
+        val lower = string.lowercase()
+        for (i in lower.indices) {
+            var c = n.children[lower[i]]
+            if (c == null) {
+                c = TrieNode()
+                n.children[lower[i]] = c
+            }
+            n = c
+        }
+        n.results.add(string)
+    }
+
+    /**
+     * Put a whole load of objects in the store at once.
+     * @param strings a collection of strings.
+     */
+    fun addAll(strings: Collection<String>) {
+        for (string in strings) {
+            add(string)
+        }
+    }
+
+    companion object {
+        private val EMPTY_SET = Collections.unmodifiableSet(HashSet<String>())
+    }
 }

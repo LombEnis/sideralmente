@@ -24,52 +24,52 @@ import com.google.android.stardroid.math.Vector3;
  */
 
 public class PointPrimitive extends AbstractPrimitive {
-  public final int size;
-  private final Shape pointShape;
+    public final int size;
+    private final Shape pointShape;
 
-  public PointPrimitive(float ra, float dec, int color, int size) {
-    this(CoordinateManipulationsKt.getGeocentricCoords(ra, dec), color, size);
-  }
-
-  public PointPrimitive(Vector3 coords, int color, int size) {
-    this(coords, color, size, Shape.CIRCLE);
-  }
-
-  public PointPrimitive(Vector3 coords, int color, int size, Shape pointShape) {
-    super(coords, color);
-    this.size = size;
-    this.pointShape = pointShape;
-  }
-
-  public int getSize() {
-    return size;
-  }
-
-  public Shape getPointShape() {
-    return pointShape;
-  }
-
-  public enum Shape {
-    CIRCLE(0),
-    STAR(1),
-    ELLIPTICAL_GALAXY(2),
-    SPIRAL_GALAXY(3),
-    IRREGULAR_GALAXY(4),
-    LENTICULAR_GALAXY(3),
-    GLOBULAR_CLUSTER(5),
-    OPEN_CLUSTER(6),
-    NEBULA(7),
-    HUBBLE_DEEP_FIELD(8);
-
-    private final int imageIndex;
-
-    Shape(int imageIndex) {
-      this.imageIndex = imageIndex;
+    public PointPrimitive(float ra, float dec, int color, int size) {
+        this(CoordinateManipulationsKt.getGeocentricCoords(ra, dec), color, size);
     }
 
-    public int getImageIndex() {
-      // return imageIndex;
-      return 0;
+    public PointPrimitive(Vector3 coords, int color, int size) {
+        this(coords, color, size, Shape.CIRCLE);
     }
-  }
+
+    public PointPrimitive(Vector3 coords, int color, int size, Shape pointShape) {
+        super(coords, color);
+        this.size = size;
+        this.pointShape = pointShape;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Shape getPointShape() {
+        return pointShape;
+    }
+
+    public enum Shape {
+        CIRCLE(0),
+        STAR(1),
+        ELLIPTICAL_GALAXY(2),
+        SPIRAL_GALAXY(3),
+        IRREGULAR_GALAXY(4),
+        LENTICULAR_GALAXY(3),
+        GLOBULAR_CLUSTER(5),
+        OPEN_CLUSTER(6),
+        NEBULA(7),
+        HUBBLE_DEEP_FIELD(8);
+
+        private final int imageIndex;
+
+        Shape(int imageIndex) {
+            this.imageIndex = imageIndex;
+        }
+
+        public int getImageIndex() {
+            // return imageIndex;
+            return 0;
+        }
+    }
 }

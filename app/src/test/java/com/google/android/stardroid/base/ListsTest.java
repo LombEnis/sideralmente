@@ -22,52 +22,52 @@ import java.util.List;
 
 /**
  * Unittests for the Lists class.
- * 
+ *
  * @author Brent Bryan
  */
 public class ListsTest extends TestCase {
-  private enum TestEnum {
-    ONE, TWO, THREE
-  }
+    public void testTransform() {
+        EnumSet<TestEnum> set = EnumSet.of(TestEnum.TWO, TestEnum.ONE);
+        List<Integer> list = Lists.transform(set, new Transform<TestEnum, Integer>() {
+            public Integer transform(TestEnum e) {
+                switch (e) {
+                    case ONE:
+                        return 1;
+                    case TWO:
+                        return 2;
+                    case THREE:
+                        return 3;
+                }
+                throw new RuntimeException();
+            }
+        });
 
-  public void testTransform() {
-    EnumSet<TestEnum> set = EnumSet.of(TestEnum.TWO, TestEnum.ONE);
-    List<Integer> list = Lists.transform(set, new Transform<TestEnum, Integer>() {
-      public Integer transform(TestEnum e) {
-        switch (e) {
-          case ONE:
-            return 1;
-          case TWO:
-            return 2;
-          case THREE:
-            return 3;
-        }
-        throw new RuntimeException();
-      }
-    });
+        assertEquals(2, list.size());
+        assertEquals(1, list.get(0).intValue());
+        assertEquals(2, list.get(1).intValue());
+    }
 
-    assertEquals(2, list.size());
-    assertEquals(1, list.get(0).intValue());
-    assertEquals(2, list.get(1).intValue());
-  }
+    public void testAsList_fromNonList() {
+        EnumSet<TestEnum> set = EnumSet.of(TestEnum.TWO, TestEnum.ONE);
+        List<TestEnum> list = Lists.asList(set);
 
-  public void testAsList_fromNonList() {
-    EnumSet<TestEnum> set = EnumSet.of(TestEnum.TWO, TestEnum.ONE);
-    List<TestEnum> list = Lists.asList(set);
+        assertEquals(2, list.size());
+        assertEquals(TestEnum.ONE, list.get(0));
+        assertEquals(TestEnum.TWO, list.get(1));
+    }
 
-    assertEquals(2, list.size());
-    assertEquals(TestEnum.ONE, list.get(0));
-    assertEquals(TestEnum.TWO, list.get(1));
-  }
+    public void testAsList_fromList() {
+        List<Integer> startList = Arrays.asList(new Integer[]{2, 4, 1});
+        List<Integer> newList = Lists.asList(startList);
 
-  public void testAsList_fromList() {
-    List<Integer> startList = Arrays.asList(new Integer[] {2, 4, 1});
-    List<Integer> newList = Lists.asList(startList);
+        assertEquals(3, newList.size());
+        assertEquals(2, newList.get(0).intValue());
+        assertEquals(4, newList.get(1).intValue());
+        assertEquals(1, newList.get(2).intValue());
+        assertTrue(startList == newList);
+    }
 
-    assertEquals(3, newList.size());
-    assertEquals(2, newList.get(0).intValue());
-    assertEquals(4, newList.get(1).intValue());
-    assertEquals(1, newList.get(2).intValue());
-    assertTrue(startList == newList);
-  }
+    private enum TestEnum {
+        ONE, TWO, THREE
+    }
 }

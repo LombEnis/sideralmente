@@ -33,39 +33,39 @@ import javax.inject.Inject;
  * @author John Taylor
  */
 public class PlainSmootherModelAdaptor implements SensorEventListener {
-  private static final String TAG = MiscUtil.getTag(PlainSmootherModelAdaptor.class);
-  private Vector3 magneticValues = ApplicationConstants.INITIAL_SOUTH.copyForJ();
-  private Vector3 acceleration = ApplicationConstants.INITIAL_DOWN.copyForJ();
-  private AstronomerModel model;
-  private boolean reverseMagneticZaxis;
+    private static final String TAG = MiscUtil.getTag(PlainSmootherModelAdaptor.class);
+    private Vector3 magneticValues = ApplicationConstants.INITIAL_SOUTH.copyForJ();
+    private Vector3 acceleration = ApplicationConstants.INITIAL_DOWN.copyForJ();
+    private AstronomerModel model;
+    private boolean reverseMagneticZaxis;
 
-  @Inject
-  PlainSmootherModelAdaptor(AstronomerModel model, SharedPreferences sharedPreferences) {
-    this.model = model;
-    reverseMagneticZaxis = sharedPreferences.getBoolean(
-        ApplicationConstants.REVERSE_MAGNETIC_Z_PREFKEY, false);
-  }
-
-  @Override
-  public void onSensorChanged(SensorEvent sensorEvent) {
-    Sensor sensor = sensorEvent.sensor;
-    float[] values = sensorEvent.values;
-    if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-      acceleration.x = values[0];
-      acceleration.y = values[1];
-      acceleration.z = values[2];
-    } else if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-      magneticValues.x = values[0];
-      magneticValues.y = values[1];
-      magneticValues.z = reverseMagneticZaxis ? -values[2] : values[2];
-    } else {
-      Log.e(TAG, "Pump is receiving values that aren't accel or magnetic");
+    @Inject
+    PlainSmootherModelAdaptor(AstronomerModel model, SharedPreferences sharedPreferences) {
+        this.model = model;
+        reverseMagneticZaxis = sharedPreferences.getBoolean(
+                ApplicationConstants.REVERSE_MAGNETIC_Z_PREFKEY, false);
     }
-    model.setPhoneSensorValues(acceleration, magneticValues);
-  }
 
-  @Override
-  public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    // Do nothing
-  }
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        Sensor sensor = sensorEvent.sensor;
+        float[] values = sensorEvent.values;
+        if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            acceleration.x = values[0];
+            acceleration.y = values[1];
+            acceleration.z = values[2];
+        } else if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            magneticValues.x = values[0];
+            magneticValues.y = values[1];
+            magneticValues.z = reverseMagneticZaxis ? -values[2] : values[2];
+        } else {
+            Log.e(TAG, "Pump is receiving values that aren't accel or magnetic");
+        }
+        model.setPhoneSensorValues(acceleration, magneticValues);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do nothing
+    }
 }

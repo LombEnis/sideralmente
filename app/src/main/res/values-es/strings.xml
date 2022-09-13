@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Ajustes</string>
@@ -87,8 +86,7 @@
     <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a date">O elige tu propia fecha:</string>
     <string name="change_date_prompt">Cambiar fecha</string>
     <string name="change_time_prompt">Cambiar hora</string>
-    <string name="now_visiting"
-            translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+    <string name="now_visiting" translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
         Visitando: %s</string>
     <string name="time_travel_label_past" translation_description="Label showing that we are in the past">Viaje en el tiempo: Pasado</string>
     <string name="time_travel_label_future" translation_description="Label showing that we are in the future">Viaje en el tiempo: Futuro</string>
@@ -124,7 +122,7 @@
 
     <string name="missing_label" translation_description="Used to indicate to the developer that they've added a resource with no translation.">MISSING_LBL</string>
 
-    
+
     <string name="menu_tos">Términos del Servicio</string>
     <string name="menu_diagnostics">Diagnósticos</string>
     <!-- TODO(johntaylor): the following might be deleted in favor of an icon -->
@@ -132,7 +130,7 @@
 
     <string name="north_pole">PN</string>
     <string name="south_pole">PS</string>
-    
+
     <string name="kml_load_error">Error al cargar el archivo KML</string>
     <string name="load_kml_dialog_title">Cargar KML</string>
     <string name="load_kml_file">Cargar</string>

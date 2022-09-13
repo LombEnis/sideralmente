@@ -5,5 +5,5 @@ package com.google.android.stardroid.inject
  * Created by johntaylor on 4/9/16.
  */
 interface HasComponent<C> {
-  val component: C
+    val component: C
 }

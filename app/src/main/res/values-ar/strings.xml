@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Partial Arabic translations kindly provided by
+<?xml version="1.0" encoding="utf-8"?><!-- Partial Arabic translations kindly provided by
      https://github.com/xsoh/Skymap -->
 <!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
@@ -83,8 +82,7 @@
     <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a date">أو حدد تاريخك</string>
     <string name="change_date_prompt">غير التاريخ</string>
     <string name="change_time_prompt">غير الوقت</string>
-    <string name="now_visiting"
-            translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+    <string name="now_visiting" translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
         Now visiting: %s</string>
     <string name="time_travel_label_past" translation_description="Label showing that we are in the past">Time Travel: Past</string>
     <string name="time_travel_label_future" translation_description="Label showing that we are in the future">Time Travel: Future</string>

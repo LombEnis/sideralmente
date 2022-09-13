@@ -34,8 +34,8 @@ import java.util.*
  * @author Brent Bryan
  */
 class SolarSystemRenderable(
-    private val solarSystemBody: SolarSystemBody, resources: Resources,
-    model: AstronomerModel, prefs: SharedPreferences
+        private val solarSystemBody: SolarSystemBody, resources: Resources,
+        model: AstronomerModel, prefs: SharedPreferences
 ) : AbstractAstronomicalRenderable() {
     private val pointPrimitives = ArrayList<PointPrimitive>()
     private val imagePrimitives = ArrayList<ImagePrimitive>()
@@ -73,19 +73,19 @@ class SolarSystemRenderable(
         imageId = solarSystemObject.getImageResourceId(time)
         if (solarSystemBody === SolarSystemBody.Moon) {
             imagePrimitives.add(
-                ImagePrimitive(
-                    currentCoords, resources, imageId, earthCoords,
-                    solarSystemObject.getPlanetaryImageSize()
-                )
+                    ImagePrimitive(
+                            currentCoords, resources, imageId, earthCoords,
+                            solarSystemObject.getPlanetaryImageSize()
+                    )
             )
         } else {
             val usePlanetaryImages = preferences.getBoolean(SHOW_PLANETARY_IMAGES, true)
             if (usePlanetaryImages || solarSystemBody === SolarSystemBody.Sun) {
                 imagePrimitives.add(
-                    ImagePrimitive(
-                        currentCoords, resources, imageId, UP,
-                        solarSystemObject.getPlanetaryImageSize()
-                    )
+                        ImagePrimitive(
+                                currentCoords, resources, imageId, UP,
+                                solarSystemObject.getPlanetaryImageSize()
+                        )
                 )
             } else {
                 pointPrimitives.add(PointPrimitive(currentCoords, PLANET_COLOR, PLANET_SIZE))
@@ -142,6 +142,6 @@ class SolarSystemRenderable(
         name = resources.getString(solarSystemObject.getNameResourceId())
         preferences = prefs
         earthCoords = heliocentricCoordinatesFromOrbitalElements(
-            SolarSystemBody.Earth.getOrbitalElements(model.time))
+                SolarSystemBody.Earth.getOrbitalElements(model.time))
     }
 }

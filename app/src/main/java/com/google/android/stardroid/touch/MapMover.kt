@@ -28,37 +28,37 @@ import com.google.android.stardroid.util.MiscUtil.getTag
  * @author John Taylor
  */
 class MapMover(
-  private val model: AstronomerModel,
-  private val controllerGroup: ControllerGroup,
-  context: Context
+        private val model: AstronomerModel,
+        private val controllerGroup: ControllerGroup,
+        context: Context
 ) : DragRotateZoomGestureDetectorListener {
-  private val sizeTimesRadiansToDegrees: Float
-  override fun onDrag(xPixels: Float, yPixels: Float): Boolean {
-    // Log.d(TAG, "Dragging by " + xPixels + ", " + yPixels);
-    val pixelsToRadians = model.fieldOfView / sizeTimesRadiansToDegrees
-    controllerGroup.changeUpDown(-yPixels * pixelsToRadians)
-    controllerGroup.changeRightLeft(-xPixels * pixelsToRadians)
-    return true
-  }
+    private val sizeTimesRadiansToDegrees: Float
+    override fun onDrag(xPixels: Float, yPixels: Float): Boolean {
+        // Log.d(TAG, "Dragging by " + xPixels + ", " + yPixels);
+        val pixelsToRadians = model.fieldOfView / sizeTimesRadiansToDegrees
+        controllerGroup.changeUpDown(-yPixels * pixelsToRadians)
+        controllerGroup.changeRightLeft(-xPixels * pixelsToRadians)
+        return true
+    }
 
-  override fun onRotate(degrees: Float): Boolean {
-    controllerGroup.rotate(-degrees)
-    return true
-  }
+    override fun onRotate(degrees: Float): Boolean {
+        controllerGroup.rotate(-degrees)
+        return true
+    }
 
-  override fun onStretch(ratio: Float): Boolean {
-    controllerGroup.zoomBy(1.0f / ratio)
-    return true
-  }
+    override fun onStretch(ratio: Float): Boolean {
+        controllerGroup.zoomBy(1.0f / ratio)
+        return true
+    }
 
-  companion object {
-    private val TAG = getTag(MapMover::class.java)
-  }
+    companion object {
+        private val TAG = getTag(MapMover::class.java)
+    }
 
-  init {
-    val metrics = context.resources.displayMetrics
-    val screenLongSize = metrics.heightPixels
-    Log.i(TAG, "Screen height is $screenLongSize pixels.")
-    sizeTimesRadiansToDegrees = screenLongSize * RADIANS_TO_DEGREES
-  }
+    init {
+        val metrics = context.resources.displayMetrics
+        val screenLongSize = metrics.heightPixels
+        Log.i(TAG, "Screen height is $screenLongSize pixels.")
+        sizeTimesRadiansToDegrees = screenLongSize * RADIANS_TO_DEGREES
+    }
 }

@@ -12,14 +12,15 @@ import dagger.Provides;
  */
 @Module
 public class CompassCalibrationModule {
-  private CompassCalibrationActivity activity;
-  public CompassCalibrationModule(CompassCalibrationActivity activity) {
-    this.activity = activity;
-  }
+    private CompassCalibrationActivity activity;
 
-  @Provides
-  @PerActivity
-  Context provideContext() {
-    return activity;
-  }
+    public CompassCalibrationModule(CompassCalibrationActivity activity) {
+        this.activity = activity;
+    }
+
+    @Provides
+    @PerActivity
+    Context provideContext() {
+        return activity;
+    }
 }

@@ -24,14 +24,14 @@ import com.google.android.stardroid.math.LatLong;
  */
 public interface MagneticDeclinationCalculator {
 
-  /**
-   * Returns the magnetic declination in degrees, that is, the rotation between
-   * magnetic North and true North.
-   */
-  float getDeclination();
+    /**
+     * Returns the magnetic declination in degrees, that is, the rotation between
+     * magnetic North and true North.
+     */
+    float getDeclination();
 
-  /**
-   * Sets the user's location and time.
-   */
-  void setLocationAndTime(LatLong location, long timeInMillis);
+    /**
+     * Sets the user's location and time.
+     */
+    void setLocationAndTime(LatLong location, long timeInMillis);
 }

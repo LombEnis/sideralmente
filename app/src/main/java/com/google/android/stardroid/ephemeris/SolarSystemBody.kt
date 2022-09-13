@@ -27,58 +27,58 @@ import java.util.*
  */
 // Add Color, magnitude, etc.
 enum class SolarSystemBody
-    (
-    // Resource ID to use for a planet's image.
-    val imageResourceId: Int,
-    // String ID for the body's name
-    val nameResourceId: Int,
-    // How frequently to update the body's position
-    val updateFrequencyMs: Long
+(
+        // Resource ID to use for a planet's image.
+        val imageResourceId: Int,
+        // String ID for the body's name
+        val nameResourceId: Int,
+        // How frequently to update the body's position
+        val updateFrequencyMs: Long
 ) {
     // The order here is the order in which they are drawn.  To ensure that during
     // conjunctions they display "naturally" order them in reverse distance from Earth.
     // TODO(jontayler): do this more rigorously - the only times it could really matter are when
     // Mercury and Venus ought to be behind the Sun.
     Pluto(
-        R.drawable.pluto,
-        R.string.pluto,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.pluto,
+            R.string.pluto,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Neptune(R.drawable.neptune, R.string.neptune, TimeConstants.MILLISECONDS_PER_HOUR),
     Uranus(
-        R.drawable.uranus,
-        R.string.uranus,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.uranus,
+            R.string.uranus,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Saturn(
-        R.drawable.saturn,
-        R.string.saturn,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.saturn,
+            R.string.saturn,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Jupiter(
-        R.drawable.jupiter,
-        R.string.jupiter,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.jupiter,
+            R.string.jupiter,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Mars(
-        R.drawable.mars,
-        R.string.mars,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.mars,
+            R.string.mars,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Sun(
-        R.drawable.sun,
-        R.string.sun,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.sun,
+            R.string.sun,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Mercury(
-        R.drawable.mercury,
-        R.string.mercury,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.mercury,
+            R.string.mercury,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Venus(
-        R.drawable.venus,
-        R.string.venus,
-        TimeConstants.MILLISECONDS_PER_HOUR
+            R.drawable.venus,
+            R.string.venus,
+            TimeConstants.MILLISECONDS_PER_HOUR
     ),
     Moon(R.drawable.moon4, R.string.moon, TimeConstants.MILLISECONDS_PER_MINUTE),
     Earth(R.drawable.earth, R.string.earth, TimeConstants.MILLISECONDS_PER_HOUR);

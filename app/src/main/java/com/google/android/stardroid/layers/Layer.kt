@@ -13,9 +13,9 @@
 // limitations under the License.
 package com.google.android.stardroid.layers
 
+import com.google.android.stardroid.renderables.AstronomicalRenderable
 import com.google.android.stardroid.renderer.RendererController
 import com.google.android.stardroid.search.SearchResult
-import com.google.android.stardroid.renderables.AstronomicalRenderable
 
 /**
  * A logical collection of objects which should be displayed in SkyMap. For

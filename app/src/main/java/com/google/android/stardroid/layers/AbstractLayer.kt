@@ -34,6 +34,7 @@ import java.util.concurrent.locks.ReentrantLock
 abstract class AbstractLayer(protected val resources: Resources) : Layer {
     private val renderMapLock = ReentrantLock()
     private val renderMap = HashMap<Class<*>, RenderManager<*>>()
+
     // TODO(jontayler): Try to structure the code better to prevent this from being accessed
     // before initialization.
     private /*lateinit*/ var renderer: RendererController? = null
@@ -71,11 +72,11 @@ abstract class AbstractLayer(protected val resources: Resources) : Layer {
      * of UI elements.
      */
     protected fun redraw(
-        textPrimitives: List<TextPrimitive>,
-        pointPrimitives: List<PointPrimitive>,
-        linePrimitives: List<LinePrimitive>,
-        imagePrimitives: List<ImagePrimitive>,
-        updateTypes: EnumSet<UpdateType> = EnumSet.of(UpdateType.Reset)
+            textPrimitives: List<TextPrimitive>,
+            pointPrimitives: List<PointPrimitive>,
+            linePrimitives: List<LinePrimitive>,
+            imagePrimitives: List<ImagePrimitive>,
+            updateTypes: EnumSet<UpdateType> = EnumSet.of(UpdateType.Reset)
     ) {
         if (renderer == null) return
         renderMapLock.lock()
@@ -96,8 +97,8 @@ abstract class AbstractLayer(protected val resources: Resources) : Layer {
      * creating (or disabling) the [RenderManager] if necessary.
      */
     private inline fun <reified E : AbstractPrimitive> setSources(
-        sources: List<E>, updateType: EnumSet<UpdateType>,
-        clazz: Class<E>, atomic: AtomicSection
+            sources: List<E>, updateType: EnumSet<UpdateType>,
+            clazz: Class<E>, atomic: AtomicSection
     ) {
         @Suppress("UNCHECKED_CAST")
         var manager = renderMap[clazz] as RenderManager<E>?
@@ -109,16 +110,16 @@ abstract class AbstractLayer(protected val resources: Resources) : Layer {
     }
 
     private inline fun <reified E : AbstractPrimitive> createRenderManager(
-        controller: RendererControllerBase
-    ) : RenderManager<E> =
-        @Suppress("UNCHECKED_CAST")
-        when (E::class) {
-            ImagePrimitive::class -> controller.createImageManager(layerDepthOrder) as RenderManager<E>
-            TextPrimitive::class -> controller.createLabelManager(layerDepthOrder) as RenderManager<E>
-            LinePrimitive::class -> controller.createLineManager(layerDepthOrder) as RenderManager<E>
-            PointPrimitive::class -> controller.createPointManager(layerDepthOrder) as RenderManager<E>
-            else -> throw IllegalStateException("Unknown source type: $(E::class)")
-        }
+            controller: RendererControllerBase
+    ): RenderManager<E> =
+            @Suppress("UNCHECKED_CAST")
+            when (E::class) {
+                ImagePrimitive::class -> controller.createImageManager(layerDepthOrder) as RenderManager<E>
+                TextPrimitive::class -> controller.createLabelManager(layerDepthOrder) as RenderManager<E>
+                LinePrimitive::class -> controller.createLineManager(layerDepthOrder) as RenderManager<E>
+                PointPrimitive::class -> controller.createPointManager(layerDepthOrder) as RenderManager<E>
+                else -> throw IllegalStateException("Unknown source type: $(E::class)")
+            }
 
     override fun searchByObjectName(name: String): List<SearchResult> {
         // By default, layers will return no search results.

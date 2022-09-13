@@ -14,7 +14,6 @@
 package com.google.android.stardroid.math
 
 import com.google.android.stardroid.math.MathUtils.abs
-import kotlin.jvm.JvmOverloads
 
 /**
  * Class for representing a 3x3 matrix explicitly, avoiding heap
@@ -34,9 +33,9 @@ import kotlin.jvm.JvmOverloads
  * @param zz row 3, col 3
  */
 data class Matrix3x3(
-    var xx: Float, var xy: Float, var xz: Float,
-    var yx: Float, var yy: Float, var yz: Float,
-    var zx: Float, var zy: Float, var zz: Float
+        var xx: Float, var xy: Float, var xz: Float,
+        var yx: Float, var yy: Float, var yz: Float,
+        var zx: Float, var zy: Float, var zz: Float
 ) {
 
     /**
@@ -46,7 +45,7 @@ data class Matrix3x3(
      */
     @JvmOverloads
     constructor(v1: Vector3, v2: Vector3, v3: Vector3, columnVectors: Boolean = true) : this(
-        0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f) {
+            0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f) {
         if (columnVectors) {
             xx = v1.x
             yx = v1.y
@@ -79,15 +78,15 @@ data class Matrix3x3(
     val inverse: Matrix3x3?
         get() {
             return if (abs(determinant) < 0.00001f) null else Matrix3x3(
-                (yy * zz - yz * zy) / determinant,
-                (xz * zy - xy * zz) / determinant,
-                (xy * yz - xz * yy) / determinant,
-                (yz * zx - yx * zz) / determinant,
-                (xx * zz - xz * zx) / determinant,
-                (xz * yx - xx * yz) / determinant,
-                (yx * zy - yy * zx) / determinant,
-                (xy * zx - xx * zy) / determinant,
-                (xx * yy - xy * yx) / determinant
+                    (yy * zz - yz * zy) / determinant,
+                    (xz * zy - xy * zz) / determinant,
+                    (xy * yz - xz * yy) / determinant,
+                    (yz * zx - yx * zz) / determinant,
+                    (xx * zz - xz * zx) / determinant,
+                    (xz * yx - xx * yz) / determinant,
+                    (yx * zy - yy * zx) / determinant,
+                    (xy * zx - xx * zy) / determinant,
+                    (xx * yy - xy * yx) / determinant
             )
         }
 
@@ -107,7 +106,7 @@ data class Matrix3x3(
         zy = tmp
     }
 
-    operator fun times(m : Matrix3x3) = Matrix3x3(
+    operator fun times(m: Matrix3x3) = Matrix3x3(
             this.xx * m.xx + this.xy * m.yx + this.xz * m.zx,
             this.xx * m.xy + this.xy * m.yy + this.xz * m.zy,
             this.xx * m.xz + this.xy * m.yz + this.xz * m.zz,
@@ -118,10 +117,10 @@ data class Matrix3x3(
             this.zx * m.xy + this.zy * m.yy + this.zz * m.zy,
             this.zx * m.xz + this.zy * m.yz + this.zz * m.zz)
 
-    operator fun times(v : Vector3) = Vector3(
-        this.xx * v.x + this.xy * v.y + this.xz * v.z,
-        this.yx * v.x + this.yy * v.y + this.yz * v.z,
-        this.zx * v.x + this.zy * v.y + this.zz * v.z)
+    operator fun times(v: Vector3) = Vector3(
+            this.xx * v.x + this.xy * v.y + this.xz * v.z,
+            this.yx * v.x + this.yy * v.y + this.yz * v.z,
+            this.zx * v.x + this.zy * v.y + this.zz * v.z)
 
     companion object {
         @JvmStatic

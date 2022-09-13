@@ -34,7 +34,7 @@ import kotlin.math.abs
  * @author Brent Bryan
  */
 class SkyGradientLayer(private val model: AstronomerModel, resources: Resources) :
-    Layer {
+        Layer {
     private val rendererLock = ReentrantLock()
     private var renderer: RendererController? = null
     private var lastUpdateTimeMs = 0L

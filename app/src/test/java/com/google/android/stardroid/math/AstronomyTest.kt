@@ -26,7 +26,7 @@ class AstronomyTest {
         Matrix3x3Subject.assertThat(identity).isWithin(TOL).of(noRotation)
         val rotAboutZ = calculateRotationMatrix(90f, Vector3(0f, 0f, 1f))
         Matrix3x3Subject.assertThat(Matrix3x3(0f, 1f, 0f, -1f, 0f, 0f, 0f, 0f, 1f)).isWithin(TOL)
-            .of(rotAboutZ)
+                .of(rotAboutZ)
         val axis = Vector3(2f, -4f, 1f)
         axis.normalize()
         val rotA = calculateRotationMatrix(30f, axis)
@@ -42,6 +42,6 @@ class AstronomyTest {
         axisPerpendicular.normalize()
         rotatedAxisPerpendicular.normalize()
         assertThat(axisPerpendicular dot rotatedAxisPerpendicular).isWithin(TOL)
-            .of(Math.cos(30.0 * DEGREES_TO_RADIANS).toFloat())
+                .of(Math.cos(30.0 * DEGREES_TO_RADIANS).toFloat())
     }
 }

@@ -31,35 +31,35 @@ import javax.inject.Inject;
  * @author John Taylor
  */
 public class Analytics implements AnalyticsInterface {
-  /**
-   * Analytics ID associated with http://stardroid-server.appspot.com
-   */
-  private final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder();
-  private FirebaseAnalytics firebaseAnalytics;
-  private static final String TAG = MiscUtil.getTag(Analytics.class);
+    private static final String TAG = MiscUtil.getTag(Analytics.class);
+    /**
+     * Analytics ID associated with http://stardroid-server.appspot.com
+     */
+    private final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder();
+    private FirebaseAnalytics firebaseAnalytics;
 
-  @Inject
-  Analytics(StardroidApplication application) {
-    firebaseAnalytics = FirebaseAnalytics.getInstance(application);
-    Task<String> appId = firebaseAnalytics.getAppInstanceId();
-    appId.addOnCompleteListener(task -> Log.d(TAG, "Firebase ID " + task.getResult()));
-  }
+    @Inject
+    Analytics(StardroidApplication application) {
+        firebaseAnalytics = FirebaseAnalytics.getInstance(application);
+        Task<String> appId = firebaseAnalytics.getAppInstanceId();
+        appId.addOnCompleteListener(task -> Log.d(TAG, "Firebase ID " + task.getResult()));
+    }
 
-  @Override
-  public void setEnabled(boolean enabled) {
-    Log.d(TAG, enabled ? "Enabling stats collection" : "Disabling stats collection");
-    firebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
-  }
+    @Override
+    public void setEnabled(boolean enabled) {
+        Log.d(TAG, enabled ? "Enabling stats collection" : "Disabling stats collection");
+        firebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
+    }
 
-  @Override
-  public void trackEvent(String event, Bundle params) {
-    Log.d(TAG, String.format("Logging event %s, %s", event, params));
-    firebaseAnalytics.logEvent(event, params);
-  }
+    @Override
+    public void trackEvent(String event, Bundle params) {
+        Log.d(TAG, String.format("Logging event %s, %s", event, params));
+        firebaseAnalytics.logEvent(event, params);
+    }
 
-  @Override
-  public void setUserProperty(String propertyName, String propertyValue) {
-    Log.d(TAG, String.format("Logging user property %s, %s", propertyName, propertyValue));
-    firebaseAnalytics.setUserProperty(propertyName, propertyValue);
-  }
+    @Override
+    public void setUserProperty(String propertyName, String propertyValue) {
+        Log.d(TAG, String.format("Logging user property %s, %s", propertyName, propertyValue));
+        firebaseAnalytics.setUserProperty(propertyName, propertyValue);
+    }
 }

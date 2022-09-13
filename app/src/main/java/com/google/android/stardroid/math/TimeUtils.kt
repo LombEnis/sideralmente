@@ -55,8 +55,8 @@ fun julianDay(date: Date): Double {
     val month = cal[Calendar.MONTH] + 1
     val day = cal[Calendar.DAY_OF_MONTH]
     return (367.0 * year - floor(
-        7.0 * (year
-                + floor((month + 9.0) / 12.0)) / 4.0
+            7.0 * (year
+                    + floor((month + 9.0) / 12.0)) / 4.0
     ) + floor(275.0 * month / 9.0) + day
             + 1721013.5 + hour / 24.0)
 }

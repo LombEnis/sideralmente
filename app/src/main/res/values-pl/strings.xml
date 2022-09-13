@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Ustawienia</string>
@@ -128,7 +127,7 @@
 
     <string name="north_pole">Biegun północny</string>
     <string name="south_pole">Biegun południowy</string>
-    
+
     <string name="kml_load_error">Nie udało się wczytać pliku KML</string>
     <string name="load_kml_dialog_title">Wczytaj plik KML</string>
     <string name="load_kml_file">Wczytaj</string>

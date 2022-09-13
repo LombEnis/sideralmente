@@ -34,24 +34,24 @@ class CoordinateManipulationsTest {
     @Test
     fun testGeocentryCoordinatesConversion() {
         Vector3Subject.assertThat(getGeocentricCoords(RaDec(0f, 0f))).isWithin(TOL)
-            .of(Vector3.unitX())
+                .of(Vector3.unitX())
         Vector3Subject.assertThat(getGeocentricCoords(RaDec(90f, 0f))).isWithin(TOL)
-            .of(Vector3.unitY())
+                .of(Vector3.unitY())
         Vector3Subject.assertThat(getGeocentricCoords(RaDec(0f, 90f))).isWithin(TOL)
-            .of(Vector3.unitZ())
+                .of(Vector3.unitZ())
         Vector3Subject.assertThat(getGeocentricCoords(RaDec(45f, 45f))).isWithin(TOL)
-            .of(
-                ((Vector3.unitX() + Vector3.unitY()).normalizedCopy() + Vector3.unitZ()).normalizedCopy()
-            )
+                .of(
+                        ((Vector3.unitX() + Vector3.unitY()).normalizedCopy() + Vector3.unitZ()).normalizedCopy()
+                )
     }
 
     private val allTestValues = arrayOf(
-        floatArrayOf(0f, 0f, 1f, 0f, 0f),
-        floatArrayOf(90f, 0f, 0f, 1f, 0f),
-        floatArrayOf(0f, 90f, 0f, 0f, 1f),
-        floatArrayOf(180f, 0f, -1f, 0f, 0f),
-        floatArrayOf(0f, -90f, 0f, 0f, -1f),
-        floatArrayOf(270f, 0f, 0f, -1f, 0f)
+            floatArrayOf(0f, 0f, 1f, 0f, 0f),
+            floatArrayOf(90f, 0f, 0f, 1f, 0f),
+            floatArrayOf(0f, 90f, 0f, 0f, 1f),
+            floatArrayOf(180f, 0f, -1f, 0f, 0f),
+            floatArrayOf(0f, -90f, 0f, 0f, -1f),
+            floatArrayOf(270f, 0f, 0f, -1f, 0f)
     )
 
     @Test

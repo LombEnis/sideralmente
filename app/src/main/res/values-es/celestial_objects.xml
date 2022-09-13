@@ -324,7 +324,7 @@
     <string name="beehive_cluster" translation_description="Name of the Messier object Beehive Cluster">Cúmulo El Pesebre</string>
     <string name="praesepe" translation_description="Name of the Messier object Praesepe">Praesepe</string>
     <string name="seven_sisters" translation_description="Name of the Messier object Seven Sisters">Siete Hermanas</string>
-	
+
     <!-- Objetos humanos -->
     <string name="space_station" translation_description="Name of the Internation Space Station">Estación Espacial Internacional</string>
     <string name="space_shuttle" translation_description="Name of the Space Shuttle">Transbordador Espacial</string>

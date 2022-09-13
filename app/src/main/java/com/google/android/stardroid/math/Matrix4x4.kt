@@ -13,8 +13,8 @@
 // limitations under the License.
 package com.google.android.stardroid.math
 
-import com.google.android.stardroid.math.MathUtils.sin
 import com.google.android.stardroid.math.MathUtils.cos
+import com.google.android.stardroid.math.MathUtils.sin
 import com.google.android.stardroid.math.MathUtils.tan
 
 /**
@@ -29,37 +29,37 @@ data class Matrix4x4(private val contents: FloatArray) {
         System.arraycopy(contents, 0, floatArray, 0, 16)
     }
 
-    operator fun times(mat2 : Matrix4x4): Matrix4x4 {
+    operator fun times(mat2: Matrix4x4): Matrix4x4 {
         val m = this.floatArray
         val n = mat2.floatArray
         return Matrix4x4(
-            floatArrayOf(
-                m[0] * n[0] + m[4] * n[1] + m[8] * n[2] + m[12] * n[3],
-                m[1] * n[0] + m[5] * n[1] + m[9] * n[2] + m[13] * n[3],
-                m[2] * n[0] + m[6] * n[1] + m[10] * n[2] + m[14] * n[3],
-                m[3] * n[0] + m[7] * n[1] + m[11] * n[2] + m[15] * n[3],
-                m[0] * n[4] + m[4] * n[5] + m[8] * n[6] + m[12] * n[7],
-                m[1] * n[4] + m[5] * n[5] + m[9] * n[6] + m[13] * n[7],
-                m[2] * n[4] + m[6] * n[5] + m[10] * n[6] + m[14] * n[7],
-                m[3] * n[4] + m[7] * n[5] + m[11] * n[6] + m[15] * n[7],
-                m[0] * n[8] + m[4] * n[9] + m[8] * n[10] + m[12] * n[11],
-                m[1] * n[8] + m[5] * n[9] + m[9] * n[10] + m[13] * n[11],
-                m[2] * n[8] + m[6] * n[9] + m[10] * n[10] + m[14] * n[11],
-                m[3] * n[8] + m[7] * n[9] + m[11] * n[10] + m[15] * n[11],
-                m[0] * n[12] + m[4] * n[13] + m[8] * n[14] + m[12] * n[15],
-                m[1] * n[12] + m[5] * n[13] + m[9] * n[14] + m[13] * n[15],
-                m[2] * n[12] + m[6] * n[13] + m[10] * n[14] + m[14] * n[15],
-                m[3] * n[12] + m[7] * n[13] + m[11] * n[14] + m[15] * n[15]
-            )
+                floatArrayOf(
+                        m[0] * n[0] + m[4] * n[1] + m[8] * n[2] + m[12] * n[3],
+                        m[1] * n[0] + m[5] * n[1] + m[9] * n[2] + m[13] * n[3],
+                        m[2] * n[0] + m[6] * n[1] + m[10] * n[2] + m[14] * n[3],
+                        m[3] * n[0] + m[7] * n[1] + m[11] * n[2] + m[15] * n[3],
+                        m[0] * n[4] + m[4] * n[5] + m[8] * n[6] + m[12] * n[7],
+                        m[1] * n[4] + m[5] * n[5] + m[9] * n[6] + m[13] * n[7],
+                        m[2] * n[4] + m[6] * n[5] + m[10] * n[6] + m[14] * n[7],
+                        m[3] * n[4] + m[7] * n[5] + m[11] * n[6] + m[15] * n[7],
+                        m[0] * n[8] + m[4] * n[9] + m[8] * n[10] + m[12] * n[11],
+                        m[1] * n[8] + m[5] * n[9] + m[9] * n[10] + m[13] * n[11],
+                        m[2] * n[8] + m[6] * n[9] + m[10] * n[10] + m[14] * n[11],
+                        m[3] * n[8] + m[7] * n[9] + m[11] * n[10] + m[15] * n[11],
+                        m[0] * n[12] + m[4] * n[13] + m[8] * n[14] + m[12] * n[15],
+                        m[1] * n[12] + m[5] * n[13] + m[9] * n[14] + m[13] * n[15],
+                        m[2] * n[12] + m[6] * n[13] + m[10] * n[14] + m[14] * n[15],
+                        m[3] * n[12] + m[7] * n[13] + m[11] * n[14] + m[15] * n[15]
+                )
         )
     }
 
-    operator fun times(v : Vector3): Vector3 {
+    operator fun times(v: Vector3): Vector3 {
         val m = this.floatArray
         return Vector3(
-            m[0] * v.x + m[4] * v.y + m[8] * v.z + m[12],
-            m[1] * v.x + m[5] * v.y + m[9] * v.z + m[13],
-            m[2] * v.x + m[6] * v.y + m[10] * v.z + m[14]
+                m[0] * v.x + m[4] * v.y + m[8] * v.z + m[12],
+                m[1] * v.x + m[5] * v.y + m[9] * v.z + m[13],
+                m[2] * v.x + m[6] * v.y + m[10] * v.z + m[14]
         )
     }
 
@@ -72,19 +72,19 @@ data class Matrix4x4(private val contents: FloatArray) {
         @JvmStatic
         fun createScaling(x: Float, y: Float, z: Float): Matrix4x4 {
             return Matrix4x4(
-                floatArrayOf(
-                    x, 0f, 0f, 0f, 0f, y, 0f, 0f, 0f, 0f, z, 0f, 0f, 0f, 0f, 1f
-                )
+                    floatArrayOf(
+                            x, 0f, 0f, 0f, 0f, y, 0f, 0f, 0f, 0f, z, 0f, 0f, 0f, 0f, 1f
+                    )
             )
         }
 
         @JvmStatic
         fun createTranslation(x: Float, y: Float, z: Float): Matrix4x4 {
             return Matrix4x4(
-                floatArrayOf(
-                    1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f,
-                    x, y, z, 1f
-                )
+                    floatArrayOf(
+                            1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f,
+                            x, y, z, 1f
+                    )
             )
         }
 
@@ -126,38 +126,38 @@ data class Matrix4x4(private val contents: FloatArray) {
 
         @JvmStatic
         fun createPerspectiveProjection(
-            width: Float,
-            height: Float,
-            fovyInRadians: Float
+                width: Float,
+                height: Float,
+                fovyInRadians: Float
         ): Matrix4x4 {
             val near = 0.01f
             val far = 10000.0f
             val inverseAspectRatio = height / width
             val oneOverTanHalfRadiusOfView = 1.0f / tan(fovyInRadians)
             return Matrix4x4(
-                floatArrayOf(
-                    inverseAspectRatio * oneOverTanHalfRadiusOfView, 0f, 0f, 0f, 0f,
-                    oneOverTanHalfRadiusOfView, 0f, 0f, 0f, 0f,
-                    -(far + near) / (far - near), -1f, 0f, 0f,
-                    -2 * far * near / (far - near), 0f
-                )
+                    floatArrayOf(
+                            inverseAspectRatio * oneOverTanHalfRadiusOfView, 0f, 0f, 0f, 0f,
+                            oneOverTanHalfRadiusOfView, 0f, 0f, 0f, 0f,
+                            -(far + near) / (far - near), -1f, 0f, 0f,
+                            -2 * far * near / (far - near), 0f
+                    )
             )
         }
 
         @JvmStatic
         fun createView(lookDir: Vector3, up: Vector3, right: Vector3): Matrix4x4 {
             return Matrix4x4(
-                floatArrayOf(
-                    right.x,
-                    up.x,
-                    -lookDir.x, 0f,
-                    right.y,
-                    up.y,
-                    -lookDir.y, 0f,
-                    right.z,
-                    up.z,
-                    -lookDir.z, 0f, 0f, 0f, 0f, 1f
-                )
+                    floatArrayOf(
+                            right.x,
+                            up.x,
+                            -lookDir.x, 0f,
+                            right.y,
+                            up.y,
+                            -lookDir.y, 0f,
+                            right.z,
+                            up.z,
+                            -lookDir.z, 0f, 0f, 0f, 0f, 1f
+                    )
             )
         }
 

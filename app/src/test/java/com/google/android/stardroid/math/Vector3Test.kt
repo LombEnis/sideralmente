@@ -41,7 +41,7 @@ class Vector3Test {
         val v = Vector3(3f, 4f, 0f)
         v.normalize()
         assertThat(v.length).isWithin(TOL).of(1f)
-        assertThat(v.x / v.y).isWithin(TOL).of(3f/4f)
+        assertThat(v.x / v.y).isWithin(TOL).of(3f / 4f)
     }
 
     @Test
@@ -49,7 +49,7 @@ class Vector3Test {
         val v = Vector3(3f, 4f, 0f)
         val v2 = v.normalizedCopy()
         assertThat(v2.length).isWithin(TOL).of(1f)
-        assertThat(v2.x / v2.y).isWithin(TOL).of(3f/4f)
+        assertThat(v2.x / v2.y).isWithin(TOL).of(3f / 4f)
     }
 
     @Test
@@ -79,27 +79,27 @@ class Vector3Test {
         val v1 = Vector3(1f, 2f, 3f)
         val v2 = Vector3(-2f, 2f, 2f)
         Vector3Subject.assertThat(v1 + v2).isWithin(TOL).of(
-            Vector3(-1f, 4f, 5f))
+                Vector3(-1f, 4f, 5f))
     }
 
     @Test
     fun testTimes() {
         val v1 = Vector3(1f, 2f, 3f)
         Vector3Subject.assertThat(v1 * 5f).isWithin(TOL).of(
-            Vector3(5f, 10f, 15f))
+                Vector3(5f, 10f, 15f))
     }
 
     @Test
     fun testDiv() {
         val v1 = Vector3(4f, 2f, 6f)
         Vector3Subject.assertThat(v1 / 2f).isWithin(TOL).of(
-            Vector3(2f, 1f, 3f))
+                Vector3(2f, 1f, 3f))
     }
 
     @Test
     fun testCrossProduct() {
         Vector3Subject.assertThat(Vector3.unitX() * Vector3.unitY()).isWithin(TOL).of(
-            Vector3.unitZ())
+                Vector3.unitZ())
         val v1 = Vector3(1f, 2f, 3f)
         val v2 = Vector3(-1f, 3f, -3f)
         val v3 = v1 * v2
@@ -133,7 +133,7 @@ class Vector3Test {
 
     @Test
     fun testCosineSimilarity() {
-        val v1 = Vector3(1f,2f, 3f)
+        val v1 = Vector3(1f, 2f, 3f)
         val v2 = Vector3(2f, -1f, 10f)
         assertThat(v1.cosineSimilarity(v2)).isWithin(TOL).of(0.78246075f)
     }
@@ -160,6 +160,6 @@ class Vector3Test {
         val v = Vector3(1f, 2f, 0f)
         val ww = x * v
         assertThat(ww dot ww).isWithin(TOL)
-            .of(Math.pow(1f * Math.sqrt(5.0) * Math.sin(Math.atan(2.0)), 2.0).toFloat())
+                .of(Math.pow(1f * Math.sqrt(5.0) * Math.sin(Math.atan(2.0)), 2.0).toFloat())
     }
 }

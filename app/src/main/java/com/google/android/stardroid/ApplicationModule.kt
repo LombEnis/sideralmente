@@ -29,89 +29,89 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val app: StardroidApplication) {
 
-  @Provides
-  @Singleton
-  fun provideApplication() = app
+    @Provides
+    @Singleton
+    fun provideApplication() = app
 
-  @Provides
-  fun provideContext(): Context = app
+    @Provides
+    fun provideContext(): Context = app
 
-  @Provides
-  @Singleton
-  fun provideSharedPreferences() = PreferenceManager.getDefaultSharedPreferences(app)
+    @Provides
+    @Singleton
+    fun provideSharedPreferences() = PreferenceManager.getDefaultSharedPreferences(app)
 
-  @Provides
-  @Singleton
-  fun provideLocationManager() = app.getSystemService<LocationManager>()
+    @Provides
+    @Singleton
+    fun provideLocationManager() = app.getSystemService<LocationManager>()
 
-  @Provides
-  @Singleton
-  fun provideAstronomerModel(
-    @Named("zero") magneticDeclinationCalculator: MagneticDeclinationCalculator
-  ): AstronomerModel = AstronomerModelImpl(magneticDeclinationCalculator)
+    @Provides
+    @Singleton
+    fun provideAstronomerModel(
+            @Named("zero") magneticDeclinationCalculator: MagneticDeclinationCalculator
+    ): AstronomerModel = AstronomerModelImpl(magneticDeclinationCalculator)
 
-  @Provides
-  @Singleton
-  @Named("zero")
-  fun provideDefaultMagneticDeclinationCalculator(): MagneticDeclinationCalculator = ZeroMagneticDeclinationCalculator()
+    @Provides
+    @Singleton
+    @Named("zero")
+    fun provideDefaultMagneticDeclinationCalculator(): MagneticDeclinationCalculator = ZeroMagneticDeclinationCalculator()
 
-  @Provides
-  @Singleton
-  @Named("real")
-  fun provideRealMagneticDeclinationCalculator(): MagneticDeclinationCalculator = RealMagneticDeclinationCalculator()
+    @Provides
+    @Singleton
+    @Named("real")
+    fun provideRealMagneticDeclinationCalculator(): MagneticDeclinationCalculator = RealMagneticDeclinationCalculator()
 
-  @Provides
-  @Singleton
-  fun provideAnalytics(analytics: Analytics): AnalyticsInterface = analytics
+    @Provides
+    @Singleton
+    fun provideAnalytics(analytics: Analytics): AnalyticsInterface = analytics
 
-  @Provides
-  @Singleton
-  fun provideBackgroundExecutor() = ScheduledThreadPoolExecutor(1)
+    @Provides
+    @Singleton
+    fun provideBackgroundExecutor() = ScheduledThreadPoolExecutor(1)
 
-  @Provides
-  @Singleton
-  fun provideAssetManager() = app.assets
+    @Provides
+    @Singleton
+    fun provideAssetManager() = app.assets
 
-  @Provides
-  @Singleton
-  fun provideResources() = app.resources
+    @Provides
+    @Singleton
+    fun provideResources() = app.resources
 
-  @Provides
-  @Singleton
-  fun provideSensorManager() = app.getSystemService<SensorManager>()
+    @Provides
+    @Singleton
+    fun provideSensorManager() = app.getSystemService<SensorManager>()
 
-  @Provides
-  @Singleton
-  fun provideConnectivityManager() = app.getSystemService<ConnectivityManager>()
+    @Provides
+    @Singleton
+    fun provideConnectivityManager() = app.getSystemService<ConnectivityManager>()
 
-  @Provides
-  @Singleton
-  fun provideAccountManager(context: Context) = AccountManager.get(context)
+    @Provides
+    @Singleton
+    fun provideAccountManager(context: Context) = AccountManager.get(context)
 
-  @Provides
-  @Singleton
-  fun provideLayerManager(
-    assetManager: AssetManager, resources: Resources, model: AstronomerModel?,
-    preferences: SharedPreferences
-  ): LayerManager {
-    Log.i(TAG, "Initializing LayerManager")
-    val layerManager = LayerManager(preferences)
-    layerManager.addLayer(StarsLayer(assetManager, resources))
-    layerManager.addLayer(MessierLayer(assetManager, resources))
-    layerManager.addLayer(ConstellationsLayer(assetManager, resources))
-    layerManager.addLayer(SolarSystemLayer(model!!, resources, preferences))
-    layerManager.addLayer(MeteorShowerLayer(model, resources))
-    layerManager.addLayer(CometsLayer(model, resources))
-    layerManager.addLayer(GridLayer(resources, 24, 9))
-    layerManager.addLayer(HorizonLayer(model, resources))
-    layerManager.addLayer(EclipticLayer(resources))
-    layerManager.addLayer(SkyGradientLayer(model, resources))
-    // layerManager.addLayer(new IssLayer(resources, model));
-    layerManager.initialize()
-    return layerManager
-  }
+    @Provides
+    @Singleton
+    fun provideLayerManager(
+            assetManager: AssetManager, resources: Resources, model: AstronomerModel?,
+            preferences: SharedPreferences
+    ): LayerManager {
+        Log.i(TAG, "Initializing LayerManager")
+        val layerManager = LayerManager(preferences)
+        layerManager.addLayer(StarsLayer(assetManager, resources))
+        layerManager.addLayer(MessierLayer(assetManager, resources))
+        layerManager.addLayer(ConstellationsLayer(assetManager, resources))
+        layerManager.addLayer(SolarSystemLayer(model!!, resources, preferences))
+        layerManager.addLayer(MeteorShowerLayer(model, resources))
+        layerManager.addLayer(CometsLayer(model, resources))
+        layerManager.addLayer(GridLayer(resources, 24, 9))
+        layerManager.addLayer(HorizonLayer(model, resources))
+        layerManager.addLayer(EclipticLayer(resources))
+        layerManager.addLayer(SkyGradientLayer(model, resources))
+        // layerManager.addLayer(new IssLayer(resources, model));
+        layerManager.initialize()
+        return layerManager
+    }
 
-  companion object {
-    private val TAG = getTag(ApplicationModule::class.java)
-  }
+    companion object {
+        private val TAG = getTag(ApplicationModule::class.java)
+    }
 }

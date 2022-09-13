@@ -47,97 +47,99 @@ import javax.inject.Inject;
  * @author John Taylor
  */
 public class ImageGalleryActivity extends InjectableActivity {
-  /** The index of the image id Intent extra.*/
-  public static final String IMAGE_ID = "image_id";
+    /**
+     * The index of the image id Intent extra.
+     */
+    public static final String IMAGE_ID = "image_id";
 
-  private static final String TAG = MiscUtil.getTag(ImageGalleryActivity.class);
-  private List<GalleryImage> galleryImages;
+    private static final String TAG = MiscUtil.getTag(ImageGalleryActivity.class);
+    @Inject
+    Analytics analytics;
+    private List<GalleryImage> galleryImages;
+    private ActivityLightLevelManager activityLightLevelManager;
 
-  private ActivityLightLevelManager activityLightLevelManager;
-  @Inject
-  Analytics analytics;
-
-  private class ImageAdapter extends BaseAdapter {
-    public int getCount() {
-      return galleryImages.size();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getApplicationComponent().inject(this);
+        setContentView(R.layout.imagegallery);
+        activityLightLevelManager = new ActivityLightLevelManager(
+                new ActivityLightLevelChanger(this, null),
+                PreferenceManager.getDefaultSharedPreferences(this));
+        this.galleryImages = GalleryFactory.getGallery(getResources()).getGalleryImages();
+        addImagesToGallery();
     }
 
-    public Object getItem(int position) {
-      return position;
+    @Override
+    public void onStart() {
+        super.onStart();
     }
-    public long getItemId(int position) {
-      return position;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activityLightLevelManager.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        activityLightLevelManager.onPause();
+    }
+
+    private void addImagesToGallery() {
+        Gallery gallery = (Gallery) findViewById(R.id.image_gallery);
+        ImageAdapter imageAdapter = new ImageAdapter();
+        gallery.setAdapter(imageAdapter);
+        gallery.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                showImage(position);
+            }
+        });
     }
 
     /**
-     * Returns a new ImageView to be displayed, depending on the position passed.
+     * Starts the display image activity, and overrides the transition animation.
      */
-    public View getView(int position, View convertView, ViewGroup parent) {
-      Log.d(TAG, "Get view called for position "+ position);
-      ViewGroup imagePanel;
-      if (convertView != null && convertView instanceof ViewGroup) {
-        imagePanel = (ViewGroup) convertView;
-      } else {
-        imagePanel = (ViewGroup) getLayoutInflater().inflate(
-            R.layout.imagedisplaypanel, parent, false);
-      }
-      GalleryImage galleryImage = galleryImages.get(position);
-      ImageView imageView = (ImageView) imagePanel.findViewById(R.id.image_gallery_image);
-      imageView.setImageResource(galleryImage.getImageId());
-      TextView imageLabel = (TextView) imagePanel.findViewById(R.id.image_gallery_title);
-      imageLabel.setText(galleryImage.getName());
-      return imagePanel;
+    private void showImage(int position) {
+        Intent intent = new Intent(ImageGalleryActivity.this, ImageDisplayActivity.class);
+        intent.putExtra(ImageGalleryActivity.IMAGE_ID, position);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fastzoom);
     }
-  }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    getApplicationComponent().inject(this);
-    setContentView(R.layout.imagegallery);
-    activityLightLevelManager = new ActivityLightLevelManager(
-        new ActivityLightLevelChanger(this, null),
-        PreferenceManager.getDefaultSharedPreferences(this));
-    this.galleryImages = GalleryFactory.getGallery(getResources()).getGalleryImages();
-    addImagesToGallery();
-  }
+    private class ImageAdapter extends BaseAdapter {
+        public int getCount() {
+            return galleryImages.size();
+        }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-  }
+        public Object getItem(int position) {
+            return position;
+        }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-    activityLightLevelManager.onResume();
-  }
+        public long getItemId(int position) {
+            return position;
+        }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-    activityLightLevelManager.onPause();
-  }
-
-  private void addImagesToGallery() {
-    Gallery gallery = (Gallery) findViewById(R.id.image_gallery);
-    ImageAdapter imageAdapter = new ImageAdapter();
-    gallery.setAdapter(imageAdapter);
-    gallery.setOnItemClickListener(new OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-        showImage(position);
-      }
-    });
-  }
-
-  /**
-   * Starts the display image activity, and overrides the transition animation.
-   */
-  private void showImage(int position) {
-    Intent intent = new Intent(ImageGalleryActivity.this, ImageDisplayActivity.class);
-    intent.putExtra(ImageGalleryActivity.IMAGE_ID, position);
-    startActivity(intent);
-    overridePendingTransition(R.anim.fadein, R.anim.fastzoom);
-  }
+        /**
+         * Returns a new ImageView to be displayed, depending on the position passed.
+         */
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Log.d(TAG, "Get view called for position " + position);
+            ViewGroup imagePanel;
+            if (convertView != null && convertView instanceof ViewGroup) {
+                imagePanel = (ViewGroup) convertView;
+            } else {
+                imagePanel = (ViewGroup) getLayoutInflater().inflate(
+                        R.layout.imagedisplaypanel, parent, false);
+            }
+            GalleryImage galleryImage = galleryImages.get(position);
+            ImageView imageView = (ImageView) imagePanel.findViewById(R.id.image_gallery_image);
+            imageView.setImageResource(galleryImage.getImageId());
+            TextView imageLabel = (TextView) imagePanel.findViewById(R.id.image_gallery_title);
+            imageLabel.setText(galleryImage.getName());
+            return imagePanel;
+        }
+    }
 }

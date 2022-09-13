@@ -112,7 +112,7 @@
     <string name="neptune">Neptun</string>
     <string name="pluto">Pluton</string>
 
-    <!-- Gallery objects -->    
+    <!-- Gallery objects -->
     <string name="crab_nebula" translation_description="hubble object">Mgławica Kraba</string>
     <string name="eagle_nebula" translation_description="hubble object">Mgławica Orzeł</string>
     <string name="andromeda_galaxy" translation_description="hubble object">Galaktyka Andromedy</string>

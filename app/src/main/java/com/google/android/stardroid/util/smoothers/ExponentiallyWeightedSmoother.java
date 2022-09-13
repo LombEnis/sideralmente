@@ -23,42 +23,39 @@ import com.google.android.stardroid.util.MiscUtil;
 
 /**
  * Exponentially weighted smoothing, as suggested by Chris M.
- *
  */
 public class ExponentiallyWeightedSmoother extends SensorSmoother {
-  private static final String TAG = MiscUtil.getTag(ExponentiallyWeightedSmoother.class);
-  private float alpha;
-  private int exponent;
-
-  public ExponentiallyWeightedSmoother(SensorEventListener listener, float alpha, int exponent) {
-    super(listener);
-    Log.d(TAG, "ExponentionallyWeightedSmoother with alpha = " + alpha + " and exp = " + exponent);
-    this.alpha = alpha;
-    this.exponent = exponent;
-  }
-
-  private float[] last = new float[3];
-  private float[] current = new float[3];
-
-  @Override
-  public void onSensorChanged(SensorEvent sensorEvent) {
-    Sensor sensor = sensorEvent.sensor;
-    float[] values = sensorEvent.values;
-
-
-    for (int i = 0; i < 3; ++i) {
-      last[i] = current[i];
-      float diff = values[i] - last[i];
-      float correction = diff * alpha;
-      for (int j = 1; j < exponent; ++j) {
-        correction *= MathUtils.abs(diff);
-      }
-      if (correction > MathUtils.abs(diff) ||
-          correction < -MathUtils.abs(diff)) correction = diff;
-      current[i] = last[i] + correction;
-      sensorEvent.values[i] = current[i];
+    private static final String TAG = MiscUtil.getTag(ExponentiallyWeightedSmoother.class);
+    private float alpha;
+    private int exponent;
+    private float[] last = new float[3];
+    private float[] current = new float[3];
+    public ExponentiallyWeightedSmoother(SensorEventListener listener, float alpha, int exponent) {
+        super(listener);
+        Log.d(TAG, "ExponentionallyWeightedSmoother with alpha = " + alpha + " and exp = " + exponent);
+        this.alpha = alpha;
+        this.exponent = exponent;
     }
 
-    listener.onSensorChanged(sensorEvent);
-  }
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        Sensor sensor = sensorEvent.sensor;
+        float[] values = sensorEvent.values;
+
+
+        for (int i = 0; i < 3; ++i) {
+            last[i] = current[i];
+            float diff = values[i] - last[i];
+            float correction = diff * alpha;
+            for (int j = 1; j < exponent; ++j) {
+                correction *= MathUtils.abs(diff);
+            }
+            if (correction > MathUtils.abs(diff) ||
+                    correction < -MathUtils.abs(diff)) correction = diff;
+            current[i] = last[i] + correction;
+            sensorEvent.values[i] = current[i];
+        }
+
+        listener.onSensorChanged(sensorEvent);
+    }
 }

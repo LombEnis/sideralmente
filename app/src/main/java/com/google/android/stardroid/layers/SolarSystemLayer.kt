@@ -20,7 +20,6 @@ import com.google.android.stardroid.control.AstronomerModel
 import com.google.android.stardroid.ephemeris.SolarSystemBody
 import com.google.android.stardroid.ephemeris.SolarSystemRenderable
 import com.google.android.stardroid.renderables.AstronomicalRenderable
-import java.util.*
 
 /**
  * An implementation of the [Layer] interface for displaying planets in
@@ -30,9 +29,9 @@ import java.util.*
  * @author Brent Bryan
  */
 class SolarSystemLayer(
-    private val model: AstronomerModel,
-    resources: Resources,
-    private val preferences: SharedPreferences
+        private val model: AstronomerModel,
+        resources: Resources,
+        private val preferences: SharedPreferences
 ) : AbstractRenderablesLayer(resources, true) {
     override fun initializeAstroSources(sources: ArrayList<AstronomicalRenderable>) {
         for (solarSystemBody in SolarSystemBody.values()) {
@@ -40,12 +39,12 @@ class SolarSystemLayer(
             // TODO(jontayler): IIRC this determines the rendering order. We should base it
             // on actual distrance to Earth.
             sources.add(
-                SolarSystemRenderable(
-                    solarSystemBody,
-                    resources,
-                    model,
-                    preferences
-                )
+                    SolarSystemRenderable(
+                            solarSystemBody,
+                            resources,
+                            model,
+                            preferences
+                    )
             )
         }
     }
@@ -57,5 +56,5 @@ class SolarSystemLayer(
     override val layerDepthOrder = 60
 
     // TODO(johntaylor): rename the string id.
-    override val layerNameId  = R.string.show_planets_pref // TODO(johntaylor): rename the string id.
+    override val layerNameId = R.string.show_planets_pref // TODO(johntaylor): rename the string id.
 }

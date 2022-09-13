@@ -20,17 +20,17 @@ import android.hardware.SensorEventListener;
 
 public abstract class SensorSmoother implements SensorEventListener {
 
-  protected SensorEventListener listener;
+    protected SensorEventListener listener;
 
-  public SensorSmoother(SensorEventListener listener) {
-    this.listener = listener;
-  }
+    public SensorSmoother(SensorEventListener listener) {
+        this.listener = listener;
+    }
 
-  @Override
-  public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    // Do nothing
-  }
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do nothing
+    }
 
-  @Override
-  public abstract void onSensorChanged(SensorEvent sensor);
+    @Override
+    public abstract void onSensorChanged(SensorEvent sensor);
 }

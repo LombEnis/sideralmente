@@ -16,7 +16,7 @@ package com.google.android.stardroid.math
 import kotlin.math.sqrt
 
 
-data class Vector3(@JvmField var x : Float, @JvmField var y : Float, @JvmField var z : Float) {
+data class Vector3(@JvmField var x: Float, @JvmField var y: Float, @JvmField var z: Float) {
 
     /**
      * The square of the vector's length
@@ -58,7 +58,7 @@ data class Vector3(@JvmField var x : Float, @JvmField var y : Float, @JvmField v
     /**
      * Normalizes the vector in place, i.e., map it to the corresponding unit vector.
      */
-    fun normalize() : Unit {
+    fun normalize(): Unit {
         val norm = length
         x /= norm
         y /= norm
@@ -96,9 +96,9 @@ data class Vector3(@JvmField var x : Float, @JvmField var y : Float, @JvmField v
      */
     operator fun times(p2: Vector3): Vector3 {
         return Vector3(
-            y * p2.z - z * p2.y,
-            -x * p2.z + z * p2.x,
-            x * p2.y - y * p2.x
+                y * p2.z - z * p2.y,
+                -x * p2.z + z * p2.x,
+                x * p2.y - y * p2.x
         )
     }
 
@@ -116,7 +116,7 @@ data class Vector3(@JvmField var x : Float, @JvmField var y : Float, @JvmField v
      * Java can't call Kotlin's copy() method due not supporting default params.
      * Temporary shim until Java is all gone.
      */
-    fun copyForJ() : Vector3 {
+    fun copyForJ(): Vector3 {
         return copy()
     }
 
@@ -156,11 +156,11 @@ data class Vector3(@JvmField var x : Float, @JvmField var y : Float, @JvmField v
     }
 
     fun cosineSimilarity(
-        v: Vector3
+            v: Vector3
     ) = ((this dot v)
             / sqrt(
-        (this dot this)
-                * (v dot v)
+            (this dot this)
+                    * (v dot v)
     ))
 
     companion object Factory {

@@ -6,6 +6,7 @@ public class FirebaseAnalytics {
     public static class Param {
         public static String SEARCH_TERM = "";
     }
+
     public static class Event {
         public static String SEARCH = "";
     }

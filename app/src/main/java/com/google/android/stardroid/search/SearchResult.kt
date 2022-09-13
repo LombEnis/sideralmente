@@ -26,16 +26,16 @@ class SearchResult
  * @param capitalizedName The user-presentable name of the object, properly capitalized.
  * @param renderable      The searched for object..
  */(
-  /**
-   * The user-presentable name of the object, properly capitalized.
-   */
-  var capitalizedName: String, var renderable: AstronomicalRenderable
+        /**
+         * The user-presentable name of the object, properly capitalized.
+         */
+        var capitalizedName: String, var renderable: AstronomicalRenderable
 ) {
-  fun coords(): Vector3 {
-    return renderable.searchLocation
-  }
+    fun coords(): Vector3 {
+        return renderable.searchLocation
+    }
 
-  override fun toString(): String {
-    return capitalizedName
-  }
+    override fun toString(): String {
+        return capitalizedName
+    }
 }

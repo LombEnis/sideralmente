@@ -14,11 +14,11 @@
 package com.google.android.stardroid.util
 
 object FixedPoint {
-  const val ONE = 0x00010000
+    const val ONE = 0x00010000
 
-  /// Converts a float to a 16.16 fixed point number 
-  @JvmStatic
-  fun floatToFixedPoint(f: Float): Int {
-    return (65536f * f).toInt()
-  }
+    /// Converts a float to a 16.16 fixed point number
+    @JvmStatic
+    fun floatToFixedPoint(f: Float): Int {
+        return (65536f * f).toInt()
+    }
 }

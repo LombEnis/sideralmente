@@ -8,7 +8,8 @@
     <string name="go">Vai!</string>
     <string name="location_prefs">Impostazioni località</string>
     <string name="force_gps_pref">Usa sempre GPS</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">Se abilitato, anche se è disponibile la posizione di rete</string><string name="no_use_gps_pref">Imposta località manual.
+    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">Se abilitato, anche se è disponibile la posizione di rete</string>
+    <string name="no_use_gps_pref">Imposta località manual.
 </string>
     <string name="no_use_gps_pref_hint">Inserisci un luogo o lat/long sotto</string>
     <string name="location_placename">Nome luogo</string>

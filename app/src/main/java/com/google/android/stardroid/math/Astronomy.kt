@@ -1,14 +1,13 @@
 package com.google.android.stardroid.math
 
-import java.util.*
 import com.google.android.stardroid.base.TimeConstants
 import com.google.android.stardroid.ephemeris.SolarSystemBody
-
 import com.google.android.stardroid.space.Universe
+import java.util.*
 
 
 /**
-  Functions related to Astronomy that don't belong elsewhere.
+Functions related to Astronomy that don't belong elsewhere.
  */
 
 /**

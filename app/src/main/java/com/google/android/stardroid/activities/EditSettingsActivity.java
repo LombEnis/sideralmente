@@ -45,157 +45,159 @@ import javax.inject.Inject;
  * Edit the user's preferences.
  */
 public class EditSettingsActivity extends PreferenceActivity {
-  private MyPreferenceFragment preferenceFragment;
-  
-  public static class MyPreferenceFragment extends PreferenceFragment {
+    /**
+     * These must match the keys in the preference_screen.xml file.
+     */
+    private static final String LONGITUDE = "longitude";
+    private static final String LATITUDE = "latitude";
+    private static final String LOCATION = "location";
+    private static final String TAG = MiscUtil.getTag(EditSettingsActivity.class);
+    @Inject
+    Analytics analytics;
+    @Inject
+    SharedPreferences sharedPreferences;
+    private MyPreferenceFragment preferenceFragment;
+    private Geocoder geocoder;
+    private ActivityLightLevelManager activityLightLevelManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      addPreferencesFromResource(R.xml.preference_screen);
+        super.onCreate(savedInstanceState);
+        ((StardroidApplication) getApplication()).getApplicationComponent().inject(this);
+        activityLightLevelManager = new ActivityLightLevelManager(
+                new ActivityLightLevelChanger(this, null),
+                PreferenceManager.getDefaultSharedPreferences(this));
+        geocoder = new Geocoder(this);
+        preferenceFragment = new MyPreferenceFragment();
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
+                preferenceFragment).commit();
+
     }
-  }
-  /**
-   * These must match the keys in the preference_screen.xml file.
-   */
-  private static final String LONGITUDE = "longitude";
-  private static final String LATITUDE = "latitude";
-  private static final String LOCATION = "location";
-  private static final String TAG = MiscUtil.getTag(EditSettingsActivity.class);
-  private Geocoder geocoder;
-  private ActivityLightLevelManager activityLightLevelManager;
-  @Inject Analytics analytics;
-  @Inject SharedPreferences sharedPreferences;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    ((StardroidApplication) getApplication()).getApplicationComponent().inject(this);
-    activityLightLevelManager = new ActivityLightLevelManager(
-        new ActivityLightLevelChanger(this, null),
-        PreferenceManager.getDefaultSharedPreferences(this));
-    geocoder = new Geocoder(this);
-    preferenceFragment = new MyPreferenceFragment();
-    getFragmentManager().beginTransaction().replace(android.R.id.content,
-        preferenceFragment).commit();
-    
-  }
+    @Override
+    public void onStart() {
+        super.onStart();
+        final Preference locationPreference = preferenceFragment.findPreference(LOCATION);
+        Preference latitudePreference = preferenceFragment.findPreference(LATITUDE);
+        Preference longitudePreference = preferenceFragment.findPreference(LONGITUDE);
+        locationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    final Preference locationPreference = preferenceFragment.findPreference(LOCATION);
-    Preference latitudePreference = preferenceFragment.findPreference(LATITUDE);
-    Preference longitudePreference = preferenceFragment.findPreference(LONGITUDE);
-    locationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-    
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.d(TAG, "Place to be updated to " + newValue);
-        return setLatLongFromPlace(newValue.toString());
-      }
-    });
-  
-    latitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-    
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ((EditTextPreference) locationPreference).setText("");
-        return true;
-      }
-    });
-  
-    longitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-    
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ((EditTextPreference) locationPreference).setText("");
-        return true;
-      }
-    });
-
-    Preference gyroPreference = preferenceFragment.findPreference(
-        ApplicationConstants.SHARED_PREFERENCE_DISABLE_GYRO);
-    gyroPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.d(TAG, "Toggling gyro preference " + newValue);
-        enableNonGyroSensorPrefs(((Boolean) newValue));
-        return true;
-      }
-    });
-
-    enableNonGyroSensorPrefs(
-        sharedPreferences.getBoolean(ApplicationConstants.SHARED_PREFERENCE_DISABLE_GYRO,
-            false));
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    activityLightLevelManager.onResume();
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    updatePreferences();
-    activityLightLevelManager.onPause();
-  }
-
-  private void enableNonGyroSensorPrefs(boolean enabled) {
-    // These settings aren't compatible with the gyro.
-    preferenceFragment.findPreference(
-        ApplicationConstants.SENSOR_SPEED_PREF_KEY).setEnabled(enabled);
-    preferenceFragment.findPreference(
-        ApplicationConstants.SENSOR_DAMPING_PREF_KEY).setEnabled(enabled);
-    preferenceFragment.findPreference(
-        ApplicationConstants.REVERSE_MAGNETIC_Z_PREFKEY).setEnabled(enabled);
-  }
-
-  /**
-   * Updates preferences on singletons, so we don't have to register
-   * preference change listeners for them.
-   */
-  private void updatePreferences() {
-    Log.d(TAG, "Updating preferences");
-    analytics.setEnabled(preferenceFragment.findPreference(Analytics.PREF_KEY).isEnabled());
-  }
-
-  protected boolean setLatLongFromPlace(String place) {
-    List<Address> addresses;
-    try {
-      addresses = geocoder.getFromLocationName(place, 1);
-    } catch (IOException e) {
-      Toast.makeText(this, getString(R.string.location_unable_to_geocode), Toast.LENGTH_SHORT).show();
-      return false;
-    }
-    if (addresses.isEmpty()) {
-      showNotFoundDialog(place);
-      return false;
-    }
-    // TODO(johntaylor) let the user choose, but for now just pick the first.
-    Address first = addresses.get(0);
-    setLatLong(first.getLatitude(), first.getLongitude());
-    return true;
-  }
-
-  private void setLatLong(double latitude, double longitude) {
-    EditTextPreference latPreference = (EditTextPreference) preferenceFragment.findPreference(LATITUDE);
-    EditTextPreference longPreference = (EditTextPreference) preferenceFragment.findPreference(LONGITUDE);
-    latPreference.setText(Double.toString(latitude));
-    longPreference.setText(Double.toString(longitude));
-    String message = String.format(getString(R.string.location_place_found), latitude, longitude);
-    Log.d(TAG, message);
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-  }
-
-  private void showNotFoundDialog(String place) {
-    String message = String.format(getString(R.string.location_not_found), place);
-    AlertDialog.Builder dialog = new AlertDialog.Builder(this)
-        .setTitle(R.string.location_not_found_title)
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok, new OnClickListener() {
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-          }
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.d(TAG, "Place to be updated to " + newValue);
+                return setLatLongFromPlace(newValue.toString());
+            }
         });
-    dialog.show();
-  }
+
+        latitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ((EditTextPreference) locationPreference).setText("");
+                return true;
+            }
+        });
+
+        longitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ((EditTextPreference) locationPreference).setText("");
+                return true;
+            }
+        });
+
+        Preference gyroPreference = preferenceFragment.findPreference(
+                ApplicationConstants.SHARED_PREFERENCE_DISABLE_GYRO);
+        gyroPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.d(TAG, "Toggling gyro preference " + newValue);
+                enableNonGyroSensorPrefs(((Boolean) newValue));
+                return true;
+            }
+        });
+
+        enableNonGyroSensorPrefs(
+                sharedPreferences.getBoolean(ApplicationConstants.SHARED_PREFERENCE_DISABLE_GYRO,
+                        false));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activityLightLevelManager.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        updatePreferences();
+        activityLightLevelManager.onPause();
+    }
+
+    private void enableNonGyroSensorPrefs(boolean enabled) {
+        // These settings aren't compatible with the gyro.
+        preferenceFragment.findPreference(
+                ApplicationConstants.SENSOR_SPEED_PREF_KEY).setEnabled(enabled);
+        preferenceFragment.findPreference(
+                ApplicationConstants.SENSOR_DAMPING_PREF_KEY).setEnabled(enabled);
+        preferenceFragment.findPreference(
+                ApplicationConstants.REVERSE_MAGNETIC_Z_PREFKEY).setEnabled(enabled);
+    }
+
+    /**
+     * Updates preferences on singletons, so we don't have to register
+     * preference change listeners for them.
+     */
+    private void updatePreferences() {
+        Log.d(TAG, "Updating preferences");
+        analytics.setEnabled(preferenceFragment.findPreference(Analytics.PREF_KEY).isEnabled());
+    }
+
+    protected boolean setLatLongFromPlace(String place) {
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocationName(place, 1);
+        } catch (IOException e) {
+            Toast.makeText(this, getString(R.string.location_unable_to_geocode), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (addresses.isEmpty()) {
+            showNotFoundDialog(place);
+            return false;
+        }
+        // TODO(johntaylor) let the user choose, but for now just pick the first.
+        Address first = addresses.get(0);
+        setLatLong(first.getLatitude(), first.getLongitude());
+        return true;
+    }
+
+    private void setLatLong(double latitude, double longitude) {
+        EditTextPreference latPreference = (EditTextPreference) preferenceFragment.findPreference(LATITUDE);
+        EditTextPreference longPreference = (EditTextPreference) preferenceFragment.findPreference(LONGITUDE);
+        latPreference.setText(Double.toString(latitude));
+        longPreference.setText(Double.toString(longitude));
+        String message = String.format(getString(R.string.location_place_found), latitude, longitude);
+        Log.d(TAG, message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showNotFoundDialog(String place) {
+        String message = String.format(getString(R.string.location_not_found), place);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.location_not_found_title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        dialog.show();
+    }
+
+    public static class MyPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preference_screen);
+        }
+    }
 }

@@ -20,8 +20,6 @@ import com.google.android.stardroid.math.MathUtils.sin
 import com.google.android.stardroid.math.MathUtils.sqrt
 import com.google.android.stardroid.math.Vector3
 import com.google.android.stardroid.math.Vector3Subject
-import junit.framework.AssertionFailedError
-import junit.framework.TestCase
 import org.junit.Test
 import java.util.*
 
@@ -34,7 +32,7 @@ import java.util.*
 // as there's currently too much code duplication.
 class AstronomerModelWithMagneticVariationTest {
     private class MagneticDeclinationCalculation(private val angle: Float) :
-        MagneticDeclinationCalculator {
+            MagneticDeclinationCalculator {
         override fun getDeclination(): Float {
             return angle
         }
@@ -61,9 +59,9 @@ class AstronomerModelWithMagneticVariationTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkPointing(
-            0.0f, location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedNadir,
-            expectedNorth
+                0.0f, location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedNadir,
+                expectedNorth
         )
     }
 
@@ -84,9 +82,9 @@ class AstronomerModelWithMagneticVariationTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkPointing(
-            -45.0f, location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
-            expectedUpAlongPhone = expectedNorth
+                -45.0f, location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
@@ -95,9 +93,9 @@ class AstronomerModelWithMagneticVariationTest {
         val location = LatLong(0f, 0f)
         val acceleration = Vector3(0f, 10f, 0f)
         val magneticField = Vector3(
-            sin(10f * DEGREES_TO_RADIANS),
-            10f,
-            -cos(10f * DEGREES_TO_RADIANS)
+                sin(10f * DEGREES_TO_RADIANS),
+                10f,
+                -cos(10f * DEGREES_TO_RADIANS)
         )
         val expectedZenith = Vector3(1f, 0f, 0f)
         val expectedNadir = Vector3(-1f, 0f, 0f)
@@ -106,9 +104,9 @@ class AstronomerModelWithMagneticVariationTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkPointing(
-            10f, location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedNorth,
-            expectedZenith
+                10f, location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedNorth,
+                expectedZenith
         )
     }
 
@@ -124,38 +122,38 @@ class AstronomerModelWithMagneticVariationTest {
         val expectedSouth = Vector3(1 / SQRT2, 0f, -1 / SQRT2)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkPointing(
-            180f, location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
-            expectedUpAlongPhone = expectedNorth
+                180f, location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
     private fun checkPointing(
-        magDeclination: Float,
-        location: LatLong,
-        acceleration: Vector3,
-        magneticField: Vector3,
-        expectedZenith: Vector3,
-        expectedNadir: Vector3,
-        expectedNorth: Vector3,
-        expectedEast: Vector3,
-        expectedSouth: Vector3,
-        expectedWest: Vector3,
-        expectedPointing: Vector3,
-        expectedUpAlongPhone: Vector3
+            magDeclination: Float,
+            location: LatLong,
+            acceleration: Vector3,
+            magneticField: Vector3,
+            expectedZenith: Vector3,
+            expectedNadir: Vector3,
+            expectedNorth: Vector3,
+            expectedEast: Vector3,
+            expectedSouth: Vector3,
+            expectedWest: Vector3,
+            expectedPointing: Vector3,
+            expectedUpAlongPhone: Vector3
     ) {
         val astronomer: AstronomerModel = AstronomerModelImpl(
-            MagneticDeclinationCalculation(magDeclination)
+                MagneticDeclinationCalculation(magDeclination)
         )
         astronomer.location = location
         val fakeClock =
-            Clock { // This date is special as RA, DEC = (0, 0) is directly overhead at the
-                // equator on the Greenwich meridian.
-                // 12:07 March 20th 2009
-                val calendar = GregorianCalendar(TimeZone.getTimeZone("UTC"))
-                calendar[2009, 2, 20, 12, 7] = 24
-                calendar.timeInMillis
-            }
+                Clock { // This date is special as RA, DEC = (0, 0) is directly overhead at the
+                    // equator on the Greenwich meridian.
+                    // 12:07 March 20th 2009
+                    val calendar = GregorianCalendar(TimeZone.getTimeZone("UTC"))
+                    calendar[2009, 2, 20, 12, 7] = 24
+                    calendar.timeInMillis
+                }
         astronomer.setClock(fakeClock)
         astronomer.setPhoneSensorValues(acceleration, magneticField)
 

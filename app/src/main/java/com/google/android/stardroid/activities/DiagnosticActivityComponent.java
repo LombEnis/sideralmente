@@ -11,5 +11,5 @@ import dagger.Component;
 @PerActivity
 @Component(modules = DiagnosticActivityModule.class, dependencies = ApplicationComponent.class)
 public interface DiagnosticActivityComponent {
-  void inject(DiagnosticActivity activity);
+    void inject(DiagnosticActivity activity);
 }

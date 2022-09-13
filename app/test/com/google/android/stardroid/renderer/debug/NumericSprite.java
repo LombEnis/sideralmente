@@ -37,150 +37,163 @@ import javax.microedition.khronos.opengles.GL11Ext;
 
 /**
  * A 2D rectangular mesh. Can be drawn textured or untextured.
- *
  */
 class Grid {
 
-        public Grid(int w, int h) {
-                if (w < 0 || w >= 65536) {
-                        throw new IllegalArgumentException("w");
-                }
-                if (h < 0 || h >= 65536) {
-                        throw new IllegalArgumentException("h");
-                }
-                if (w * h >= 65536) {
-                        throw new IllegalArgumentException("w * h >= 65536");
-                }
+    private FloatBuffer mVertexBuffer;
+    private float[] mVertexArray;
+    private FloatBuffer mTexCoordBuffer;
+    private float[] mTexCoordArray;
+    private CharBuffer mIndexBuffer;
+    private int mW;
+    private int mH;
+    private int mIndexCount;
 
-                mW = w;
-                mH = h;
-                int size = w * h;
-                mVertexArray = new float[size * 3];
-                mVertexBuffer = FloatBuffer.wrap(mVertexArray);
-
-                mTexCoordArray = new float[size * 2];
-                mTexCoordBuffer = FloatBuffer.wrap(mTexCoordArray);
-
-                int quadW = mW - 1;
-                int quadH = mH - 1;
-                int quadCount = quadW * quadH;
-                int indexCount = quadCount * 6;
-                mIndexCount = indexCount;
-                char[] indexArray = new char[indexCount];
-
-                /*
-                 * Initialize triangle list mesh.
-                 *
-                 *     [0]-----[  1] ...
-                 *      |    /   |
-                 *      |   /    |
-                 *      |  /     |
-                 *     [w]-----[w+1] ...
-                 *      |       |
-                 *
-                 */
-
-                {
-                        int i = 0;
-                        for (int y = 0; y < quadH; y++) {
-                                for (int x = 0; x < quadW; x++) {
-                                        char a = (char) (y * mW + x);
-                                        char b = (char) (y * mW + x + 1);
-                                        char c = (char) ((y + 1) * mW + x);
-                                        char d = (char) ((y + 1) * mW + x + 1);
-
-                                        indexArray[i++] = a;
-                                        indexArray[i++] = b;
-                                        indexArray[i++] = c;
-
-                                        indexArray[i++] = b;
-                                        indexArray[i++] = c;
-                                        indexArray[i++] = d;
-                                }
-                        }
-                }
-
-                mIndexBuffer = CharBuffer.wrap(indexArray);
+    public Grid(int w, int h) {
+        if (w < 0 || w >= 65536) {
+            throw new IllegalArgumentException("w");
+        }
+        if (h < 0 || h >= 65536) {
+            throw new IllegalArgumentException("h");
+        }
+        if (w * h >= 65536) {
+            throw new IllegalArgumentException("w * h >= 65536");
         }
 
-        void set(int i, int j, float x, float y, float z, float u, float v) {
-                if (i < 0 || i >= mW) {
-                        throw new IllegalArgumentException("i");
+        mW = w;
+        mH = h;
+        int size = w * h;
+        mVertexArray = new float[size * 3];
+        mVertexBuffer = FloatBuffer.wrap(mVertexArray);
+
+        mTexCoordArray = new float[size * 2];
+        mTexCoordBuffer = FloatBuffer.wrap(mTexCoordArray);
+
+        int quadW = mW - 1;
+        int quadH = mH - 1;
+        int quadCount = quadW * quadH;
+        int indexCount = quadCount * 6;
+        mIndexCount = indexCount;
+        char[] indexArray = new char[indexCount];
+
+        /*
+         * Initialize triangle list mesh.
+         *
+         *     [0]-----[  1] ...
+         *      |    /   |
+         *      |   /    |
+         *      |  /     |
+         *     [w]-----[w+1] ...
+         *      |       |
+         *
+         */
+
+        {
+            int i = 0;
+            for (int y = 0; y < quadH; y++) {
+                for (int x = 0; x < quadW; x++) {
+                    char a = (char) (y * mW + x);
+                    char b = (char) (y * mW + x + 1);
+                    char c = (char) ((y + 1) * mW + x);
+                    char d = (char) ((y + 1) * mW + x + 1);
+
+                    indexArray[i++] = a;
+                    indexArray[i++] = b;
+                    indexArray[i++] = c;
+
+                    indexArray[i++] = b;
+                    indexArray[i++] = c;
+                    indexArray[i++] = d;
                 }
-                if (j < 0 || j >= mH) {
-                        throw new IllegalArgumentException("j");
-                }
-
-                int index = mW * j + i;
-
-                int posIndex = index * 3;
-                mVertexArray[posIndex] = x;
-                mVertexArray[posIndex + 1] = y;
-                mVertexArray[posIndex + 2] = z;
-
-                int texIndex = index * 2;
-                mTexCoordArray[texIndex] = u;
-                mTexCoordArray[texIndex + 1] = v;
+            }
         }
 
-        public void draw(GL10 gl, boolean useTexture) {
-                gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-                gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mVertexBuffer);
+        mIndexBuffer = CharBuffer.wrap(indexArray);
+    }
 
-                if (useTexture) {
-                        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-                        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTexCoordBuffer);
-                        gl.glEnable(GL10.GL_TEXTURE_2D);
-                } else {
-                        gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-                        gl.glDisable(GL10.GL_TEXTURE_2D);
-                }
+    void set(int i, int j, float x, float y, float z, float u, float v) {
+        if (i < 0 || i >= mW) {
+            throw new IllegalArgumentException("i");
+        }
+        if (j < 0 || j >= mH) {
+            throw new IllegalArgumentException("j");
+        }
 
-                gl.glDrawElements(GL10.GL_TRIANGLES, mIndexCount,
-                                GL10.GL_UNSIGNED_SHORT, mIndexBuffer);
+        int index = mW * j + i;
+
+        int posIndex = index * 3;
+        mVertexArray[posIndex] = x;
+        mVertexArray[posIndex + 1] = y;
+        mVertexArray[posIndex + 2] = z;
+
+        int texIndex = index * 2;
+        mTexCoordArray[texIndex] = u;
+        mTexCoordArray[texIndex + 1] = v;
+    }
+
+    public void draw(GL10 gl, boolean useTexture) {
+        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mVertexBuffer);
+
+        if (useTexture) {
+            gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+            gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTexCoordBuffer);
+            gl.glEnable(GL10.GL_TEXTURE_2D);
+        } else {
+            gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+            gl.glDisable(GL10.GL_TEXTURE_2D);
+        }
+
+        gl.glDrawElements(GL10.GL_TRIANGLES, mIndexCount,
+                GL10.GL_UNSIGNED_SHORT, mIndexBuffer);
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-        }
-
-        private FloatBuffer mVertexBuffer;
-        private float[] mVertexArray;
-
-        private FloatBuffer mTexCoordBuffer;
-        private float[] mTexCoordArray;
-
-        private CharBuffer mIndexBuffer;
-
-        private int mW;
-        private int mH;
-        private int mIndexCount;
+    }
 }
 
 /**
  * An OpenGL text label maker.
- *
- *
+ * <p>
+ * <p>
  * OpenGL labels are implemented by creating a Bitmap, drawing all the labels
  * into the Bitmap, converting the Bitmap into an Alpha texture, and creating a
  * mesh for each label
- *
+ * <p>
  * The benefits of this approach are that the labels are drawn using the high
  * quality anti-aliased font rasterizer, full character set support, and all the
  * text labels are stored on a single texture, which makes it faster to use.
- *
+ * <p>
  * The drawbacks are that you can only have as many labels as will fit onto one
  * texture, and you have to recreate the whole texture if any label text
  * changes.
- *
  */
 class LabelMaker {
+    private static final int STATE_NEW = 0;
+    private static final int STATE_INITIALIZED = 1;
+    private static final int STATE_ADDING = 2;
+    private static final int STATE_DRAWING = 3;
+    private int mStrikeWidth;
+    private int mStrikeHeight;
+    private boolean mFullColor;
+    private Bitmap mBitmap;
+    private Canvas mCanvas;
+    private Paint mClearPaint;
+    private TextureReference mTexture;
+    private float mTexelWidth;  // Convert texel to U
+    private float mTexelHeight; // Convert texel to V
+    private int mU;
+    private int mV;
+    private int mLineHeight;
+    private ArrayList<Label> mLabels = new ArrayList<Label>();
+    private int mState;
     /**
      * Create a label maker
      * or maximum compatibility with various OpenGL ES implementations,
      * the strike width and height must be powers of two,
      * We want the strike width to be at least as wide as the widest window.
      *
-     * @param fullColor true if we want a full color backing store (4444),
-     * otherwise we generate a grey L8 backing store.
-     * @param strikeWidth width of strike
+     * @param fullColor    true if we want a full color backing store (4444),
+     *                     otherwise we generate a grey L8 backing store.
+     * @param strikeWidth  width of strike
      * @param strikeHeight height of strike
      */
     public LabelMaker(boolean fullColor, int strikeWidth, int strikeHeight) {
@@ -225,7 +238,7 @@ class LabelMaker {
      * Call when the surface has been destroyed
      */
     public void shutdown(GL10 gl) {
-        if ( gl != null) {
+        if (gl != null) {
             if (mState > STATE_NEW) {
                 mTexture.delete(gl);
                 mState = STATE_NEW;
@@ -255,7 +268,7 @@ class LabelMaker {
      * Call to add a label
      *
      * @param gl
-     * @param text the text of the label
+     * @param text      the text of the label
      * @param textPaint the paint of the label
      * @return the id of the label, used to measure and draw the label
      */
@@ -267,7 +280,7 @@ class LabelMaker {
      * Call to add a label
      *
      * @param gl
-     * @param text the text of the label
+     * @param text      the text of the label
      * @param textPaint the paint of the label
      * @return the id of the label, used to measure and draw the label
      */
@@ -277,6 +290,7 @@ class LabelMaker {
 
     /**
      * Call to add a label
+     *
      * @return the id of the label, used to measure and draw the label
      */
     public int add(GL10 gl, Drawable drawable, int minWidth, int minHeight) {
@@ -287,12 +301,12 @@ class LabelMaker {
      * Call to add a label
      *
      * @param gl
-     * @param text the text of the label
+     * @param text      the text of the label
      * @param textPaint the paint of the label
      * @return the id of the label, used to measure and draw the label
      */
     public int add(GL10 gl, Drawable background, String text, Paint textPaint,
-            int minWidth, int minHeight) {
+                   int minWidth, int minHeight) {
         checkState(STATE_ADDING, STATE_ADDING);
         boolean drawBackground = background != null;
         boolean drawText = (text != null) && (textPaint != null);
@@ -314,7 +328,7 @@ class LabelMaker {
             measuredTextWidth = (int) Math.ceil(textPaint.measureText(text));
         }
         int textHeight = ascent + descent;
-        int textWidth = Math.min(mStrikeWidth,measuredTextWidth);
+        int textWidth = Math.min(mStrikeWidth, measuredTextWidth);
 
         int padHeight = padding.top + padding.bottom;
         int padWidth = padding.left + padding.right;
@@ -374,10 +388,10 @@ class LabelMaker {
         float texV = 1.0f - v * mTexelHeight;
         float texV2 = 1.0f - v2 * mTexelHeight;
 
-        grid.set(0, 0,   0.0f,   0.0f, 0.0f, texU , texV2);
-        grid.set(1, 0,  width,   0.0f, 0.0f, texU2, texV2);
-        grid.set(0, 1,   0.0f, height, 0.0f, texU , texV );
-        grid.set(1, 1,  width, height, 0.0f, texU2, texV );
+        grid.set(0, 0, 0.0f, 0.0f, 0.0f, texU, texV2);
+        grid.set(1, 0, width, 0.0f, 0.0f, texU2, texV2);
+        grid.set(0, 1, 0.0f, height, 0.0f, texU, texV);
+        grid.set(1, 1, width, height, 0.0f, texU2, texV);
 
         // We know there's enough space, so update the member variables
         mU = u + width;
@@ -477,9 +491,9 @@ class LabelMaker {
         gl.glTranslatef(snappedX, snappedY, 0.0f);
         Label label = mLabels.get(labelID);
         gl.glEnable(GL10.GL_TEXTURE_2D);
-        ((GL11)gl).glTexParameteriv(GL10.GL_TEXTURE_2D,
+        ((GL11) gl).glTexParameteriv(GL10.GL_TEXTURE_2D,
                 GL11Ext.GL_TEXTURE_CROP_RECT_OES, label.mCrop, 0);
-        ((GL11Ext)gl).glDrawTexiOES((int) snappedX, (int) snappedY, 0,
+        ((GL11Ext) gl).glDrawTexiOES((int) snappedX, (int) snappedY, 0,
                 (int) label.width, (int) label.height);
         gl.glPopMatrix();
     }
@@ -507,8 +521,13 @@ class LabelMaker {
     }
 
     private static class Label {
+        public Grid grid;
+        public float width;
+        public float height;
+        public float baseline;
+        public int[] mCrop;
         public Label(Grid grid, float width, float height, float baseLine,
-                int cropU, int cropV, int cropW, int cropH) {
+                     int cropU, int cropV, int cropW, int cropH) {
             this.grid = grid;
             this.width = width;
             this.height = height;
@@ -520,43 +539,15 @@ class LabelMaker {
             crop[3] = cropH;
             mCrop = crop;
         }
-
-        public Grid grid;
-        public float width;
-        public float height;
-        public float baseline;
-        public int[] mCrop;
     }
-
-    private int mStrikeWidth;
-    private int mStrikeHeight;
-    private boolean mFullColor;
-    private Bitmap mBitmap;
-    private Canvas mCanvas;
-    private Paint mClearPaint;
-
-    private TextureReference mTexture;
-
-    private float mTexelWidth;  // Convert texel to U
-    private float mTexelHeight; // Convert texel to V
-    private int mU;
-    private int mV;
-    private int mLineHeight;
-    private ArrayList<Label> mLabels = new ArrayList<Label>();
-
-    private static final int STATE_NEW = 0;
-    private static final int STATE_INITIALIZED = 1;
-    private static final int STATE_ADDING = 2;
-    private static final int STATE_DRAWING = 3;
-    private int mState;
 }
 
 public class NumericSprite {
-  private LabelMaker mLabelMaker;
-  private String mText;
-  private int[] mWidth = new int[10];
-  private int[] mLabelId = new int[10];
-  private final static String sStrike = "0123456789";
+    private final static String sStrike = "0123456789";
+    private LabelMaker mLabelMaker;
+    private String mText;
+    private int[] mWidth = new int[10];
+    private int[] mLabelId = new int[10];
 
     public NumericSprite() {
         mText = "";
@@ -571,7 +562,7 @@ public class NumericSprite {
         mLabelMaker.initialize(gl, textureManager);
         mLabelMaker.beginAdding(gl);
         for (int i = 0; i < 10; i++) {
-            String digit = sStrike.substring(i, i+1);
+            String digit = sStrike.substring(i, i + 1);
             mLabelId[i] = mLabelMaker.add(gl, digit, paint);
             mWidth[i] = (int) Math.ceil(mLabelMaker.getWidth(i));
         }
@@ -593,7 +584,7 @@ public class NumericSprite {
         x = x | (x >> 2);
         x = x | (x >> 4);
         x = x | (x >> 8);
-        x = x | (x >>16);
+        x = x | (x >> 16);
         return x + 1;
     }
 
@@ -602,10 +593,10 @@ public class NumericSprite {
     }
 
     public void draw(GL10 gl, float x, float y,
-            float viewWidth, float viewHeight) {
+                     float viewWidth, float viewHeight) {
         int length = mText.length();
         mLabelMaker.beginDrawing(gl, viewWidth, viewHeight);
-        for(int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             char c = mText.charAt(i);
             int digit = c - '0';
             mLabelMaker.draw(gl, x, y, mLabelId[digit]);
@@ -617,7 +608,7 @@ public class NumericSprite {
     public float width() {
         float width = 0.0f;
         int length = mText.length();
-        for(int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             char c = mText.charAt(i);
             width += mWidth[c - '0'];
         }

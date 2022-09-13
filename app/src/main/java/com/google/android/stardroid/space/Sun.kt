@@ -13,7 +13,7 @@ class Sun : SunOrbitingObject(SolarSystemBody.Sun) {
     override val bodySize = -0.83f
 
     override fun getMyHeliocentricCoordinates(date: Date) =
-        Vector3(0.0f, 0.0f, 0.0f)
+            Vector3(0.0f, 0.0f, 0.0f)
 
     // TODO(serafini): For now, return semi-reasonable values for the Sun and
     // Moon. We shouldn't call this method for those bodies, but we want to do

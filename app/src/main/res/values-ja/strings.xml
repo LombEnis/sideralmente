@@ -86,8 +86,7 @@
     <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a data">または表示する日付を手動で選択</string>
     <string name="change_date_prompt">日付の変更</string>
     <string name="change_time_prompt">時刻の変更</string>
-    <string name="now_visiting"
-      translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+    <string name="now_visiting" translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
       現在表示中: %s</string>
     <string name="time_travel_label_past" translation_description="Label showing that we are in the past">タイムトラベル: 過去</string>
     <string name="time_travel_label_future" translation_description="Label showing that we are in the future">タイムトラベル: 未来</string>
@@ -197,13 +196,11 @@
     <string name="compass_calibration_activity_do_not_show_this_again">これを再び表示しない</string>
     <string name="compass_calibration_activity_warning">コンパスはキャリブレーションが
         必要かもしれません</string>
-    <string name="compass_calib_what_to_do"
-        translation_description="Information for the user on how to calibrate the compass when the dialog auto-opens. Placeholder is the video URL">このデバイスは、
+    <string name="compass_calib_what_to_do" translation_description="Information for the user on how to calibrate the compass when the dialog auto-opens. Placeholder is the video URL">このデバイスは、
         内部コンパスがキャリブレーションされていないとSkyマップに報告しています。
     これはSkyマップの問題ではないですが、修正を助けることは出来ます。コンパスをキャリブレーションするには、この動画%sで示しているように、精度が「高」になるまで
         デバイスを8の字に動かしてください。</string>
-    <string name="compass_calib_what_to_do_user"
-        transation_description="Information for the user on how to calibrate the compass when they invoke the calibration dialog. Placeholder is the video URL">このデバイスの
+    <string name="compass_calib_what_to_do_user" transation_description="Information for the user on how to calibrate the compass when they invoke the calibration dialog. Placeholder is the video URL">このデバイスの
         コンパスの精度は上に
         表示しています。
     表示が「高」でない場合、コンパスはキャリブレーションが必要かもしれません。これはSkyマップの問題ではなく、デバイスの

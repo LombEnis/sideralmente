@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
     <string name="app_name" translation_description="Application Title">星空地图</string>
     <string name="menu_settings">设置</string>

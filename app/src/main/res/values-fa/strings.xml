@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
     <string name="app_name" translation_description="Application Title">نقشه‌ی آسمان</string>
     <string name="menu_settings">تنظیمات</string>
@@ -83,8 +82,7 @@
     <string name="custom_date_prompt" translation_description="Label telling the user to manually specify a date">یا انتخاب تاریخ دلخواه:</string>
     <string name="change_date_prompt">تغییر تاریخ</string>
     <string name="change_time_prompt">تغییر ساعت</string>
-    <string name="now_visiting"
-            translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
+    <string name="now_visiting" translation_description="used in time travel dialog to tell the user what time they are visiting, time formatted as yyyy.mm.dd at hh.mm.ss + timezone">
         در حال تماشای تاریخ: %s</string>
     <string name="time_travel_label_past" translation_description="Label showing that we are in the past">سفر زمانی به: گذشته</string>
     <string name="time_travel_label_future" translation_description="Label showing that we are in the future">سفر زمانی به: آینده</string>

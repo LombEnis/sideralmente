@@ -2,13 +2,14 @@ package com.google.android.stardroid.math
 
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
+import com.google.common.truth.Subject.Factory
 import com.google.common.truth.Truth
 
 /**
  * For use in Truth tests.
  */
 class Matrix3x3Subject private constructor(metadata: FailureMetadata, private val actual: Matrix3x3) :
-    Subject(metadata, actual) {
+        Subject(metadata, actual) {
     fun isWithin(tol: Float): TolerantComparison {
         return TolerantComparison(tol)
     }
@@ -31,8 +32,8 @@ class Matrix3x3Subject private constructor(metadata: FailureMetadata, private va
         private fun matrix3x3s(): Factory<Matrix3x3Subject, Matrix3x3> {
             return Factory { metadata: FailureMetadata, actual: Matrix3x3 ->
                 Matrix3x3Subject(
-                    metadata,
-                    actual
+                        metadata,
+                        actual
                 )
             }
         }

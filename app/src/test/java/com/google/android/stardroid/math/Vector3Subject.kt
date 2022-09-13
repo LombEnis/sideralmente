@@ -2,13 +2,14 @@ package com.google.android.stardroid.math
 
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
+import com.google.common.truth.Subject.Factory
 import com.google.common.truth.Truth
 
 /**
  * Subject class for use in Truth tests.
  */
 class Vector3Subject private constructor(metadata: FailureMetadata, private val actual: Vector3) :
-      Subject(metadata, actual) {
+        Subject(metadata, actual) {
     fun isWithin(tol: Float): TolerantComparison {
         return TolerantComparison(tol)
     }
@@ -25,8 +26,8 @@ class Vector3Subject private constructor(metadata: FailureMetadata, private val 
         fun vector3s(): Factory<Vector3Subject, Vector3> {
             return Factory { metadata: FailureMetadata, actual: Vector3 ->
                 Vector3Subject(
-                    metadata,
-                    actual
+                        metadata,
+                        actual
                 )
             }
         }

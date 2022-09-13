@@ -18,38 +18,38 @@ import junit.framework.TestCase;
 
 /**
  * Unit tests for the Pair class.
- * 
+ *
  * @author Brent Bryan
  */
 public class PairTest extends TestCase {
 
-  public void testCreatePair() {
-    Pair<String, Double> p = new Pair<String, Double>("ThreePointOne", 3.1);
-    assertEquals("ThreePointOne", p.getFirst());
-    assertEquals(3.1, p.getSecond().doubleValue());
-  }
-  
-  public void testOf() {
-    Pair<Integer, String> p = Pair.of(3, "Three");
-    assertEquals(3, p.getFirst().intValue());
-    assertEquals("Three", p.getSecond());
-  } 
+    public void testCreatePair() {
+        Pair<String, Double> p = new Pair<String, Double>("ThreePointOne", 3.1);
+        assertEquals("ThreePointOne", p.getFirst());
+        assertEquals(3.1, p.getSecond().doubleValue());
+    }
 
-  public void testNull() {
-    Pair<Integer, String> p = Pair.of(null, null);
-    assertEquals(null, p.getFirst());
-    assertEquals(null, p.getSecond());
-  }
-  
-  public void testSetters() {
-    Pair<Integer, Double> p = Pair.of(null, null);
+    public void testOf() {
+        Pair<Integer, String> p = Pair.of(3, "Three");
+        assertEquals(3, p.getFirst().intValue());
+        assertEquals("Three", p.getSecond());
+    }
 
-    p.setFirst(2);
-    assertEquals(2, p.getFirst().intValue());
-    assertEquals(null, p.getSecond());
-    
-    p.setSecond(3.4);
-    assertEquals(2, p.getFirst().intValue());
-    assertEquals(3.4, p.getSecond().doubleValue());
-  }
+    public void testNull() {
+        Pair<Integer, String> p = Pair.of(null, null);
+        assertEquals(null, p.getFirst());
+        assertEquals(null, p.getSecond());
+    }
+
+    public void testSetters() {
+        Pair<Integer, Double> p = Pair.of(null, null);
+
+        p.setFirst(2);
+        assertEquals(2, p.getFirst().intValue());
+        assertEquals(null, p.getSecond());
+
+        p.setSecond(3.4);
+        assertEquals(2, p.getFirst().intValue());
+        assertEquals(3.4, p.getSecond().doubleValue());
+    }
 }

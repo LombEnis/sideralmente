@@ -26,8 +26,8 @@ data class LatLong(private val _latitudeDeg: Float, private val _longitudeDeg: F
      * convenience method, since many of the GPS methods return doubles.
      */
     constructor(latitude: Double, longitude: Double) : this(
-        latitude.toFloat(),
-        longitude.toFloat()
+            latitude.toFloat(),
+            longitude.toFloat()
     )
 
     /**
@@ -38,12 +38,12 @@ data class LatLong(private val _latitudeDeg: Float, private val _longitudeDeg: F
     fun distanceFrom(other: LatLong): Float {
         // Some misuse of the astronomy math classes
         val otherPnt = getGeocentricCoords(
-            other.longitude,
-            other.latitude
+                other.longitude,
+                other.latitude
         )
         val thisPnt = getGeocentricCoords(
-            longitude,
-            latitude
+                longitude,
+                latitude
         )
         val cosTheta = thisPnt.cosineSimilarity(otherPnt)
         return MathUtils.acos(cosTheta) * 180f / PI

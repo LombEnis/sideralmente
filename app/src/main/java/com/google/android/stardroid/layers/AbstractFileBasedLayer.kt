@@ -16,9 +16,9 @@ package com.google.android.stardroid.layers
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.util.Log
-import com.google.android.stardroid.renderer.RendererObjectManager.UpdateType
 import com.google.android.stardroid.renderables.AstronomicalRenderable
 import com.google.android.stardroid.renderables.proto.ProtobufAstronomicalRenderable
+import com.google.android.stardroid.renderer.RendererObjectManager.UpdateType
 import com.google.android.stardroid.source.proto.SourceProto
 import com.google.android.stardroid.util.MiscUtil
 import com.google.common.io.Closeables
@@ -36,11 +36,12 @@ import java.util.concurrent.Executors
  * @author John Taylor
  */
 abstract class AbstractFileBasedLayer(
-    private val assetManager: AssetManager,
-    resources: Resources,
-    private val fileName: String
+        private val assetManager: AssetManager,
+        resources: Resources,
+        private val fileName: String
 ) : AbstractRenderablesLayer(resources, false) {
     private val fileSources: MutableList<AstronomicalRenderable> = ArrayList()
+
     @Synchronized
     override fun initialize() {
         BACKGROUND_EXECUTOR.execute {
@@ -62,16 +63,16 @@ abstract class AbstractFileBasedLayer(
             val sources = parser.parseFrom(inputStream)
             for (proto in sources.sourceList) {
                 fileSources.add(
-                    ProtobufAstronomicalRenderable(
-                        proto,
-                        resources
-                    )
+                        ProtobufAstronomicalRenderable(
+                                proto,
+                                resources
+                        )
                 )
             }
             Log.d(TAG, "Found: " + fileSources.size + " sources")
             val s = String.format(
-                "Finished Loading: %s | Found %s sourcs.\n",
-                sourceFilename, fileSources.size
+                    "Finished Loading: %s | Found %s sourcs.\n",
+                    sourceFilename, fileSources.size
             )
             Log.d(TAG, s)
             refreshSources(EnumSet.of(UpdateType.Reset))

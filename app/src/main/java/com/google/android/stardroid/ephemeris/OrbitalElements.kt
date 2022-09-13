@@ -14,9 +14,9 @@
 package com.google.android.stardroid.ephemeris
 
 import android.util.Log
-import com.google.android.stardroid.math.MathUtils.sin
-import com.google.android.stardroid.math.MathUtils.cos
 import com.google.android.stardroid.math.MathUtils.abs
+import com.google.android.stardroid.math.MathUtils.cos
+import com.google.android.stardroid.math.MathUtils.sin
 import com.google.android.stardroid.math.MathUtils.sqrt
 import com.google.android.stardroid.math.MathUtils.tan
 import com.google.android.stardroid.math.mod2pi
@@ -39,12 +39,12 @@ import com.google.android.stardroid.util.MiscUtil
  * @author Brent Bryan
  */
 data class OrbitalElements(
-    val distance: Float, // Mean distance (AU)
-    val eccentricity: Float, // Eccentricity of orbit
-    val inclination: Float, // Inclination of orbit (AngleUtils.RADIANS)
-    val ascendingNode: Float, // Longitude of ascending node (AngleUtils.RADIANS)
-    val perihelion: Float, // Longitude of perihelion (AngleUtils.RADIANS)
-    val meanLongitude: Float // Mean longitude (AngleUtils.RADIANS)
+        val distance: Float, // Mean distance (AU)
+        val eccentricity: Float, // Eccentricity of orbit
+        val inclination: Float, // Inclination of orbit (AngleUtils.RADIANS)
+        val ascendingNode: Float, // Longitude of ascending node (AngleUtils.RADIANS)
+        val perihelion: Float, // Longitude of perihelion (AngleUtils.RADIANS)
+        val meanLongitude: Float // Mean longitude (AngleUtils.RADIANS)
 ) {
     val anomaly: Float
         get() = calculateTrueAnomaly(meanLongitude - perihelion, eccentricity)
@@ -77,8 +77,8 @@ data class OrbitalElements(
 
         // convert eccentric anomaly to true anomaly
         val v = 2f * kotlin.math.atan(
-            sqrt((1 + e) / (1 - e))
-                    * tan(0.5f * e0)
+                sqrt((1 + e) / (1 - e))
+                        * tan(0.5f * e0)
         )
         return mod2pi(v)
     }

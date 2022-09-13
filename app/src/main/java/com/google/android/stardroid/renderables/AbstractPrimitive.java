@@ -21,7 +21,8 @@ import com.google.android.stardroid.math.Vector3;
 
 import java.util.List;
 
-/** This class represents the base of an astronomical object to be
+/**
+ * This class represents the base of an astronomical object to be
  * displayed by the UI.  These object need not be only stars and
  * galaxies but also include labels (such as the name of major stars)
  * and constellation depictions.
@@ -29,46 +30,45 @@ import java.util.List;
  * @author Brent Bryan
  */
 public abstract class AbstractPrimitive {
-  /** Each source has an update granularity associated with it, which
-   *  defines how often it's provider expects its value to change.
-   */
-  public enum UpdateGranularity {
-    Second, Minute, Hour, Day, Year
-  }
+    private final int color;
+    private final Vector3 xyz;
+    public UpdateGranularity granularity;
+    private List<String> names;
+    @Deprecated
+    AbstractPrimitive() {
+        this(CoordinateManipulationsKt.getGeocentricCoords(0.0f, 0.0f), Color.BLACK);
+    }
 
-  public UpdateGranularity granularity;
+    protected AbstractPrimitive(int color) {
+        this(CoordinateManipulationsKt.getGeocentricCoords(0.0f, 0.0f), color);
+    }
 
-  private final int color;
-  private final Vector3 xyz;
-  private List<String> names;
+    protected AbstractPrimitive(Vector3 geocentricCoords, int color) {
+        this.xyz = geocentricCoords;
+        this.color = color;
+    }
 
-  @Deprecated
-  AbstractPrimitive() {
-    this(CoordinateManipulationsKt.getGeocentricCoords(0.0f, 0.0f), Color.BLACK);
-  }
+    public List<String> getNames() {
+        return names;
+    }
 
-  protected AbstractPrimitive(int color) {
-    this(CoordinateManipulationsKt.getGeocentricCoords(0.0f, 0.0f), color);
-  }
+    public void setNames(List<String> names) {
+        this.names = names;
+    }
 
-  protected AbstractPrimitive(Vector3 geocentricCoords, int color) {
-    this.xyz = geocentricCoords;
-    this.color = color;
-  }
+    public int getColor() {
+        return color;
+    }
 
-  public List<String> getNames() {
-    return names;
-  }
+    public Vector3 getLocation() {
+        return xyz;
+    }
 
-  public void setNames(List<String> names) {
-    this.names = names;
-  }
-
-  public int getColor() {
-    return color;
-  }
-
-  public Vector3 getLocation() {
-    return xyz;
-  }
+    /**
+     * Each source has an update granularity associated with it, which
+     * defines how often it's provider expects its value to change.
+     */
+    public enum UpdateGranularity {
+        Second, Minute, Hour, Day, Year
+    }
 }

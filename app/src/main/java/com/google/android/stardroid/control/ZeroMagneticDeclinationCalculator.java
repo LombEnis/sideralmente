@@ -24,18 +24,18 @@ import com.google.android.stardroid.math.LatLong;
  */
 public final class ZeroMagneticDeclinationCalculator implements MagneticDeclinationCalculator {
 
-  @Override
-  public float getDeclination() {
-    return 0;
-  }
+    @Override
+    public float getDeclination() {
+        return 0;
+    }
 
-  @Override
-  public void setLocationAndTime(LatLong location, long timeInMills) {
-    // Do nothing.
-  }
+    @Override
+    public void setLocationAndTime(LatLong location, long timeInMills) {
+        // Do nothing.
+    }
 
-  @Override
-  public String toString() {
-    return "Zero Magnetic Correction";
-  }
+    @Override
+    public String toString() {
+        return "Zero Magnetic Correction";
+    }
 }

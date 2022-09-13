@@ -15,7 +15,6 @@ package com.google.android.stardroid.math
 
 import com.google.android.stardroid.math.MathUtils.cos
 import com.google.android.stardroid.math.MathUtils.sin
-import java.util.*
 
 /**
  * Utilities for working with angles, distances, matrices, and time.
@@ -50,9 +49,9 @@ fun calculateRotationMatrix(degrees: Float, axis: Vector3): Matrix3x3 {
     val yzm = y * zm
     val zxm = z * xm
     return Matrix3x3(
-        x * xm + cosD, xym + zs, zxm - ys,
-        xym - zs, y * ym + cosD, yzm + xs,
-        zxm + ys, yzm - xs, z * zm + cosD
+            x * xm + cosD, xym + zs, zxm - ys,
+            xym - zs, y * ym + cosD, yzm + xs,
+            zxm + ys, yzm - xs, z * zm + cosD
     )
 }
 

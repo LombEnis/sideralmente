@@ -26,73 +26,74 @@ import java.util.PriorityQueue;
  * removed to ensure that the resulting size remains fixed.
  *
  * @param <E> type of object contained in the queue
- *
  * @author Brent Bryan
  */
 public class FixedSizePriorityQueue<E> extends PriorityQueue<E> {
-  private static final long serialVersionUID = 3959389634971824728L;
+    private static final long serialVersionUID = 3959389634971824728L;
 
-  /** Maximum number of elements stored in this queue. */
-  private int maxSize;
+    /**
+     * Maximum number of elements stored in this queue.
+     */
+    private int maxSize;
 
-  /**
-   * Filter used to reject some objects without even checking the number of
-   * objects or priorities of those objects in the queue.
-   */
-  private Filter<? super E> filter = null;
+    /**
+     * Filter used to reject some objects without even checking the number of
+     * objects or priorities of those objects in the queue.
+     */
+    private Filter<? super E> filter = null;
 
-  public FixedSizePriorityQueue(int maxQueueSize, Comparator<? super E> comparator) {
-    super(maxQueueSize, comparator);
-    this.maxSize = maxQueueSize;
-  }
-
-  /**
-   * Sets the filter used to reject objects (without checking the number of
-   * elements in the queue, or their priorities). Setting the filter to null
-   * removes all filtering.
-   */
-  public void setFilter(@Nullable Filter<? super E> filter) {
-    this.filter = filter;
-  }
-
-  /**
-   * Returns the filter that is currently being used to reject elements which
-   * are submitted for addition to the queue. Returns null if not filter has
-   * been set.
-   */
-  public Filter<? super E> getFilter() {
-    return filter;
-  }
-
-  @Override
-  public boolean add(E object) {
-    if (filter != null && !filter.accept(object)) {
-      return false;
+    public FixedSizePriorityQueue(int maxQueueSize, Comparator<? super E> comparator) {
+        super(maxQueueSize, comparator);
+        this.maxSize = maxQueueSize;
     }
 
-    if (!isFull()) {
-      super.add(object);
-      return true;
+    /**
+     * Returns the filter that is currently being used to reject elements which
+     * are submitted for addition to the queue. Returns null if not filter has
+     * been set.
+     */
+    public Filter<? super E> getFilter() {
+        return filter;
     }
 
-    if (comparator().compare(object, peek()) > 0) {
-      poll();
-      super.add(object);
-      return true;
+    /**
+     * Sets the filter used to reject objects (without checking the number of
+     * elements in the queue, or their priorities). Setting the filter to null
+     * removes all filtering.
+     */
+    public void setFilter(@Nullable Filter<? super E> filter) {
+        this.filter = filter;
     }
-    return false;
-  }
 
-  @Override
-  public boolean addAll(Collection<? extends E> c) {
-    boolean changed = false;
-    for (E e : c) {
-      changed |= add(e);
+    @Override
+    public boolean add(E object) {
+        if (filter != null && !filter.accept(object)) {
+            return false;
+        }
+
+        if (!isFull()) {
+            super.add(object);
+            return true;
+        }
+
+        if (comparator().compare(object, peek()) > 0) {
+            poll();
+            super.add(object);
+            return true;
+        }
+        return false;
     }
-    return changed;
-  }
 
-  public boolean isFull() {
-    return size() == maxSize;
-  }
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        boolean changed = false;
+        for (E e : c) {
+            changed |= add(e);
+        }
+        return changed;
+    }
+
+    public boolean isFull() {
+        return size() == maxSize;
+    }
 }

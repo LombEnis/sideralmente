@@ -8,7 +8,7 @@ import dagger.Module;
  */
 @Module
 public class DynamicStarMapModule extends AbstractDynamicStarMapModule {
-  public DynamicStarMapModule(DynamicStarMapActivity activity) {
-    super(activity);
-  }
+    public DynamicStarMapModule(DynamicStarMapActivity activity) {
+        super(activity);
+    }
 }

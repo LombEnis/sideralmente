@@ -24,112 +24,107 @@ import com.google.android.stardroid.math.CoordinateManipulationsKt;
 import com.google.android.stardroid.math.Vector3;
 
 /**
- *  A celestial object represented by an image, such as a planet or a
- *  galaxy.
+ * A celestial object represented by an image, such as a planet or a
+ * galaxy.
  */
 public class ImagePrimitive extends AbstractPrimitive {
 
-  static Vector3 up = new Vector3(0.0f, 1.0f, 0.0f);
+    static Vector3 up = new Vector3(0.0f, 1.0f, 0.0f);
+    private final float imageScale;
+    private final Resources resources;
+    // These two vectors, along with Source.xyz, determine the position of the
+    // image object.  The corners are as follows
+    //
+    //  xyz-u+v   xyz+u+v
+    //     +---------+     ^
+    //     |   xyz   |     | v
+    //     |    .    |     .
+    //     |         |
+    //     +---------+
+    //  xyz-u-v    xyz+u-v
+    //
+    //          .--->
+    //            u
+    public float ux, uy, uz;
+    public float vx, vy, vz;
+    public Bitmap image;
+    public boolean requiresBlending = false;
 
 
-  // These two vectors, along with Source.xyz, determine the position of the
-  // image object.  The corners are as follows
-  //
-  //  xyz-u+v   xyz+u+v
-  //     +---------+     ^
-  //     |   xyz   |     | v
-  //     |    .    |     .
-  //     |         |
-  //     +---------+
-  //  xyz-u-v    xyz+u-v
-  //
-  //          .--->
-  //            u
-  public float ux, uy, uz;
-  public float vx, vy, vz;
-
-  public Bitmap image;
-
-  public boolean requiresBlending = false;
-
-  private final float imageScale;
-  private final Resources resources;
-
-
-  public ImagePrimitive(float ra, float dec, Resources res, int id) {
-    this(ra, dec, res, id, up, 1.0f);
-  }
-
-  public ImagePrimitive(float ra, float dec, Resources res, int id, Vector3 upVec) {
-    this(ra, dec, res, id, upVec, 1.0f);
-  }
-
-  public ImagePrimitive(float ra, float dec, Resources res, int id, Vector3 upVec,
-                        float imageScale) {
-    this(CoordinateManipulationsKt.getGeocentricCoords(ra, dec), res, id, upVec, imageScale);
-  }
-
-  public ImagePrimitive(Vector3 coords, Resources res, int id, Vector3 upVec,
-                        float imageScale) {
-    super(coords, Color.WHITE);
-    this.imageScale = imageScale;
-
-    // TODO(jpowell): We're never freeing this resource, so we leak it every
-    // time we create a new ImagePrimitive and garbage collect an old one.
-    // We need to make sure it gets freed.
-    // We should also cache this so we don't have to keep reloading these
-    // which is really slow and adds noticeable lag to the application when it
-    // happens.
-    this.resources = res;
-    setUpVector(upVec);
-    setImageId(id);
-  }
-
-  public void setImageId(int imageId) {
-    Options opts = new Options();
-    opts.inScaled = false;
-
-    this.image = BitmapFactory.decodeResource(resources, imageId, opts);
-    if (image == null) {
-      throw new RuntimeException("Coud not decode image " + imageId);
+    public ImagePrimitive(float ra, float dec, Resources res, int id) {
+        this(ra, dec, res, id, up, 1.0f);
     }
-  }
 
-  public Bitmap getImage() {
-    return image;
-  }
+    public ImagePrimitive(float ra, float dec, Resources res, int id, Vector3 upVec) {
+        this(ra, dec, res, id, upVec, 1.0f);
+    }
 
-  public float[] getHorizontalCorner() {
-    return new float[] {ux, uy, uz};
-  }
+    public ImagePrimitive(float ra, float dec, Resources res, int id, Vector3 upVec,
+                          float imageScale) {
+        this(CoordinateManipulationsKt.getGeocentricCoords(ra, dec), res, id, upVec, imageScale);
+    }
 
-  public float[] getVerticalCorner() {
-    return new float[] {vx, vy, vz};
-  }
+    public ImagePrimitive(Vector3 coords, Resources res, int id, Vector3 upVec,
+                          float imageScale) {
+        super(coords, Color.WHITE);
+        this.imageScale = imageScale;
 
-  public boolean requiresBlending() {
-    return requiresBlending;
-  }
+        // TODO(jpowell): We're never freeing this resource, so we leak it every
+        // time we create a new ImagePrimitive and garbage collect an old one.
+        // We need to make sure it gets freed.
+        // We should also cache this so we don't have to keep reloading these
+        // which is really slow and adds noticeable lag to the application when it
+        // happens.
+        this.resources = res;
+        setUpVector(upVec);
+        setImageId(id);
+    }
 
-  protected Resources getResources() {
-    return resources;
-  }
+    public void setImageId(int imageId) {
+        Options opts = new Options();
+        opts.inScaled = false;
 
-  public void setUpVector(Vector3 upVec) {
-    Vector3 p = this.getLocation();
-    Vector3 u = p.times(upVec).normalizedCopy().unaryMinus();
-    Vector3 v = u.times(p);
+        this.image = BitmapFactory.decodeResource(resources, imageId, opts);
+        if (image == null) {
+            throw new RuntimeException("Coud not decode image " + imageId);
+        }
+    }
 
-    v.timesAssign(imageScale);
-    u.timesAssign(imageScale);
+    public Bitmap getImage() {
+        return image;
+    }
 
-    // TODO(serafini): Can we replace these with a float[]?
-    ux = u.x;
-    uy = u.y;
-    uz = u.z;
+    public float[] getHorizontalCorner() {
+        return new float[]{ux, uy, uz};
+    }
 
-    vx = v.x;
-    vy = v.y;
-    vz = v.z;
-  }
+    public float[] getVerticalCorner() {
+        return new float[]{vx, vy, vz};
+    }
+
+    public boolean requiresBlending() {
+        return requiresBlending;
+    }
+
+    protected Resources getResources() {
+        return resources;
+    }
+
+    public void setUpVector(Vector3 upVec) {
+        Vector3 p = this.getLocation();
+        Vector3 u = p.times(upVec).normalizedCopy().unaryMinus();
+        Vector3 v = u.times(p);
+
+        v.timesAssign(imageScale);
+        u.timesAssign(imageScale);
+
+        // TODO(serafini): Can we replace these with a float[]?
+        ux = u.x;
+        uy = u.y;
+        uz = u.z;
+
+        vx = v.x;
+        vy = v.y;
+        vz = v.z;
+    }
 }

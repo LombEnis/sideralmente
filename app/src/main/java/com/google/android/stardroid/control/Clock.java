@@ -20,5 +20,5 @@ package com.google.android.stardroid.control;
  * @author John Taylor
  */
 public interface Clock {
-  long getTimeInMillisSinceEpoch();
+    long getTimeInMillisSinceEpoch();
 }

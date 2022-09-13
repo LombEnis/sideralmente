@@ -25,50 +25,50 @@ import com.google.android.stardroid.util.MiscUtil.getTag
  * @author John Taylor
  */
 class GestureInterpreter(
-  private val fullscreenControlsManager: FullscreenControlsManager,
-  private val mapMover: MapMover
+        private val fullscreenControlsManager: FullscreenControlsManager,
+        private val mapMover: MapMover
 ) : SimpleOnGestureListener() {
-  private val flinger = Flinger { distanceX: Float, distanceY: Float ->
-    mapMover.onDrag(
-      distanceX,
-      distanceY
-    )
-  }
+    private val flinger = Flinger { distanceX: Float, distanceY: Float ->
+        mapMover.onDrag(
+                distanceX,
+                distanceY
+        )
+    }
 
-  override fun onDown(e: MotionEvent): Boolean {
-    Log.d(TAG, "Tap down")
-    flinger.stop()
-    return true
-  }
+    override fun onDown(e: MotionEvent): Boolean {
+        Log.d(TAG, "Tap down")
+        flinger.stop()
+        return true
+    }
 
-  override fun onFling(
-    e1: MotionEvent,
-    e2: MotionEvent,
-    velocityX: Float,
-    velocityY: Float
-  ): Boolean {
-    Log.d(TAG, "Flinging $velocityX, $velocityY")
-    flinger.fling(velocityX, velocityY)
-    return true
-  }
+    override fun onFling(
+            e1: MotionEvent,
+            e2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+    ): Boolean {
+        Log.d(TAG, "Flinging $velocityX, $velocityY")
+        flinger.fling(velocityX, velocityY)
+        return true
+    }
 
-  override fun onSingleTapUp(e: MotionEvent): Boolean {
-    Log.d(TAG, "Tap up")
-    fullscreenControlsManager.toggleControls()
-    return true
-  }
+    override fun onSingleTapUp(e: MotionEvent): Boolean {
+        Log.d(TAG, "Tap up")
+        fullscreenControlsManager.toggleControls()
+        return true
+    }
 
-  override fun onDoubleTap(e: MotionEvent): Boolean {
-    Log.d(TAG, "Double tap")
-    return false
-  }
+    override fun onDoubleTap(e: MotionEvent): Boolean {
+        Log.d(TAG, "Double tap")
+        return false
+    }
 
-  override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-    Log.d(TAG, "Confirmed single tap")
-    return false
-  }
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+        Log.d(TAG, "Confirmed single tap")
+        return false
+    }
 
-  companion object {
-    private val TAG = getTag(GestureInterpreter::class.java)
-  }
+    companion object {
+        private val TAG = getTag(GestureInterpreter::class.java)
+    }
 }

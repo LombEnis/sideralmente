@@ -232,46 +232,46 @@ class UniverseSmokeTest {
         // 2009 Jan  1, 12:00 UT1
         testCal[2009, GregorianCalendar.JANUARY, 1, 12, 0] = 0
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(21.2f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(69.5f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(57.5f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(99.8f)
 
         // 2009 Sep 20, 12:00 UT1
         testCal[2009, GregorianCalendar.SEPTEMBER, 20, 12, 0] = 0
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(4.1f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(0.5f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(88.0f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(88.7f)
 
         // 2010 Dec 25, 12:00 UT1
         testCal[2010, GregorianCalendar.DECEMBER, 25, 12, 0] = 0
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(79.0f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(12.1f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(42.0f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
         ).isWithin(PHASE_TOL).of(99.6f)
     }
 
@@ -289,47 +289,47 @@ class UniverseSmokeTest {
         // 2010 Dec 25, 12:00 UT1
         testCal[2010, GregorianCalendar.DECEMBER, 25, 12, 0] = 0
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePercentIlluminated(testCal.time)
         ).isWithin(REG_TOL).of(21.741992950439453f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePercentIlluminated(testCal.time)
         ).isWithin(REG_TOL).of(12.131664276123047f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePercentIlluminated(testCal.time)
         ).isWithin(REG_TOL).of(42.03889846801758f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePercentIlluminated(testCal.time)
         ).isWithin(REG_TOL).of(99.64849853515625f)
 
         // Don't trust these numbers
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePhaseAngle(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Moon).calculatePhaseAngle(testCal.time)
         ).isWithin(REG_TOL).of(124.41341400146484f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePhaseAngle(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mercury).calculatePhaseAngle(testCal.time)
         ).isWithin(REG_TOL).of(139.23260498046875f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePhaseAngle(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Venus).calculatePhaseAngle(testCal.time)
         ).isWithin(REG_TOL).of(99.1617431640625f)
         assertThat(
-            universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePhaseAngle(testCal.time)
+                universe.solarSystemObjectFor(SolarSystemBody.Mars).calculatePhaseAngle(testCal.time)
         ).isWithin(REG_TOL).of(6.797830581665039f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Moon).getMagnitude(testCal.time)).isWithin(REG_TOL).of(-10f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Mercury).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(1.7964696884155273f)
+                .of(1.7964696884155273f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Venus).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(-4.544736385345459f)
+                .of(-4.544736385345459f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Mars).getMagnitude(testCal.time)).isWithin(REG_TOL).of(1.2287708520889282f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Jupiter).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(-2.377939224243164f)
+                .of(-2.377939224243164f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Saturn).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(1.1006574630737305f)
+                .of(1.1006574630737305f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Uranus).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(5.848583698272705f)
+                .of(5.848583698272705f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Neptune).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(7.944333076477051f)
+                .of(7.944333076477051f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Pluto).getMagnitude(testCal.time)).isWithin(REG_TOL)
-            .of(14.110675811767578f)
+                .of(14.110675811767578f)
         assertThat(universe.solarSystemObjectFor(SolarSystemBody.Sun).getMagnitude(testCal.time)).isWithin(REG_TOL).of(-27f)
     }
 

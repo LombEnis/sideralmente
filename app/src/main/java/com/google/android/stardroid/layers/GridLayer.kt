@@ -22,7 +22,6 @@ import com.google.android.stardroid.renderables.AbstractAstronomicalRenderable
 import com.google.android.stardroid.renderables.AstronomicalRenderable
 import com.google.android.stardroid.renderables.LinePrimitive
 import com.google.android.stardroid.renderables.TextPrimitive
-import java.util.*
 
 /**
  * Creates a Layer containing a Renderable which correspond to grid lines parallel
@@ -40,9 +39,9 @@ class GridLayer
  * @param numDeclinationLines The number of declination lines to show including the poles
  * on each side of the equator. 9 is a good number for 10 degree intervals.
  */(
-    resources: Resources,
-    private val numRightAscensionLines: Int,
-    private val numDeclinationLines: Int
+        resources: Resources,
+        private val numRightAscensionLines: Int,
+        private val numDeclinationLines: Int
 ) : AbstractRenderablesLayer(resources, false) {
 
     override fun initializeAstroSources(sources: ArrayList<AstronomicalRenderable>) {
@@ -58,7 +57,7 @@ class GridLayer
 
     /** Implementation of the grid elements as an [AstronomicalRenderable]  */
     internal class GridRenderable(resources: Resources, numRaSources: Int, numDecSources: Int) :
-        AbstractAstronomicalRenderable() {
+            AbstractAstronomicalRenderable() {
         override val labels: MutableList<TextPrimitive> = ArrayList()
         override val lines: MutableList<LinePrimitive> = ArrayList()
 
@@ -111,20 +110,20 @@ class GridLayer
             }
             /** North & South pole, hour markers every 2hrs.  */
             labels.add(
-                TextPrimitive(
-                    0f,
-                    90f,
-                    resources.getString(R.string.north_pole),
-                    LINE_COLOR
-                )
+                    TextPrimitive(
+                            0f,
+                            90f,
+                            resources.getString(R.string.north_pole),
+                            LINE_COLOR
+                    )
             )
             labels.add(
-                TextPrimitive(
-                    0f,
-                    -90f,
-                    resources.getString(R.string.south_pole),
-                    LINE_COLOR
-                )
+                    TextPrimitive(
+                            0f,
+                            -90f,
+                            resources.getString(R.string.south_pole),
+                            LINE_COLOR
+                    )
             )
             for (index in 0..11) {
                 val ra = index * 30.0f
@@ -137,21 +136,21 @@ class GridLayer
                 val dec = d * 90.0f / numDecSources
                 lines.add(createDecLine(dec))
                 labels.add(
-                    TextPrimitive(
-                        0f,
-                        dec,
-                        String.format("%d°", dec.toInt()),
-                        LINE_COLOR
-                    )
+                        TextPrimitive(
+                                0f,
+                                dec,
+                                String.format("%d°", dec.toInt()),
+                                LINE_COLOR
+                        )
                 )
                 lines.add(createDecLine(-dec))
                 labels.add(
-                    TextPrimitive(
-                        0f,
-                        -dec,
-                        String.format("%d°", -dec.toInt()),
-                        LINE_COLOR
-                    )
+                        TextPrimitive(
+                                0f,
+                                -dec,
+                                String.format("%d°", -dec.toInt()),
+                                LINE_COLOR
+                        )
                 )
             }
         }

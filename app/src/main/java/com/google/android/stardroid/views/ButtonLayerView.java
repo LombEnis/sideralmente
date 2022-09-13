@@ -25,55 +25,55 @@ import android.widget.LinearLayout;
 import com.google.android.stardroid.R;
 
 /**
- *  Contains the provider buttons.
+ * Contains the provider buttons.
  */
 
 public class ButtonLayerView extends LinearLayout {
-  // TODO(jontayler): clear up the fade code which is no longer used.
-  private int fadeTime = 500;
+    // TODO(jontayler): clear up the fade code which is no longer used.
+    private int fadeTime = 500;
 
-  public ButtonLayerView(Context context) {
-    this(context, null);
-  }
-
-  public ButtonLayerView(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    setFocusable(false);
-    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ButtonLayerView);
-    fadeTime = a.getResourceId(R.styleable.ButtonLayerView_fade_time, 500);
-  }
-
-  @Override
-  public boolean onTouchEvent(MotionEvent event) {
-
-    /* Consume all touch events so they don't get dispatched to the view
-     * beneath this view.
-     */
-    return true;
-  }
-
-  public void show() {
-    fade(View.VISIBLE, 0.0f, 1.0f);
-  }
-
-  public void hide() {
-    fade(View.GONE, 1.0f, 0.0f);
-  }
-
-  private void fade(int visibility, float startAlpha, float endAlpha) {
-    AlphaAnimation anim = new AlphaAnimation(startAlpha, endAlpha);
-    anim.setDuration(fadeTime);
-    startAnimation(anim);
-    setVisibility(visibility);
-  }
-
-  @Override
-  public boolean hasFocus() {
-    int numChildren = getChildCount();
-    boolean hasFocus = false;
-    for (int i = 0; i < numChildren; ++i) {
-      hasFocus = hasFocus || getChildAt(i).hasFocus();
+    public ButtonLayerView(Context context) {
+        this(context, null);
     }
-    return hasFocus;
-  }
+
+    public ButtonLayerView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setFocusable(false);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ButtonLayerView);
+        fadeTime = a.getResourceId(R.styleable.ButtonLayerView_fade_time, 500);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        /* Consume all touch events so they don't get dispatched to the view
+         * beneath this view.
+         */
+        return true;
+    }
+
+    public void show() {
+        fade(View.VISIBLE, 0.0f, 1.0f);
+    }
+
+    public void hide() {
+        fade(View.GONE, 1.0f, 0.0f);
+    }
+
+    private void fade(int visibility, float startAlpha, float endAlpha) {
+        AlphaAnimation anim = new AlphaAnimation(startAlpha, endAlpha);
+        anim.setDuration(fadeTime);
+        startAnimation(anim);
+        setVisibility(visibility);
+    }
+
+    @Override
+    public boolean hasFocus() {
+        int numChildren = getChildCount();
+        boolean hasFocus = false;
+        for (int i = 0; i < numChildren; ++i) {
+            hasFocus = hasFocus || getChildAt(i).hasFocus();
+        }
+        return hasFocus;
+    }
 }

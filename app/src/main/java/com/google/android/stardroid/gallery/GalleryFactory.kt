@@ -21,17 +21,17 @@ import android.content.res.Resources
  * @author John Taylor
  */
 object GalleryFactory {
-  private var gallery: Gallery? = null
+    private var gallery: Gallery? = null
 
-  /**
-   * Returns the gallery.  This will usually be a singleton.
-   */
-  @JvmStatic
-  @Synchronized
-  fun getGallery(resources: Resources): Gallery? {
-    if (gallery == null) {
-      gallery = HardcodedGallery(resources)
+    /**
+     * Returns the gallery.  This will usually be a singleton.
+     */
+    @JvmStatic
+    @Synchronized
+    fun getGallery(resources: Resources): Gallery? {
+        if (gallery == null) {
+            gallery = HardcodedGallery(resources)
+        }
+        return gallery
     }
-    return gallery
-  }
 }

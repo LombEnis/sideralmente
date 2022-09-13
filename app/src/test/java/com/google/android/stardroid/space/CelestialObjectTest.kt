@@ -36,13 +36,13 @@ class CelestialObjectTest {
         testCal[2010, GregorianCalendar.MARCH, 21, 12, 0] = 0
         var loc = LatLong(60f, 0f)
         var sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(17..18)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 5:00 and 6:59 the following day.
         var sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(5..6)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)
@@ -50,13 +50,13 @@ class CelestialObjectTest {
         // In midsummer, sunset should be between 20:00 and 21:59.
         testCal[2010, GregorianCalendar.JUNE, 21, 12, 0] = 0
         sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(20..21)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 2:00 and 3:59 the following day.
         sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(2..3)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)
@@ -64,13 +64,13 @@ class CelestialObjectTest {
         // In midwinter, sunset should be between 14:00 and 15:59.
         testCal[2010, GregorianCalendar.DECEMBER, 21, 12, 0] = 0
         sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(14..15)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 8:00 and 9:59 the following day.
         sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("GMT")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(8..9)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)
@@ -81,13 +81,13 @@ class CelestialObjectTest {
         testCal[2010, GregorianCalendar.MARCH, 21, 12, 0] = 0
         loc = LatLong(60f, -75f)
         sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(17..18)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 5:00 and 6:59 the following day.
         sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(5..6)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)
@@ -95,13 +95,13 @@ class CelestialObjectTest {
         // In midsummer, sunset should be between 20:00 and 21:59.
         testCal[2010, GregorianCalendar.JUNE, 21, 12, 0] = 0
         sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(20..21)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 2:00 and 3:59 the following day.
         sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(2..3)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)
@@ -109,13 +109,13 @@ class CelestialObjectTest {
         // In midwinter, sunset should be between 14:00 and 15:59.
         testCal[2010, GregorianCalendar.DECEMBER, 21, 12, 0] = 0
         sunset = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.SET)
         sunset!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunset[Calendar.HOUR_OF_DAY]).isIn(14..15)
         assertThat(sunset[Calendar.DAY_OF_MONTH]).isEqualTo(21)
         // Sunrise should be between 8:00 and 9:59 the following day.
         sunrise = universe.solarSystemObjectFor(SolarSystemBody.Sun)
-            .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
+                .calcNextRiseSetTime(testCal, loc, CelestialObject.RiseSetIndicator.RISE)
         sunrise!!.timeZone = TimeZone.getTimeZone("EST")
         assertThat(sunrise[Calendar.HOUR_OF_DAY]).isIn(8..9)
         assertThat(sunrise[Calendar.DAY_OF_MONTH]).isEqualTo(22)

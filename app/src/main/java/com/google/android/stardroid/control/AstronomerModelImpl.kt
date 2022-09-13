@@ -13,12 +13,12 @@
 // limitations under the License.
 package com.google.android.stardroid.control
 
-import com.google.android.stardroid.math.Matrix3x3.Companion.identity
-import com.google.android.stardroid.control.AstronomerModel.Pointing
-import com.google.android.stardroid.ApplicationConstants
 import android.hardware.SensorManager
 import android.util.Log
+import com.google.android.stardroid.ApplicationConstants
+import com.google.android.stardroid.control.AstronomerModel.Pointing
 import com.google.android.stardroid.math.*
+import com.google.android.stardroid.math.Matrix3x3.Companion.identity
 import com.google.android.stardroid.util.MiscUtil
 import java.util.*
 import kotlin.math.abs
@@ -67,7 +67,7 @@ import kotlin.math.abs
  * @author John Taylor
  */
 class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalculator) :
-    AstronomerModel {
+        AstronomerModel {
     private var pointingInPhoneCoords = POINTING_DIR_IN_STANDARD_PHONE_COORDS
     private var screenUpInPhoneCoords = SCREEN_UP_STANDARD_IN_PHONE_COORDS
     private var magneticDeclinationCalculator: MagneticDeclinationCalculator? = null
@@ -110,16 +110,16 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
     override fun setViewDirectionMode(mode: AstronomerModel.ViewDirectionMode) {
         val (p, s) = when (mode) {
             AstronomerModel.ViewDirectionMode.STANDARD -> listOf(
-                POINTING_DIR_IN_STANDARD_PHONE_COORDS,
-                SCREEN_UP_STANDARD_IN_PHONE_COORDS
+                    POINTING_DIR_IN_STANDARD_PHONE_COORDS,
+                    SCREEN_UP_STANDARD_IN_PHONE_COORDS
             )
             AstronomerModel.ViewDirectionMode.ROTATE90 -> listOf(
-                POINTING_DIR_IN_STANDARD_PHONE_COORDS,
-                SCREEN_UP_ROTATED_IN_PHONE_COORDS
+                    POINTING_DIR_IN_STANDARD_PHONE_COORDS,
+                    SCREEN_UP_ROTATED_IN_PHONE_COORDS
             )
             AstronomerModel.ViewDirectionMode.TELESCOPE -> listOf(
-                POINTING_DIR_FOR_TELESCOPES,
-                SCREEN_UP_FOR_TELESCOPES
+                    POINTING_DIR_FOR_TELESCOPES,
+                    SCREEN_UP_FOR_TELESCOPES
             )
         }
         pointingInPhoneCoords = p
@@ -176,11 +176,11 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
         // Note on some phones such as the Galaxy S4 this vector is the wrong size and needs to be
         // truncated to 4.
         System.arraycopy(
-            rotationVector,
-            0,
-            this.rotationVector,
-            0,
-            rotationVector.size.coerceAtMost(4)
+                rotationVector,
+                0,
+                this.rotationVector,
+                0,
+                rotationVector.size.coerceAtMost(4)
         )
         useRotationVector = true
     }
@@ -236,7 +236,7 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
         calculateLocalNorthAndUpInCelestialCoords(false)
         calculateLocalNorthAndUpInPhoneCoordsFromSensors()
         val transform = axesMagneticCelestialMatrix * axesPhoneInverseMatrix
-        val viewInSpaceSpace =  transform * pointingInPhoneCoords
+        val viewInSpaceSpace = transform * pointingInPhoneCoords
         val screenUpInSpaceSpace = transform * screenUpInPhoneCoords
         pointing.updateLineOfSight(viewInSpaceSpace)
         pointing.updatePerpendicular(screenUpInSpaceSpace)
@@ -249,8 +249,8 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
     private fun calculateLocalNorthAndUpInCelestialCoords(forceUpdate: Boolean) {
         val currentTime = clock.timeInMillisSinceEpoch
         if (!forceUpdate &&
-            abs(currentTime - celestialCoordsLastUpdated) <
-            MINIMUM_TIME_BETWEEN_CELESTIAL_COORD_UPDATES_MILLIS
+                abs(currentTime - celestialCoordsLastUpdated) <
+                MINIMUM_TIME_BETWEEN_CELESTIAL_COORD_UPDATES_MILLIS
         ) {
             return
         }
@@ -268,14 +268,14 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
         // the magnetic declination, it's more efficient to rotate the
         // celestial axes by the same amount in the opposite direction.
         val rotationMatrix = calculateRotationMatrix(
-            magneticDeclinationCalculator!!.declination, upCelestial
+                magneticDeclinationCalculator!!.declination, upCelestial
         )
         val magneticNorthCelestial = rotationMatrix * trueNorthCelestial
         val magneticEastCelestial = magneticNorthCelestial * upCelestial
         axesMagneticCelestialMatrix = Matrix3x3(
-            magneticNorthCelestial,
-            upCelestial,
-            magneticEastCelestial
+                magneticNorthCelestial,
+                upCelestial,
+                magneticEastCelestial
         )
     }
     // TODO(jontayler): with the switch to using the rotation vector sensor this is rather
@@ -302,7 +302,7 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
             // This is the vector to magnetic North *along the ground*.
             // (The "vector rejection")
             magneticNorthPhone =
-                magneticFieldToNorth - upPhone * (magneticFieldToNorth dot upPhone)
+                    magneticFieldToNorth - upPhone * (magneticFieldToNorth dot upPhone)
             magneticNorthPhone.normalize()
             // East is the cross-product.
             magneticEastPhone = magneticNorthPhone * upPhone
@@ -311,7 +311,7 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
         // Easiest way to do that is to construct it from row vectors instead
         // of column vectors.
         axesPhoneInverseMatrix = Matrix3x3(
-            magneticNorthPhone, upPhone, magneticEastPhone, false)
+                magneticNorthPhone, upPhone, magneticEastPhone, false)
     }
 
     /**
@@ -348,8 +348,10 @@ class AstronomerModelImpl(magneticDeclinationCalculator: MagneticDeclinationCalc
         private val TAG = MiscUtil.getTag(AstronomerModelImpl::class.java)
         private val POINTING_DIR_IN_STANDARD_PHONE_COORDS = -Vector3.unitZ()
         private val SCREEN_UP_STANDARD_IN_PHONE_COORDS = Vector3.unitY()
+
         // Some devices like glasses seem to fix the orientation 90 degrees to what we expect.
         private val SCREEN_UP_ROTATED_IN_PHONE_COORDS = Vector3.unitX()
+
         // For telescopes where you want the phone strapped to the tube so that you're
         // essentially sighting along the long edge of the phone
         private val POINTING_DIR_FOR_TELESCOPES = Vector3.unitY()

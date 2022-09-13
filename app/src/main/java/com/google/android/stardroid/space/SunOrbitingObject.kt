@@ -9,10 +9,10 @@ import java.util.*
 /**
  * An object that orbits the sun.
  */
-open class SunOrbitingObject(solarSystemBody : SolarSystemBody) : SolarSystemObject(solarSystemBody) {
+open class SunOrbitingObject(solarSystemBody: SolarSystemBody) : SolarSystemObject(solarSystemBody) {
     override fun getRaDec(date: Date): RaDec {
         val earthCoords =
-            heliocentricCoordinatesFromOrbitalElements(SolarSystemBody.Earth.getOrbitalElements(date))
+                heliocentricCoordinatesFromOrbitalElements(SolarSystemBody.Earth.getOrbitalElements(date))
         val myCoords = getMyHeliocentricCoordinates(date)
         myCoords -= earthCoords
         val equ = convertToEquatorialCoordinates(myCoords)
@@ -20,7 +20,7 @@ open class SunOrbitingObject(solarSystemBody : SolarSystemBody) : SolarSystemObj
     }
 
     protected open fun getMyHeliocentricCoordinates(date: Date) =
-        heliocentricCoordinatesFromOrbitalElements(solarSystemBody.getOrbitalElements(date))
+            heliocentricCoordinatesFromOrbitalElements(solarSystemBody.getOrbitalElements(date))
 
     /////////////////////
 

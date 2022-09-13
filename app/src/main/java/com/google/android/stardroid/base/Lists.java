@@ -25,42 +25,43 @@ import java.util.List;
  */
 
 public class Lists {
-  // No Instances
-  private Lists() {}
-
-  /**
-   * Transforms each element in the given Iterable and returns the result as a
-   * List. Does not change the given Iterable, or the items stored therein.
-   */
-  public static <E, F> List<F> transform(Iterable<E> iterable, Transform<E, F> transform) {
-    List<F> result = new ArrayList<>();
-    for (E e : iterable) {
-      result.add(transform.transform(e));
-    }
-    return result;
-  }
-
-  /**
-   * Returns the given Iterable as a List. If the current Iterable is already a
-   * List, then the Iterable is returned directly. Otherwise a new List is
-   * created with the same elements as the given Iterable.
-   */
-  public static <E> List<E> asList(Iterable<E> iterable) {
-    if (iterable instanceof List) {
-      return (List<E>) iterable;
+    // No Instances
+    private Lists() {
     }
 
-    List<E> result = new ArrayList<E>();
-    for (E e : iterable) {
-      result.add(e);
+    /**
+     * Transforms each element in the given Iterable and returns the result as a
+     * List. Does not change the given Iterable, or the items stored therein.
+     */
+    public static <E, F> List<F> transform(Iterable<E> iterable, Transform<E, F> transform) {
+        List<F> result = new ArrayList<>();
+        for (E e : iterable) {
+            result.add(transform.transform(e));
+        }
+        return result;
     }
-    return result;
-  }
 
-  /**
-   * Converts a user specified set of objects into a {@link List} of that type.
-   */
-  public static <E> List<E> asList(E... objects) {
-    return Arrays.asList(objects);
-  }
+    /**
+     * Returns the given Iterable as a List. If the current Iterable is already a
+     * List, then the Iterable is returned directly. Otherwise a new List is
+     * created with the same elements as the given Iterable.
+     */
+    public static <E> List<E> asList(Iterable<E> iterable) {
+        if (iterable instanceof List) {
+            return (List<E>) iterable;
+        }
+
+        List<E> result = new ArrayList<E>();
+        for (E e : iterable) {
+            result.add(e);
+        }
+        return result;
+    }
+
+    /**
+     * Converts a user specified set of objects into a {@link List} of that type.
+     */
+    public static <E> List<E> asList(E... objects) {
+        return Arrays.asList(objects);
+    }
 }

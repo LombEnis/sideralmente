@@ -32,41 +32,39 @@ import com.google.android.stardroid.math.CoordinateManipulations;
 
 // This class is for debugging the sky renderer.
 public class DebugSkyRenderer extends SkyRenderer {
-  private boolean mEnableSearch = false;
+    private final static int SAMPLE_PERIOD_FRAMES = 12;
+    private final static float SAMPLE_FACTOR = 1.0f / SAMPLE_PERIOD_FRAMES;
+    private boolean mEnableSearch = false;
+    // If true, the look direction spins around in a circle
+    private boolean mSpinLookDir = false;
+    private float mLookAngle = 0;
+    private float mLookAngleLowerBound = -(float) Math.PI / 4.0f;
+    private float mLookAngleUpperBound = (float) Math.PI / 4.0f;
+    private LabelMaker mLabels = null;
+    private int mLabelFPS = 0;
+    private Paint mLabelPaint = null;
+    private NumericSprite mNumericSprite = null;
+    private int mMsPerFrame;
+    private int mFrames;
+    private long mStartTime;
 
-  // If true, the look direction spins around in a circle
-  private boolean mSpinLookDir = false;
-  private float mLookAngle = 0;
-  private float mLookAngleLowerBound = -(float) Math.PI / 4.0f;
-  private float mLookAngleUpperBound = (float) Math.PI / 4.0f;
+    public DebugSkyRenderer(Resources res) {
+        super(res);
 
-  private LabelMaker mLabels = null;
-  private int mLabelFPS = 0;
-  private Paint mLabelPaint = null;
-  private NumericSprite mNumericSprite = null;
-  private int mMsPerFrame;
-  private int mFrames;
-  private long mStartTime;
-  private final static int SAMPLE_PERIOD_FRAMES = 12;
-  private final static float SAMPLE_FACTOR = 1.0f / SAMPLE_PERIOD_FRAMES;
+        mLabelPaint = new Paint();
+        mLabelPaint.setTextSize(32);
+        mLabelPaint.setAntiAlias(true);
+        mLabelPaint.setARGB(0xff, 0xff, 0xff, 0xff);
 
-  public DebugSkyRenderer(Resources res) {
-    super(res);
-
-    mLabelPaint = new Paint();
-    mLabelPaint.setTextSize(32);
-    mLabelPaint.setAntiAlias(true);
-    mLabelPaint.setARGB(0xff, 0xff, 0xff, 0xff);
-
-    debugSetPointObjects();
+        debugSetPointObjects();
 //    debugSetPolyLineObjects();
 //    debugSetLabelObjects();
 //    debugSetImageObjects();
-  }
+    }
 
-  private void debugSetPointObjects() {
-    GeocentricCoordinates coords = new GeocentricCoordinates(1f, 0f, 0f);
-    PointPrimitive p1 = new PointPrimitive(coords, 0xff, 2);
+    private void debugSetPointObjects() {
+        GeocentricCoordinates coords = new GeocentricCoordinates(1f, 0f, 0f);
+        PointPrimitive p1 = new PointPrimitive(coords, 0xff, 2);
 
 //    PointPrimitive p2 = new PointPrimitive(0, 0, 0, 0, 0, 0, 2);
 //    p2.xyz.x = 0;
@@ -80,45 +78,45 @@ public class DebugSkyRenderer extends SkyRenderer {
 //    p3.xyz.z = 4;
 //    p3.color = 0xff0000; // blue
 
-    ArrayList<PointPrimitive> points = new ArrayList<PointPrimitive>();
-    points.add(p1);
+        ArrayList<PointPrimitive> points = new ArrayList<PointPrimitive>();
+        points.add(p1);
 //    points.add(p2);
 //    points.add(p3);
-    // forceSetPointPrimitives(points, 0);
-  }
+        // forceSetPointPrimitives(points, 0);
+    }
 
-  void debugSetPolyLineObjects() {
-    LinePrimitive line1 = new LinePrimitive(0xffffffff);
-    line1.vertices.add(new GeocentricCoordinates(-1, -1, 4));
-    line1.vertices.add(new GeocentricCoordinates(0, 1, 4));
-    line1.vertices.add(new GeocentricCoordinates(0, 0, 4));
-    line1.vertices.add(new GeocentricCoordinates(1, 0, 4));
+    void debugSetPolyLineObjects() {
+        LinePrimitive line1 = new LinePrimitive(0xffffffff);
+        line1.vertices.add(new GeocentricCoordinates(-1, -1, 4));
+        line1.vertices.add(new GeocentricCoordinates(0, 1, 4));
+        line1.vertices.add(new GeocentricCoordinates(0, 0, 4));
+        line1.vertices.add(new GeocentricCoordinates(1, 0, 4));
 
-    LinePrimitive line2 = new LinePrimitive(0xffffffff);
-    line2.vertices.add(new GeocentricCoordinates(1, -1.5f, 4));
-    line2.vertices.add(new GeocentricCoordinates(0, -0.5f, 4));
+        LinePrimitive line2 = new LinePrimitive(0xffffffff);
+        line2.vertices.add(new GeocentricCoordinates(1, -1.5f, 4));
+        line2.vertices.add(new GeocentricCoordinates(0, -0.5f, 4));
 
-    ArrayList<LinePrimitive> lines = new ArrayList<LinePrimitive>();
-    lines.add(line1);
-    lines.add(line2);
+        ArrayList<LinePrimitive> lines = new ArrayList<LinePrimitive>();
+        lines.add(line1);
+        lines.add(line2);
 
-    // forceSetPolyLinePrimitives(lines, 0);
-  }
+        // forceSetPolyLinePrimitives(lines, 0);
+    }
 
-  void debugSetLabelObjects() {
-    ArrayList<TextPrimitive> labels = new ArrayList<TextPrimitive>();
-    GeocentricCoordinates coords1 = new GeocentricCoordinates(0, 0, 4);
-    TextPrimitive ts1 = new TextPrimitive(coords1, "Foo", 0xffffff00);
+    void debugSetLabelObjects() {
+        ArrayList<TextPrimitive> labels = new ArrayList<TextPrimitive>();
+        GeocentricCoordinates coords1 = new GeocentricCoordinates(0, 0, 4);
+        TextPrimitive ts1 = new TextPrimitive(coords1, "Foo", 0xffffff00);
 
-    GeocentricCoordinates coords2 = new GeocentricCoordinates(1, -1.5f, 4);
-    TextPrimitive ts2 = new TextPrimitive(coords2, "Bar", 0xff00ffff);
-    labels.add(ts1);
-    labels.add(ts2);
+        GeocentricCoordinates coords2 = new GeocentricCoordinates(1, -1.5f, 4);
+        TextPrimitive ts2 = new TextPrimitive(coords2, "Bar", 0xff00ffff);
+        labels.add(ts1);
+        labels.add(ts2);
 
-    // forceSetTextPrimitives(labels, 0);
-  }
+        // forceSetTextPrimitives(labels, 0);
+    }
 
-  void debugSetImageObjects() {
+    void debugSetImageObjects() {
     /*
      * TODO(serafini): Fix the unit tests.
 
@@ -154,66 +152,66 @@ public class DebugSkyRenderer extends SkyRenderer {
 
     forceSetImagePrimitives(images, 0);
      */
-  }
-
-
-  @Override
-  public void onDrawFrame(GL10 gl) {
-    if (mSpinLookDir) {
-      mLookAngle += 0.03f;
-      if (mLookAngle > mLookAngleUpperBound) {
-        mLookAngle = mLookAngleLowerBound;
-      }
-      super.setViewOrientation(1, 0.2f, 0, 0, FloatMath.sin(mLookAngle), FloatMath.cos(mLookAngle));
     }
 
-    if (mEnableSearch) {
-      super.enableSearchOverlay(new GeocentricCoordinates(0, 0.707f, 0.707f), "Foo");
-      mEnableSearch = false;
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        if (mSpinLookDir) {
+            mLookAngle += 0.03f;
+            if (mLookAngle > mLookAngleUpperBound) {
+                mLookAngle = mLookAngleLowerBound;
+            }
+            super.setViewOrientation(1, 0.2f, 0, 0, FloatMath.sin(mLookAngle), FloatMath.cos(mLookAngle));
+        }
+
+        if (mEnableSearch) {
+            super.enableSearchOverlay(new GeocentricCoordinates(0, 0.707f, 0.707f), "Foo");
+            mEnableSearch = false;
+        }
+
+        super.onDrawFrame(gl);
+
+        int width = getWidth();
+        int height = getHeight();
+        mLabels.beginDrawing(gl, width, height);
+        float msPFX = width - mLabels.getWidth(mLabelFPS) - 1;
+        mLabels.draw(gl, msPFX, 0, mLabelFPS);
+        mLabels.endDrawing(gl);
+
+        drawFPS(gl, msPFX);
     }
 
-    super.onDrawFrame(gl);
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        super.onSurfaceCreated(gl, config);
 
-    int width = getWidth();
-    int height = getHeight();
-    mLabels.beginDrawing(gl, width, height);
-    float msPFX = width - mLabels.getWidth(mLabelFPS) - 1;
-    mLabels.draw(gl, msPFX, 0, mLabelFPS);
-    mLabels.endDrawing(gl);
+        mLabels = new LabelMaker(true, 256, 64);
+        mLabels.initialize(gl, mTextureManager);
+        mLabels.beginAdding(gl);
+        mLabelFPS = mLabels.add(gl, "fps", mLabelPaint);
+        mLabels.endAdding(gl);
 
-    drawFPS(gl, msPFX);
-  }
-
-  @Override
-  public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    super.onSurfaceCreated(gl, config);
-
-    mLabels = new LabelMaker(true, 256, 64);
-    mLabels.initialize(gl, mTextureManager);
-    mLabels.beginAdding(gl);
-    mLabelFPS = mLabels.add(gl, "fps", mLabelPaint);
-    mLabels.endAdding(gl);
-
-    mNumericSprite = new NumericSprite();
-    mNumericSprite.initialize(gl, mTextureManager, mLabelPaint);
-  }
-
-  private void drawFPS(GL10 gl, float rightMargin) {
-    long time = SystemClock.uptimeMillis();
-    if (mStartTime == 0) {
-      mStartTime = time;
+        mNumericSprite = new NumericSprite();
+        mNumericSprite.initialize(gl, mTextureManager, mLabelPaint);
     }
-    if (mFrames++ == SAMPLE_PERIOD_FRAMES) {
-      mFrames = 0;
-      long delta = time - mStartTime;
-      mStartTime = time;
-      mMsPerFrame = (int) (delta * SAMPLE_FACTOR);
+
+    private void drawFPS(GL10 gl, float rightMargin) {
+        long time = SystemClock.uptimeMillis();
+        if (mStartTime == 0) {
+            mStartTime = time;
+        }
+        if (mFrames++ == SAMPLE_PERIOD_FRAMES) {
+            mFrames = 0;
+            long delta = time - mStartTime;
+            mStartTime = time;
+            mMsPerFrame = (int) (delta * SAMPLE_FACTOR);
+        }
+        if (mMsPerFrame > 0) {
+            mNumericSprite.setValue(1000 / mMsPerFrame);
+            float numWidth = mNumericSprite.width();
+            float x = rightMargin - numWidth;
+            mNumericSprite.draw(gl, x, 0, getWidth(), getHeight());
+        }
     }
-    if (mMsPerFrame > 0) {
-      mNumericSprite.setValue(1000 / mMsPerFrame);
-      float numWidth = mNumericSprite.width();
-      float x = rightMargin - numWidth;
-      mNumericSprite.draw(gl, x, 0, getWidth(), getHeight());
-    }
-  }
 }

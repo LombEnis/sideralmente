@@ -14,27 +14,27 @@ import dagger.Provides;
  */
 @Module
 public class DiagnosticActivityModule {
-  private DiagnosticActivity activity;
+    private DiagnosticActivity activity;
 
-  public DiagnosticActivityModule(DiagnosticActivity activity) {
-    this.activity = activity;
-  }
+    public DiagnosticActivityModule(DiagnosticActivity activity) {
+        this.activity = activity;
+    }
 
-  @Provides
-  @PerActivity
-  Activity provideActivity() {
-    return activity;
-  }
+    @Provides
+    @PerActivity
+    Activity provideActivity() {
+        return activity;
+    }
 
-  @Provides
-  @PerActivity
-  Context provideActivityContext() {
-    return activity;
-  }
+    @Provides
+    @PerActivity
+    Context provideActivityContext() {
+        return activity;
+    }
 
-  @Provides
-  @PerActivity
-  Handler provideHandler() {
-    return new Handler();
-  }
+    @Provides
+    @PerActivity
+    Handler provideHandler() {
+        return new Handler();
+    }
 }

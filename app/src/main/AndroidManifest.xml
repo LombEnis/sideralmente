@@ -93,7 +93,7 @@
             android:screenOrientation="portrait"></activity> <!-- Provides search suggestions. -->
         <activity
             android:name=".activities.BlogActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <provider
             android:name=".search.SearchTermsProvider"
             android:authorities="com.google.android.stardroid.searchterms"

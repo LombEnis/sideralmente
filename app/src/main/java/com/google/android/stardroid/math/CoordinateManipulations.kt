@@ -109,11 +109,11 @@ fun heliocentricCoordinatesFromOrbitalElements(elem: OrbitalElements): Vector3 {
  * Converts to coordinates centered on Earth in the Earth's rotational plane to
  * coordinates in Earth's equatorial plane.
  */
-fun convertToEquatorialCoordinates(earthOrbitalPlane : Vector3): Vector3 {
+fun convertToEquatorialCoordinates(earthOrbitalPlane: Vector3): Vector3 {
     return Vector3(
-        earthOrbitalPlane.x,
-        earthOrbitalPlane.y * cos(OBLIQUITY) - earthOrbitalPlane.z * sin(OBLIQUITY),
-        earthOrbitalPlane.y * sin(OBLIQUITY) + earthOrbitalPlane.z * cos(OBLIQUITY)
+            earthOrbitalPlane.x,
+            earthOrbitalPlane.y * cos(OBLIQUITY) - earthOrbitalPlane.z * sin(OBLIQUITY),
+            earthOrbitalPlane.y * sin(OBLIQUITY) + earthOrbitalPlane.z * cos(OBLIQUITY)
     )
 }
 

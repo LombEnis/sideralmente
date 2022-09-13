@@ -73,7 +73,7 @@ class ManualOrientationController : AbstractController() {
         val newPointingXyz = pointingXyz + deltaXyz
         newPointingXyz.normalize()
         val deltaUpXyz = pointingXyz * radians
-        val newUpXyz =  topXyz + deltaUpXyz
+        val newUpXyz = topXyz + deltaUpXyz
         newUpXyz.normalize()
         model.setPointing(newPointingXyz, newUpXyz)
     }

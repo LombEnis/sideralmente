@@ -20,7 +20,6 @@ import com.google.android.stardroid.renderer.RendererController
 import com.google.android.stardroid.search.SearchResult
 import com.google.android.stardroid.search.SearchTermsProvider.SearchTerm
 import com.google.android.stardroid.util.MiscUtil
-import java.util.*
 
 /**
  * Allows a group of layers to be controlled together.

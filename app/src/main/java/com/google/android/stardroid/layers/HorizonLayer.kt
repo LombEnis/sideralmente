@@ -32,7 +32,7 @@ import kotlin.math.abs
  * @author John Taylor
  */
 class HorizonLayer(private val model: AstronomerModel, resources: Resources) :
-    AbstractRenderablesLayer(resources, true) {
+        AbstractRenderablesLayer(resources, true) {
     override fun initializeAstroSources(sources: ArrayList<AstronomicalRenderable>) {
         sources.add(HorizonRenderable(model, resources))
     }
@@ -49,7 +49,7 @@ class HorizonLayer(private val model: AstronomerModel, resources: Resources) :
 
     /** Implementation of [AstronomicalRenderable] for the horizon source.  */
     internal class HorizonRenderable(private val model: AstronomerModel, resources: Resources) :
-        AbstractAstronomicalRenderable() {
+            AbstractAstronomicalRenderable() {
         private val zenith = Vector3(0f, 0f, 0f)
         private val nadir = Vector3(0f, 0f, 0f)
         private val north = Vector3(0f, 0f, 0f)

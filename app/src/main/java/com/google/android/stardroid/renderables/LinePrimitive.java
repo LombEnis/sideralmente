@@ -14,50 +14,51 @@
 
 package com.google.android.stardroid.renderables;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.graphics.Color;
 
 import com.google.android.stardroid.math.RaDec;
 import com.google.android.stardroid.math.Vector3;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * For representing constellations, constellation boundaries etc.
  */
 public class LinePrimitive extends AbstractPrimitive {
 
-  public final List<Vector3> vertices;
-  public final List<RaDec> raDecs;
-  public final float lineWidth;
+    public final List<Vector3> vertices;
+    public final List<RaDec> raDecs;
+    public final float lineWidth;
 
-  public LinePrimitive() {
-    this(Color.WHITE, new ArrayList<Vector3>(), 1.5f);
-  }
-
-  public LinePrimitive(int color) {
-    this(color, new ArrayList<Vector3>(), 1.5f);
-  }
-
-  public LinePrimitive(int color, List<Vector3> vertices, float lineWidth) {
-    super(color);
-
-    this.vertices = vertices;
-    this.raDecs = new ArrayList<RaDec>();
-    this.lineWidth = lineWidth;
-  }
-
-  public float getLineWidth() {
-    return lineWidth;
-  }
-  public List<Vector3> getVertices() {
-    List<Vector3> result;
-    if (vertices != null) {
-      result = vertices;
-    } else {
-      result = new ArrayList<Vector3>();
+    public LinePrimitive() {
+        this(Color.WHITE, new ArrayList<Vector3>(), 1.5f);
     }
-    return Collections.unmodifiableList(result);
-  }
+
+    public LinePrimitive(int color) {
+        this(color, new ArrayList<Vector3>(), 1.5f);
+    }
+
+    public LinePrimitive(int color, List<Vector3> vertices, float lineWidth) {
+        super(color);
+
+        this.vertices = vertices;
+        this.raDecs = new ArrayList<RaDec>();
+        this.lineWidth = lineWidth;
+    }
+
+    public float getLineWidth() {
+        return lineWidth;
+    }
+
+    public List<Vector3> getVertices() {
+        List<Vector3> result;
+        if (vertices != null) {
+            result = vertices;
+        } else {
+            result = new ArrayList<Vector3>();
+        }
+        return Collections.unmodifiableList(result);
+    }
 }

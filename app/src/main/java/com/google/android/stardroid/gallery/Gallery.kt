@@ -19,5 +19,5 @@ package com.google.android.stardroid.gallery
  * @author John Taylor
  */
 interface Gallery {
-  val galleryImages: List<GalleryImage>
+    val galleryImages: List<GalleryImage>
 }

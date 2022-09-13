@@ -38,7 +38,7 @@ object MiscUtil {
 /** Returns a date given the year, month and day in UTC.
  * The month is specified sanely, ie from 1.
  */
-fun dateFromUtcHmd(y: Int, m: Int, d: Int) : Date {
+fun dateFromUtcHmd(y: Int, m: Int, d: Int): Date {
     val localdate = LocalDate.of(y, m, d)
     val zonedDateTime = ZonedDateTime.of(localdate, LocalTime.MIDNIGHT, ZoneId.of("UTC"))
     val date = Date.from(zonedDateTime.toInstant())

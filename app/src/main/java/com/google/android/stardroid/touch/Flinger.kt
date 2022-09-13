@@ -25,47 +25,47 @@ import java.util.concurrent.TimeUnit
  * to simulate an underlying object with some inertia.
  */
 class Flinger(private val listener: (Float, Float) -> Unit) {
-  private val updatesPerSecond = 20
-  private val timeIntervalMillis = 1000 / updatesPerSecond
-  private val executor: ScheduledExecutorService
-  private var flingTask: ScheduledFuture<*>? = null
-  fun fling(velocityX: Float, velocityY: Float) {
-    Log.d(TAG, "Doing the fling")
-    class PositionUpdater(private var myVelocityX: Float, private var myVelocityY: Float) :
-      Runnable {
-      private val decelFactor = 1.1f
-      private val TOL = 10f
-      override fun run() {
-        if (myVelocityX * myVelocityX + myVelocityY * myVelocityY < TOL) {
-          stop()
+    private val updatesPerSecond = 20
+    private val timeIntervalMillis = 1000 / updatesPerSecond
+    private val executor: ScheduledExecutorService
+    private var flingTask: ScheduledFuture<*>? = null
+    fun fling(velocityX: Float, velocityY: Float) {
+        Log.d(TAG, "Doing the fling")
+        class PositionUpdater(private var myVelocityX: Float, private var myVelocityY: Float) :
+                Runnable {
+            private val decelFactor = 1.1f
+            private val TOL = 10f
+            override fun run() {
+                if (myVelocityX * myVelocityX + myVelocityY * myVelocityY < TOL) {
+                    stop()
+                }
+                listener(
+                        myVelocityX / updatesPerSecond,
+                        myVelocityY / updatesPerSecond
+                )
+                myVelocityX /= decelFactor
+                myVelocityY /= decelFactor
+            }
         }
-        listener(
-          myVelocityX / updatesPerSecond,
-          myVelocityY / updatesPerSecond
+        flingTask = executor.scheduleAtFixedRate(
+                PositionUpdater(velocityX, velocityY),
+                0, timeIntervalMillis.toLong(), TimeUnit.MILLISECONDS
         )
-        myVelocityX /= decelFactor
-        myVelocityY /= decelFactor
-      }
     }
-    flingTask = executor.scheduleAtFixedRate(
-      PositionUpdater(velocityX, velocityY),
-      0, timeIntervalMillis.toLong(), TimeUnit.MILLISECONDS
-    )
-  }
 
-  /**
-   * Brings the flinger to a dead stop.
-   */
-  fun stop() {
-    flingTask?.cancel(true)
-    Log.d(TAG, "Fling stopped")
-  }
+    /**
+     * Brings the flinger to a dead stop.
+     */
+    fun stop() {
+        flingTask?.cancel(true)
+        Log.d(TAG, "Fling stopped")
+    }
 
-  companion object {
-    private val TAG = getTag(Flinger::class.java)
-  }
+    companion object {
+        private val TAG = getTag(Flinger::class.java)
+    }
 
-  init {
-    executor = Executors.newScheduledThreadPool(1)
-  }
+    init {
+        executor = Executors.newScheduledThreadPool(1)
+    }
 }

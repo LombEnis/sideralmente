@@ -37,13 +37,13 @@ import java.util.concurrent.TimeUnit
  * @author Brent Bryan
  */
 class IssLayer(resources: Resources, model: AstronomerModel) :
-    AbstractRenderablesLayer(resources, true) {
+        AbstractRenderablesLayer(resources, true) {
     private val scheduler = Executors.newScheduledThreadPool(1)
     private val issRenderable: IssRenderable = IssRenderable(model, resources)
     override fun initializeAstroSources(sources: ArrayList<AstronomicalRenderable>) {
         sources.add(issRenderable)
         scheduler.scheduleAtFixedRate(
-            OrbitalElementsGrabber(issRenderable), 0, 60, TimeUnit.SECONDS
+                OrbitalElementsGrabber(issRenderable), 0, 60, TimeUnit.SECONDS
         )
     }
 
@@ -127,7 +127,7 @@ class IssLayer(resources: Resources, model: AstronomerModel) :
 
     /** AstronomicalRenderable corresponding to the International Space Station.  */
     internal class IssRenderable(private val model: AstronomerModel, resources: Resources?) :
-        AbstractAstronomicalRenderable() {
+            AbstractAstronomicalRenderable() {
         private val coords = Vector3(1f, 0f, 0f)
         private val pointPrimitives = ArrayList<PointPrimitive>()
         private val textPrimitives = ArrayList<TextPrimitive>()
@@ -135,6 +135,7 @@ class IssLayer(resources: Resources, model: AstronomerModel) :
         private var orbitalElements: OrbitalElements? = null
         private var orbitalElementsChanged = false
         private var lastUpdateTimeMs = 0L
+
         @Synchronized
         fun setOrbitalElements(elements: OrbitalElements?) {
             orbitalElements = elements
@@ -161,7 +162,7 @@ class IssLayer(resources: Resources, model: AstronomerModel) :
             val updateTypes = EnumSet.noneOf(UpdateType::class.java)
             val modelTime = model.time
             if (orbitalElementsChanged ||
-                Math.abs(modelTime.time - lastUpdateTimeMs) > UPDATE_FREQ_MS
+                    Math.abs(modelTime.time - lastUpdateTimeMs) > UPDATE_FREQ_MS
             ) {
                 updateCoords(modelTime)
                 if (orbitalElements != null) {

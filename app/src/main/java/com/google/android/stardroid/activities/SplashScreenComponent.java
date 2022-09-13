@@ -13,6 +13,6 @@ import dagger.Component;
 @PerActivity
 @Component(modules = SplashScreenModule.class, dependencies = ApplicationComponent.class)
 public interface SplashScreenComponent extends EulaDialogFragment.ActivityComponent,
-    WhatsNewDialogFragment.ActivityComponent {
-  void inject(SplashScreenActivity activity);
+        WhatsNewDialogFragment.ActivityComponent {
+    void inject(SplashScreenActivity activity);
 }

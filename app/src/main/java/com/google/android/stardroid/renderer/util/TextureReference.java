@@ -24,21 +24,22 @@ import javax.microedition.khronos.opengles.GL10;
  * automatically invalidated and should not be bound or deleted.
  *
  * @author James Powell
- *
  */
 public interface TextureReference {
-  /**
-   * Sets this as the active texture on the OpenGL context.
-   * @param gl The OpenGL context
-   */
-  void bind(GL10 gl);
+    /**
+     * Sets this as the active texture on the OpenGL context.
+     *
+     * @param gl The OpenGL context
+     */
+    void bind(GL10 gl);
 
-  /**
-   * Deletes the texture resource.  This should not be called multiple times.
-   * Note that when the OpenGL surface is being re-created, all resources
-   * are automatically freed, so you should not delete the textures in that
-   * case.
-   * @param gl
-   */
-  void delete(GL10 gl);
+    /**
+     * Deletes the texture resource.  This should not be called multiple times.
+     * Note that when the OpenGL surface is being re-created, all resources
+     * are automatically freed, so you should not delete the textures in that
+     * case.
+     *
+     * @param gl
+     */
+    void delete(GL10 gl);
 }

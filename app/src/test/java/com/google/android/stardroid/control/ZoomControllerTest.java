@@ -14,63 +14,63 @@
 
 package com.google.android.stardroid.control;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
 /**
  * Test suite for the {@link ZoomController}.
  *
  * @author John Taylor
- *
+ * <p>
  * Tests that require roboelectric for API calls.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest=Config.NONE)
+@Config(manifest = Config.NONE)
 public class ZoomControllerTest {
-  private static final float INITIAL_FIELD_OF_VIEW = 30.0f;
+    private static final float INITIAL_FIELD_OF_VIEW = 30.0f;
 
-  private AstronomerModel astronomerModel;
-  private ZoomController zoomController;
+    private AstronomerModel astronomerModel;
+    private ZoomController zoomController;
 
-  @Before
-  public void setUp() throws Exception {
-    astronomerModel = createMock(AstronomerModel.class);
-    zoomController = new ZoomController();
-    zoomController.setModel(astronomerModel);
-  }
+    @Before
+    public void setUp() throws Exception {
+        astronomerModel = createMock(AstronomerModel.class);
+        zoomController = new ZoomController();
+        zoomController.setModel(astronomerModel);
+    }
 
-  /**
-   * Tests that the maximum field of view is not exceeded.
-   */
-  @Test
-  public void testZoomOut_tooFar() {
-    float newFieldOfView = ZoomController.MAX_ZOOM_OUT;
-    expect(astronomerModel.getFieldOfView()).andStubReturn(INITIAL_FIELD_OF_VIEW);
-    astronomerModel.setFieldOfView(newFieldOfView);
+    /**
+     * Tests that the maximum field of view is not exceeded.
+     */
+    @Test
+    public void testZoomOut_tooFar() {
+        float newFieldOfView = ZoomController.MAX_ZOOM_OUT;
+        expect(astronomerModel.getFieldOfView()).andStubReturn(INITIAL_FIELD_OF_VIEW);
+        astronomerModel.setFieldOfView(newFieldOfView);
 
-    replay(astronomerModel);
+        replay(astronomerModel);
 
-    zoomController.zoomBy(1000);
-    verify(astronomerModel);
-  }
+        zoomController.zoomBy(1000);
+        verify(astronomerModel);
+    }
 
-  @Test
-  public void testZoomIn_modelNotUpdatedWhenControllerNotEnabled() {
-    expect(astronomerModel.getFieldOfView()).andReturn(INITIAL_FIELD_OF_VIEW);
-    // Note that setFieldOfView will not be called
+    @Test
+    public void testZoomIn_modelNotUpdatedWhenControllerNotEnabled() {
+        expect(astronomerModel.getFieldOfView()).andReturn(INITIAL_FIELD_OF_VIEW);
+        // Note that setFieldOfView will not be called
 
-    replay(astronomerModel);
+        replay(astronomerModel);
 
-    zoomController.setEnabled(false);
-    zoomController.zoomBy(0.9f);
-    verify(astronomerModel);
-  }
+        zoomController.setEnabled(false);
+        zoomController.zoomBy(0.9f);
+        verify(astronomerModel);
+    }
 }

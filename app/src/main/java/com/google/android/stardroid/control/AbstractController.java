@@ -22,27 +22,28 @@ import javax.inject.Inject;
 
 /**
  * Implements some of the boilerplate of a {@link Controller}.
- * 
+ *
  * @author John Taylor
  */
 public abstract class AbstractController implements Controller {
-  private static final String TAG = MiscUtil.getTag(AbstractController.class);
-  @Inject AstronomerModel model;
-  protected boolean enabled = true;
+    private static final String TAG = MiscUtil.getTag(AbstractController.class);
+    protected boolean enabled = true;
+    @Inject
+    AstronomerModel model;
 
-  // TODO(jontayler): remove this
-  @Override
-  public void setModel(AstronomerModel model) {
-    this.model = model;
-  }
-
-  @Override
-  public void setEnabled(boolean enabled) {
-    if (enabled) {
-      Log.d(TAG, "Enabling controller " + this);
-    } else {
-      Log.d(TAG, "Disabling controller " + this);
+    // TODO(jontayler): remove this
+    @Override
+    public void setModel(AstronomerModel model) {
+        this.model = model;
     }
-    this.enabled = enabled;
-  }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        if (enabled) {
+            Log.d(TAG, "Enabling controller " + this);
+        } else {
+            Log.d(TAG, "Disabling controller " + this);
+        }
+        this.enabled = enabled;
+    }
 }

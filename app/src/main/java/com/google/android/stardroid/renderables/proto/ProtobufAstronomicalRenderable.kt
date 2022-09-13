@@ -35,8 +35,8 @@ import java.util.*
  * @author Brent Bryan
  */
 class ProtobufAstronomicalRenderable(
-    originalProto: SourceProto.AstronomicalSourceProto,
-    private val resources: Resources
+        originalProto: SourceProto.AstronomicalSourceProto,
+        private val resources: Resources
 ) : AbstractAstronomicalRenderable() {
     companion object {
         private val TAG = MiscUtil.getTag(ProtobufAstronomicalRenderable::class.java)
@@ -54,16 +54,16 @@ class ProtobufAstronomicalRenderable(
             shapeMap[SourceProto.Shape.CIRCLE] = PointPrimitive.Shape.CIRCLE
             shapeMap[SourceProto.Shape.STAR] = PointPrimitive.Shape.CIRCLE
             shapeMap[SourceProto.Shape.ELLIPTICAL_GALAXY] =
-                PointPrimitive.Shape.ELLIPTICAL_GALAXY
+                    PointPrimitive.Shape.ELLIPTICAL_GALAXY
             shapeMap[SourceProto.Shape.SPIRAL_GALAXY] = PointPrimitive.Shape.SPIRAL_GALAXY
             shapeMap[SourceProto.Shape.IRREGULAR_GALAXY] = PointPrimitive.Shape.IRREGULAR_GALAXY
             shapeMap[SourceProto.Shape.LENTICULAR_GALAXY] =
-                PointPrimitive.Shape.LENTICULAR_GALAXY
+                    PointPrimitive.Shape.LENTICULAR_GALAXY
             shapeMap[SourceProto.Shape.GLOBULAR_CLUSTER] = PointPrimitive.Shape.GLOBULAR_CLUSTER
             shapeMap[SourceProto.Shape.OPEN_CLUSTER] =
-                PointPrimitive.Shape.OPEN_CLUSTER
+                    PointPrimitive.Shape.OPEN_CLUSTER
             shapeMap[SourceProto.Shape.NEBULA] =
-                PointPrimitive.Shape.NEBULA
+                    PointPrimitive.Shape.NEBULA
             shapeMap[SourceProto.Shape.HUBBLE_DEEP_FIELD] = PointPrimitive.Shape.HUBBLE_DEEP_FIELD
         }
     }
@@ -102,28 +102,29 @@ class ProtobufAstronomicalRenderable(
     }
 
     override val names: MutableList<String> = ArrayList()
-/*       get() {
-            if (names.isEmpty()) {
-                //names.
-                //names = ArrayList(proto.nameIntIdsCount)
+
+    /*       get() {
+                if (names.isEmpty()) {
+                    //names.
+                    //names = ArrayList(proto.nameIntIdsCount)
+                    for (id in proto.nameIntIdsList) {
+                        names!!.add(resources.getString(id))
+                    }
+                }
+                return names!!
+            }
+
+        @Synchronized
+        override fun getNames(): ArrayList<String> {
+            if (names == null) {
+                names = ArrayList(proto.nameIntIdsCount)
                 for (id in proto.nameIntIdsList) {
                     names!!.add(resources.getString(id))
                 }
             }
             return names!!
         }
-
-    @Synchronized
-    override fun getNames(): ArrayList<String> {
-        if (names == null) {
-            names = ArrayList(proto.nameIntIdsCount)
-            for (id in proto.nameIntIdsList) {
-                names!!.add(resources.getString(id))
-            }
-        }
-        return names!!
-    }
-*/
+    */
     override val searchLocation: Vector3
         get() = getCoords(proto.searchLocation)
 
@@ -135,10 +136,10 @@ class ProtobufAstronomicalRenderable(
             val points = ArrayList<PointPrimitive>(proto.pointCount)
             for (element in proto.pointList) {
                 points.add(
-                    PointPrimitive(
-                        getCoords(element.location),
-                        element.color, element.size, shapeMap[element.shape]
-                    )
+                        PointPrimitive(
+                                getCoords(element.location),
+                                element.color, element.size, shapeMap[element.shape]
+                        )
                 )
             }
             return points
@@ -152,11 +153,11 @@ class ProtobufAstronomicalRenderable(
             for (element in proto.labelList) {
                 Log.d(TAG, "Label " + element.stringsIntId + " : " + element.stringsStrId)
                 points.add(
-                    TextPrimitive(
-                        getCoords(element.location),
-                        resources.getString(element.stringsIntId),
-                        element.color, element.offset, element.fontSize
-                    )
+                        TextPrimitive(
+                                getCoords(element.location),
+                                resources.getString(element.stringsIntId),
+                                element.color, element.offset, element.fontSize
+                        )
                 )
             }
             return points

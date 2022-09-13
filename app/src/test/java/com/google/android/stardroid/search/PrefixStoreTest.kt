@@ -16,7 +16,6 @@ package com.google.android.stardroid.search
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 /**
  * Tests for the PrefixStore
@@ -25,6 +24,7 @@ import java.util.*
  */
 class PrefixStoreTest {
     private var prefixStore: PrefixStore? = null
+
     @Before
     fun setUp() {
         prefixStore = PrefixStore()

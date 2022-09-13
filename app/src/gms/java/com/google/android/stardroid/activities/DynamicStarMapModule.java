@@ -12,13 +12,13 @@ import dagger.Provides;
  */
 @Module
 public class DynamicStarMapModule extends AbstractDynamicStarMapModule {
-  public DynamicStarMapModule(DynamicStarMapActivity activity) {
-    super(activity);
-  }
+    public DynamicStarMapModule(DynamicStarMapActivity activity) {
+        super(activity);
+    }
 
-  @Provides
-  @PerActivity
-  GoogleApiAvailability providePlayServicesApiAvailability() {
-    return GoogleApiAvailability.getInstance();
-  }
+    @Provides
+    @PerActivity
+    GoogleApiAvailability providePlayServicesApiAvailability() {
+        return GoogleApiAvailability.getInstance();
+    }
 }

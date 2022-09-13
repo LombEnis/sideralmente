@@ -39,136 +39,142 @@ import javax.inject.Inject;
  * Shows a splash screen, then launch the next activity.
  */
 public class SplashScreenActivity extends InjectableActivity
-    implements EulaDialogFragment.EulaAcceptanceListener, WhatsNewDialogFragment.CloseListener,
-    HasComponent<SplashScreenComponent> {
-  private final static String TAG = MiscUtil.getTag(SplashScreenActivity.class);
+        implements EulaDialogFragment.EulaAcceptanceListener, WhatsNewDialogFragment.CloseListener,
+        HasComponent<SplashScreenComponent> {
+    private final static String TAG = MiscUtil.getTag(SplashScreenActivity.class);
+    // Update this with new versions of the EULA
+    private static final int EULA_VERSION_CODE = 1;
+    @Inject
+    StardroidApplication app;
+    @Inject
+    Analytics analytics;
+    @Inject
+    SharedPreferences sharedPreferences;
+    @Inject
+    Animation fadeAnimation;
+    @Inject
+    EulaDialogFragment eulaDialogFragmentWithButtons;
+    @Inject
+    FragmentManager fragmentManager;
+    @Inject
+    WhatsNewDialogFragment whatsNewDialogFragment;
+    @Inject
+    ConstraintsChecker cc;
+    private View graphic;
+    private SplashScreenComponent daggerComponent;
 
-  @Inject StardroidApplication app;
-  @Inject Analytics analytics;
-  @Inject SharedPreferences sharedPreferences;
-  @Inject Animation fadeAnimation;
-  @Inject EulaDialogFragment eulaDialogFragmentWithButtons;
-  @Inject FragmentManager fragmentManager;
-  @Inject WhatsNewDialogFragment whatsNewDialogFragment;
-  @Inject ConstraintsChecker cc;
-  private View graphic;
-  private SplashScreenComponent daggerComponent;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash);
+        daggerComponent = DaggerSplashScreenComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .splashScreenModule(new SplashScreenModule(this)).build();
+        daggerComponent.inject(this);
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    Log.d(TAG, "onCreate");
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.splash);
-    daggerComponent = DaggerSplashScreenComponent.builder()
-        .applicationComponent(getApplicationComponent())
-        .splashScreenModule(new SplashScreenModule(this)).build();
-    daggerComponent.inject(this);
+        graphic = findViewById(R.id.splash);
 
-    graphic = findViewById(R.id.splash);
+        fadeAnimation.setAnimationListener(new AnimationListener() {
+            public void onAnimationEnd(Animation unused) {
+                Log.d(TAG, "onAnimationEnd");
+                graphic.setVisibility(View.INVISIBLE);
+                maybeShowWhatsNewAndEnd();
+            }
 
-    fadeAnimation.setAnimationListener(new AnimationListener() {
-      public void onAnimationEnd(Animation unused) {
-        Log.d(TAG, "onAnimationEnd");
-        graphic.setVisibility(View.INVISIBLE);
-        maybeShowWhatsNewAndEnd();
-      }
+            public void onAnimationRepeat(Animation arg0) {
+            }
 
-      public void onAnimationRepeat(Animation arg0) {
-      }
-
-      public void onAnimationStart(Animation arg0) {
-        Log.d(TAG, "SplashScreen.Animation onAnimationStart");
-      }
-    });
-  }
-
-  @Override
-  public void onResume() {
-    Log.d(TAG, "onResume");
-    super.onResume();
-    boolean eulaShowing = maybeShowEula();
-    Log.d(TAG, "Eula showing " + eulaShowing);
-    if (!eulaShowing) {
-      // User has previously accepted - let's get on with it!
-      Log.d(TAG, "EULA already accepted");
-      graphic.startAnimation(fadeAnimation);
+            public void onAnimationStart(Animation arg0) {
+                Log.d(TAG, "SplashScreen.Animation onAnimationStart");
+            }
+        });
     }
-  }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-  }
-
-  @Override
-  public void onPause() {
-    Log.d(TAG, "onPause");
-    super.onPause();
-  }
-
-  @Override
-  public void onDestroy() {
-    Log.d(TAG, "onDestroy");
-    super.onDestroy();
-  }
-
-  private boolean maybeShowEula() {
-    boolean eulaAlreadyConfirmed = (sharedPreferences.getInt(
-        ApplicationConstants.READ_TOS_PREF_VERSION, -1) == EULA_VERSION_CODE);
-    if (!eulaAlreadyConfirmed) {
-      eulaDialogFragmentWithButtons.show(fragmentManager, "Eula Dialog");
-      return true;
-    } else {
-      return false;
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume");
+        super.onResume();
+        boolean eulaShowing = maybeShowEula();
+        Log.d(TAG, "Eula showing " + eulaShowing);
+        if (!eulaShowing) {
+            // User has previously accepted - let's get on with it!
+            Log.d(TAG, "EULA already accepted");
+            graphic.startAnimation(fadeAnimation);
+        }
     }
-  }
 
-  // Update this with new versions of the EULA
-  private static final int EULA_VERSION_CODE = 1;
-
-  @Override
-  public void eulaAccepted() {
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-    editor.putInt(ApplicationConstants.READ_TOS_PREF_VERSION, EULA_VERSION_CODE);
-    editor.commit();
-    // Let's go.
-    graphic.startAnimation(fadeAnimation);
-  }
-
-  @Override
-  public void eulaRejected() {
-    Log.d(TAG, "Sorry chum, no accept, no app.");
-    finish();
-  }
-
-  private void maybeShowWhatsNewAndEnd() {
-    boolean whatsNewSeen = (sharedPreferences.getLong(
-        ApplicationConstants.READ_WHATS_NEW_PREF_VERSION, -1) == app.getVersion());
-    if (whatsNewSeen) {
-      launchSkyMap();
-    } else {
-      whatsNewDialogFragment.show(fragmentManager, "Whats New Dialog");
+    @Override
+    public void onStart() {
+        super.onStart();
     }
-  }
 
-  // What's new dialog closed.
-  @Override
-  public void dialogClosed() {
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-    editor.putLong(ApplicationConstants.READ_WHATS_NEW_PREF_VERSION, app.getVersion());
-    editor.commit();
-    launchSkyMap();
-  }
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause");
+        super.onPause();
+    }
 
-  private void launchSkyMap() {
-    Intent intent = new Intent(SplashScreenActivity.this, DynamicStarMapActivity.class);
-    cc.check();
-    startActivity(intent);
-    finish();
-  }
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy");
+        super.onDestroy();
+    }
 
-  @Override
-  public SplashScreenComponent getComponent() {
-    return daggerComponent;
-  }
+    private boolean maybeShowEula() {
+        boolean eulaAlreadyConfirmed = (sharedPreferences.getInt(
+                ApplicationConstants.READ_TOS_PREF_VERSION, -1) == EULA_VERSION_CODE);
+        if (!eulaAlreadyConfirmed) {
+            eulaDialogFragmentWithButtons.show(fragmentManager, "Eula Dialog");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void eulaAccepted() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ApplicationConstants.READ_TOS_PREF_VERSION, EULA_VERSION_CODE);
+        editor.commit();
+        // Let's go.
+        graphic.startAnimation(fadeAnimation);
+    }
+
+    @Override
+    public void eulaRejected() {
+        Log.d(TAG, "Sorry chum, no accept, no app.");
+        finish();
+    }
+
+    private void maybeShowWhatsNewAndEnd() {
+        boolean whatsNewSeen = (sharedPreferences.getLong(
+                ApplicationConstants.READ_WHATS_NEW_PREF_VERSION, -1) == app.getVersion());
+        if (whatsNewSeen) {
+            launchSkyMap();
+        } else {
+            whatsNewDialogFragment.show(fragmentManager, "Whats New Dialog");
+        }
+    }
+
+    // What's new dialog closed.
+    @Override
+    public void dialogClosed() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(ApplicationConstants.READ_WHATS_NEW_PREF_VERSION, app.getVersion());
+        editor.commit();
+        launchSkyMap();
+    }
+
+    private void launchSkyMap() {
+        Intent intent = new Intent(SplashScreenActivity.this, DynamicStarMapActivity.class);
+        cc.check();
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public SplashScreenComponent getComponent() {
+        return daggerComponent;
+    }
 }

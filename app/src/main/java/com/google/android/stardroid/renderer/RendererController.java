@@ -22,76 +22,80 @@ import java.util.Queue;
 /**
  * Allows the rest of the program to communicate with the SkyRenderer by queueing
  * events.
+ *
  * @author James Powell
  */
 public class RendererController extends RendererControllerBase {
-  /**
-   * Used for grouping renderer calls into atomic units.
-   */
-  public static class AtomicSection extends RendererControllerBase {
-    private Queuer mQueuer = new Queuer();
-    private static int NEXT_ID = 0;
-    private int mID;
+    private final EventQueuer mQueuer;
 
-    private AtomicSection(SkyRenderer renderer) {
-      super(renderer);
-      synchronized(AtomicSection.class) {
-        mID = NEXT_ID++;
-      }
+    public RendererController(SkyRenderer renderer, final GLSurfaceView view) {
+        super(renderer);
+        mQueuer = view::queueEvent;
     }
 
     @Override
     protected EventQueuer getQueuer() {
-      return mQueuer;
+        return mQueuer;
     }
 
     @Override
     public String toString() {
-      return "AtomicSection" + mID;
+        return "RendererController";
     }
 
-    private Queue<Runnable> releaseEvents() {
-      Queue<Runnable> queue = mQueuer.mQueue;
-      mQueuer = new Queuer();
-      return queue;
+    public AtomicSection createAtomic() {
+        return new AtomicSection(mRenderer);
     }
 
-    private static class Queuer implements EventQueuer {
-      private Queue<Runnable> mQueue = new LinkedList<Runnable>();
-      public void queueEvent(Runnable r) {
-        mQueue.add(r);
-      }
+    public void queueAtomic(final AtomicSection atomic) {
+        String msg = "Applying " + atomic.toString();
+        queueRunnable(msg, CommandType.Synchronization, new Runnable() {
+            public void run() {
+                Queue<Runnable> events = atomic.releaseEvents();
+                for (Runnable r : events) {
+                    r.run();
+                }
+            }
+        });
     }
-  }
 
-  private final EventQueuer mQueuer;
+    /**
+     * Used for grouping renderer calls into atomic units.
+     */
+    public static class AtomicSection extends RendererControllerBase {
+        private static int NEXT_ID = 0;
+        private Queuer mQueuer = new Queuer();
+        private int mID;
 
-  @Override
-  protected EventQueuer getQueuer() {
-    return mQueuer;
-  }
+        private AtomicSection(SkyRenderer renderer) {
+            super(renderer);
+            synchronized (AtomicSection.class) {
+                mID = NEXT_ID++;
+            }
+        }
 
-  public RendererController(SkyRenderer renderer, final GLSurfaceView view) {
-    super(renderer);
-    mQueuer = view::queueEvent;
-  }
+        @Override
+        protected EventQueuer getQueuer() {
+            return mQueuer;
+        }
 
-  @Override
-  public String toString() {
-    return "RendererController";
-  }
+        @Override
+        public String toString() {
+            return "AtomicSection" + mID;
+        }
 
-  public AtomicSection createAtomic() {
-    return new AtomicSection(mRenderer);
-  }
+        private Queue<Runnable> releaseEvents() {
+            Queue<Runnable> queue = mQueuer.mQueue;
+            mQueuer = new Queuer();
+            return queue;
+        }
 
-  public void queueAtomic(final AtomicSection atomic) {
-    String msg = "Applying " + atomic.toString();
-    queueRunnable(msg, CommandType.Synchronization, new Runnable() { public void run() {
-      Queue<Runnable> events = atomic.releaseEvents();
-      for (Runnable r : events) {
-        r.run();
-      }
-    }});
-  }
+        private static class Queuer implements EventQueuer {
+            private Queue<Runnable> mQueue = new LinkedList<Runnable>();
+
+            public void queueEvent(Runnable r) {
+                mQueue.add(r);
+            }
+        }
+    }
 }

@@ -22,7 +22,6 @@ import com.google.android.stardroid.renderables.AbstractAstronomicalRenderable
 import com.google.android.stardroid.renderables.AstronomicalRenderable
 import com.google.android.stardroid.renderables.LinePrimitive
 import com.google.android.stardroid.renderables.TextPrimitive
-import java.util.*
 
 /**
  * Creates a Layer for the Ecliptic.

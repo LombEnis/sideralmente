@@ -13,8 +13,8 @@
 // limitations under the License.
 package com.google.android.stardroid.math
 
-import junit.framework.TestCase
 import com.google.common.truth.Truth.assertThat
+import junit.framework.TestCase
 import java.util.*
 
 /**

@@ -18,8 +18,8 @@ import kotlin.math.atan2
 import kotlin.math.sqrt
 
 data class RaDec(
-    var ra: Float, // In degrees
-    var dec: Float // In degrees
+        var ra: Float, // In degrees
+        var dec: Float // In degrees
 ) {
 
     /**
@@ -71,18 +71,18 @@ data class RaDec(
             // find the RA and DEC from the rectangular equatorial coords
             val ra = mod2pi(atan2(coords.y, coords.x)) * RADIANS_TO_DEGREES
             val dec =
-                (atan(coords.z / sqrt(coords.x * coords.x + coords.y * coords.y))
-                        * RADIANS_TO_DEGREES)
+                    (atan(coords.z / sqrt(coords.x * coords.x + coords.y * coords.y))
+                            * RADIANS_TO_DEGREES)
             return RaDec(ra, dec)
         }
 
         @JvmStatic
         fun fromHoursMinutesSeconds(
-            raHours: Float, raMinutes: Float, raSeconds: Float,
-            decDegrees: Float, decMinutes: Float, decSeconds: Float
+                raHours: Float, raMinutes: Float, raSeconds: Float,
+                decDegrees: Float, decMinutes: Float, decSeconds: Float
         ) = RaDec(
-            raDegreesFromHMS(raHours, raMinutes, raSeconds),
-            decDegreesFromDMS(decDegrees, decMinutes, decSeconds)
+                raDegreesFromHMS(raHours, raMinutes, raSeconds),
+                decDegreesFromDMS(decDegrees, decMinutes, decSeconds)
         )
     }
 }

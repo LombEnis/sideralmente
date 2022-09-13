@@ -17,10 +17,10 @@ import dagger.Component;
 @PerActivity
 @Component(modules = DynamicStarMapModule.class, dependencies = ApplicationComponent.class)
 public interface DynamicStarMapComponent extends EulaDialogFragment.ActivityComponent,
-    TimeTravelDialogFragment.ActivityComponent, HelpDialogFragment.ActivityComponent,
-    NoSearchResultsDialogFragment.ActivityComponent,
-    MultipleSearchResultsDialogFragment.ActivityComponent,
-    NoSensorsDialogFragment.ActivityComponent {
-  void inject(DynamicStarMapActivity activity);
+        TimeTravelDialogFragment.ActivityComponent, HelpDialogFragment.ActivityComponent,
+        NoSearchResultsDialogFragment.ActivityComponent,
+        MultipleSearchResultsDialogFragment.ActivityComponent,
+        NoSensorsDialogFragment.ActivityComponent {
+    void inject(DynamicStarMapActivity activity);
 }
 

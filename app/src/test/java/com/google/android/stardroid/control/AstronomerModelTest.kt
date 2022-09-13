@@ -17,7 +17,6 @@ import com.google.android.stardroid.math.LatLong
 import com.google.android.stardroid.math.MathUtils.sqrt
 import com.google.android.stardroid.math.Vector3
 import com.google.android.stardroid.math.Vector3Subject
-import junit.framework.TestCase
 import org.junit.Test
 import java.util.*
 
@@ -47,9 +46,9 @@ class AstronomerModelTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(1f, 0f, 0f)
         checkModelOrientation(
-            location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
-            expectedUpAlongPhone = expectedNorth
+                location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
@@ -68,9 +67,9 @@ class AstronomerModelTest {
         val expectedSouth = Vector3(1 / SQRT2, 0f, -1 / SQRT2)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkModelOrientation(
-            location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
-            expectedUpAlongPhone = expectedNorth
+                location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
@@ -90,9 +89,9 @@ class AstronomerModelTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkModelOrientation(
-            location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
-            expectedUpAlongPhone = expectedNorth
+                location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNadir,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
@@ -112,9 +111,9 @@ class AstronomerModelTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkModelOrientation(
-            location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedEast,
-            expectedUpAlongPhone = expectedNorth
+                location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedEast,
+                expectedUpAlongPhone = expectedNorth
         )
     }
 
@@ -133,35 +132,35 @@ class AstronomerModelTest {
         val expectedSouth = Vector3(0f, 0f, -1f)
         val expectedWest = Vector3(0f, -1f, 0f)
         checkModelOrientation(
-            location, acceleration, magneticField, expectedZenith, expectedNadir,
-            expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNorth,
-            expectedUpAlongPhone = expectedZenith
+                location, acceleration, magneticField, expectedZenith, expectedNadir,
+                expectedNorth, expectedEast, expectedSouth, expectedWest, expectedPointing = expectedNorth,
+                expectedUpAlongPhone = expectedZenith
         )
     }
 
     private fun checkModelOrientation(
-        location: LatLong,
-        acceleration: Vector3,
-        magneticField: Vector3,
-        expectedZenith: Vector3,
-        expectedNadir: Vector3,
-        expectedNorth: Vector3,
-        expectedEast: Vector3,
-        expectedSouth: Vector3,
-        expectedWest: Vector3,
-        expectedPointing: Vector3,
-        expectedUpAlongPhone: Vector3
+            location: LatLong,
+            acceleration: Vector3,
+            magneticField: Vector3,
+            expectedZenith: Vector3,
+            expectedNadir: Vector3,
+            expectedNorth: Vector3,
+            expectedEast: Vector3,
+            expectedSouth: Vector3,
+            expectedWest: Vector3,
+            expectedPointing: Vector3,
+            expectedUpAlongPhone: Vector3
     ) {
         astronomer.location = location
         val fakeClock =
-            Clock {
-                // This date is special as RA, DEC = (0, 0) is directly overhead at the
-                // equator on the Greenwich meridian.
-                // 12:07 March 20th 2009
-                val calendar = GregorianCalendar(TimeZone.getTimeZone("UTC"))
-                calendar[2009, 2, 20, 12, 7] = 24
-                calendar.timeInMillis
-            }
+                Clock {
+                    // This date is special as RA, DEC = (0, 0) is directly overhead at the
+                    // equator on the Greenwich meridian.
+                    // 12:07 March 20th 2009
+                    val calendar = GregorianCalendar(TimeZone.getTimeZone("UTC"))
+                    calendar[2009, 2, 20, 12, 7] = 24
+                    calendar.timeInMillis
+                }
         astronomer.setClock(fakeClock)
         astronomer.setPhoneSensorValues(acceleration, magneticField)
 

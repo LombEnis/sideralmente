@@ -19,11 +19,11 @@ import com.google.android.stardroid.R
 import com.google.android.stardroid.base.TimeConstants
 import com.google.android.stardroid.control.AstronomerModel
 import com.google.android.stardroid.math.Vector3
-import com.google.android.stardroid.renderer.RendererObjectManager.UpdateType
 import com.google.android.stardroid.renderables.AbstractAstronomicalRenderable
 import com.google.android.stardroid.renderables.AstronomicalRenderable
 import com.google.android.stardroid.renderables.ImagePrimitive
 import com.google.android.stardroid.renderables.Renderable
+import com.google.android.stardroid.renderer.RendererObjectManager.UpdateType
 import com.google.android.stardroid.util.MiscUtil
 import java.util.*
 import kotlin.math.abs
@@ -34,7 +34,7 @@ import kotlin.math.abs
  * @author John Taylor
  */
 class StarOfBethlehemLayer(private val model: AstronomerModel, resources: Resources) :
-    AbstractRenderablesLayer(resources, true) {
+        AbstractRenderablesLayer(resources, true) {
     override fun initializeAstroSources(sources: ArrayList<AstronomicalRenderable>) {
         sources.add(StarOfBethlehemRenderable(model, resources))
     }
@@ -47,12 +47,12 @@ class StarOfBethlehemLayer(private val model: AstronomerModel, resources: Resour
     override val layerNameId = R.string.show_stars_pref
 
     private class StarOfBethlehemRenderable(private val model: AstronomerModel, resources: Resources) :
-        AbstractAstronomicalRenderable() {
+            AbstractAstronomicalRenderable() {
         override val images: MutableList<ImagePrimitive> = ArrayList()
         private var lastUpdateTimeMs = 0L
         private val coords = Vector3(1f, 0f, 0f)
         private val theImage: ImagePrimitive =
-            ImagePrimitive(coords, resources, R.drawable.blank, UP, SCALE_FACTOR)
+                ImagePrimitive(coords, resources, R.drawable.blank, UP, SCALE_FACTOR)
 
         private fun updateStar() {
             lastUpdateTimeMs = model.time.time
@@ -62,16 +62,16 @@ class StarOfBethlehemLayer(private val model: AstronomerModel, resources: Resour
             theImage.setUpVector(UP)
             // TODO(johntaylor): consider varying the sizes by scaling factor as time progresses.
             if (calendar[Calendar.MONTH] == Calendar.DECEMBER
-                && calendar[Calendar.DAY_OF_MONTH] == 25
+                    && calendar[Calendar.DAY_OF_MONTH] == 25
             ) {
                 Log.d(TAG, "Showing Easter Egg")
                 theImage.setImageId(R.drawable.star_of_b)
                 val zenith = model.zenith
                 val east = model.east
                 coords.assign(
-                    (zenith.x + 2 * east.x) / 3,
-                    (zenith.y + 2 * east.y) / 3,
-                    (zenith.z + 2 * east.z) / 3
+                        (zenith.x + 2 * east.x) / 3,
+                        (zenith.y + 2 * east.y) / 3,
+                        (zenith.z + 2 * east.z) / 3
                 )
                 theImage.setUpVector(zenith)
             } else {

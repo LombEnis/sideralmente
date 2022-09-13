@@ -25,24 +25,24 @@ class Matrix4x4Test {
     fun testMultiplyByIdentity() {
         val identity = createIdentity()
         val m = Matrix4x4(
-            floatArrayOf(
-                1f,
-                2f,
-                3f,
-                4f,
-                5f,
-                6f,
-                7f,
-                8f,
-                9f,
-                10f,
-                11f,
-                12f,
-                13f,
-                14f,
-                15f,
-                16f
-            )
+                floatArrayOf(
+                        1f,
+                        2f,
+                        3f,
+                        4f,
+                        5f,
+                        6f,
+                        7f,
+                        8f,
+                        9f,
+                        10f,
+                        11f,
+                        12f,
+                        13f,
+                        14f,
+                        15f,
+                        16f
+                )
         )
         Matrix4x4Subject.assertThat(m).isWithin(TOL).of(identity * m)
         Matrix4x4Subject.assertThat(m).isWithin(TOL).of(m * identity)
@@ -51,45 +51,45 @@ class Matrix4x4Test {
     @Test
     fun testMultiplyByScaling() {
         val m = Matrix4x4(
-            floatArrayOf(
-                1f,
-                2f,
-                3f,
-                0f,
-                5f,
-                6f,
-                7f,
-                0f,
-                9f,
-                10f,
-                11f,
-                0f,
-                0f,
-                0f,
-                0f,
-                0f
-            )
+                floatArrayOf(
+                        1f,
+                        2f,
+                        3f,
+                        0f,
+                        5f,
+                        6f,
+                        7f,
+                        0f,
+                        9f,
+                        10f,
+                        11f,
+                        0f,
+                        0f,
+                        0f,
+                        0f,
+                        0f
+                )
         )
         val scaling = createScaling(2f, 2f, 2f)
         val expected = Matrix4x4(
-            floatArrayOf(
-                2f,
-                4f,
-                6f,
-                0f,
-                10f,
-                12f,
-                14f,
-                0f,
-                18f,
-                20f,
-                22f,
-                0f,
-                0f,
-                0f,
-                0f,
-                0f
-            )
+                floatArrayOf(
+                        2f,
+                        4f,
+                        6f,
+                        0f,
+                        10f,
+                        12f,
+                        14f,
+                        0f,
+                        18f,
+                        20f,
+                        22f,
+                        0f,
+                        0f,
+                        0f,
+                        0f,
+                        0f
+                )
         )
         Matrix4x4Subject.assertThat(expected).isWithin(TOL).of(scaling * m)
     }
@@ -115,7 +115,7 @@ class Matrix4x4Test {
         val v = Vector3(1f, 0f, 0f)
         val oneOverSqrt2 = 1.0f / sqrt(2.0f)
         Vector3Subject.assertThat(Vector3(oneOverSqrt2, 0f, oneOverSqrt2)).isWithin(TOL)
-            .of(m * v)
+                .of(m * v)
     }
 
     @Test

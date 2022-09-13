@@ -1,92 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/time_dialog_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/time_dialog_view"
+    android:minWidth="350dip"
     android:orientation="vertical"
     android:paddingLeft="5dip"
-    android:paddingTop="5dip"
-    android:minWidth="350dip">
+    android:paddingTop="5dip">
 
     <!-- Display the date where the user is right now. -->
     <TextView
         android:id="@+id/dateDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/now_visiting"
-        android:paddingBottom="5dip"/>
+        android:paddingBottom="5dip"
+        android:text="@string/now_visiting" />
 
     <!-- Popular dates prompt and drop down -->
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/popular_dates_prompt"
+        android:paddingTop="5dip"
         android:paddingBottom="5dip"
-        android:paddingTop="5dip"/>
+        android:text="@string/popular_dates_prompt" />
 
     <Spinner
         android:id="@+id/popular_dates_spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/popular_dates_prompt"/>
+        android:prompt="@string/popular_dates_prompt" />
 
     <!-- Custom date prompt -->
-  <TextView
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="@string/custom_date_prompt"
-     android:paddingTop="15dip"
-     android:paddingBottom="5dip"
-     />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dip"
+        android:paddingBottom="5dip"
+        android:text="@string/custom_date_prompt" />
 
-  <!-- Custom date buttons -->
-  <LinearLayout
-     android:layout_width="fill_parent"
-     android:layout_height="wrap_content"
-     android:orientation="horizontal"
-     android:paddingLeft="5dip"
-     android:paddingRight="5dip"
-     android:gravity="center_horizontal">
+    <!-- Custom date buttons -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip">
 
-    <!-- Setting width to 0px and weight to 1 ensures that width is the same for both buttons. -->
-    <Button android:id="@+id/pickDate"
-            android:layout_height="wrap_content"
+        <!-- Setting width to 0px and weight to 1 ensures that width is the same for both buttons. -->
+        <Button
+            android:id="@+id/pickDate"
             android:layout_width="wrap_content"
-            android:text="@string/change_date_prompt"
-            android:singleLine="true"/>
-
-    <Button android:id="@+id/pickTime"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/change_time_prompt"
             android:singleLine="true"
-            />
-  </LinearLayout>
+            android:text="@string/change_date_prompt" />
 
-  <!-- Bottom bar with "Go" and "Cancel" buttons. -->
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:paddingTop="5dip"
-      android:paddingLeft="5dip"
-      android:paddingRight="5dip"
-      android:gravity="center_horizontal">
-
-    <Button android:id="@+id/timeTravelGo"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/pickTime"
             android:layout_width="wrap_content"
-            android:text="@string/go"
-            />
-
-    <Button android:id="@+id/timeTravelCancel"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/cancel"
-            />
+            android:singleLine="true"
+            android:text="@string/change_time_prompt" />
+    </LinearLayout>
 
-  </LinearLayout>
+    <!-- Bottom bar with "Go" and "Cancel" buttons. -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="5dip"
+        android:paddingTop="5dip"
+        android:paddingRight="5dip">
+
+        <Button
+            android:id="@+id/timeTravelGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go" />
+
+        <Button
+            android:id="@+id/timeTravelCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel" />
+
+    </LinearLayout>
 
 </LinearLayout>
