@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.hardware.SensorManager
 import android.location.LocationManager
 import android.net.ConnectivityManager
+import com.google.android.stardroid.activities.BlogActivity
 import com.google.android.stardroid.activities.EditSettingsActivity
 import com.google.android.stardroid.activities.ImageDisplayActivity
 import com.google.android.stardroid.activities.ImageGalleryActivity
@@ -47,4 +48,5 @@ interface ApplicationComponent {
   fun inject(activity: ImageDisplayActivity)
   fun inject(activity: ImageGalleryActivity)
   fun inject(provider: SearchTermsProvider)
+  fun inject(provider: BlogActivity)
 }

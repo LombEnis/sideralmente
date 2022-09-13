@@ -128,7 +128,7 @@ public class ImageGalleryActivity extends InjectableActivity {
       public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         showImage(position);
       }
-  });
+    });
   }
 
   /**

@@ -7,12 +7,13 @@ import android.webkit.WebView;
 
 import com.google.android.stardroid.R;
 
-public class BlogActivity extends AppCompatActivity {
+public class BlogActivity extends InjectableActivity {
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getApplicationComponent().inject(this);
         setContentView(R.layout.activity_blog);
 
         setUpViews();
