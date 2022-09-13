@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:stardroid="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_sky_view_root"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@android:style/Theme.Black">
 
     <FrameLayout
         android:id="@+id/main_sky_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
 
         <android.opengl.GLSurfaceView
             android:id="@+id/skyrenderer_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <!-- Provides a translucent mask over the whole screen -->
         <View
             android:id="@+id/view_mask"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#ff990099"
             android:visibility="invisible" />
 
@@ -44,19 +44,19 @@
 
             <TextView
                 android:id="@+id/search_status_label"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dip"
-                android:layout_toRightOf="@id/search_icon"
-                android:paddingLeft="10dip"
+                android:layout_marginStart="2dip"
+                android:layout_toEndOf="@id/search_icon"
+                android:paddingStart="10dip"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/search_prompt"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/search_status_label"
-                android:layout_marginLeft="34dip"
+                android:layout_marginStart="34dip"
                 android:text="@string/search_overlay_title"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -64,7 +64,7 @@
                 android:id="@+id/cancel_search_button"
                 android:layout_width="32dip"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:src="@drawable/time_travel_close" />
@@ -214,5 +214,12 @@
             </FrameLayout>
         </RelativeLayout>
     </FrameLayout>
-</RelativeLayout>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:id="@+id/web_view"/>
+
+</LinearLayout>
 

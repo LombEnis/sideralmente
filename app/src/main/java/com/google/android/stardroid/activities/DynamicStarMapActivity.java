@@ -37,6 +37,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -264,6 +266,13 @@ public class DynamicStarMapActivity extends InjectableActivity
       doSearchWithIntent(intent);
     }
     Log.d(TAG, "-onCreate at " + System.currentTimeMillis());
+
+    setUpWebView();
+  }
+
+  private void setUpWebView() {
+    WebView webView = findViewById(R.id.web_view);
+    webView.loadUrl("https://www.google.com");
   }
 
   private void checkForSensorsAndMaybeWarn() {

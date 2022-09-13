@@ -98,12 +98,12 @@ class HorizonLayer(private val model: AstronomerModel, resources: Resources) :
         init {
             val vertices = Lists.asList(north, east, south, west, north)
             lines.add(LinePrimitive(LINE_COLOR, vertices, 1.5f))
-            labels.add(TextPrimitive(zenith, resources.getString(R.string.zenith), LABEL_COLOR))
-            labels.add(TextPrimitive(nadir, resources.getString(R.string.nadir), LABEL_COLOR))
-            labels.add(TextPrimitive(north, resources.getString(R.string.north), LABEL_COLOR))
-            labels.add(TextPrimitive(south, resources.getString(R.string.south), LABEL_COLOR))
-            labels.add(TextPrimitive(east, resources.getString(R.string.east), LABEL_COLOR))
-            labels.add(TextPrimitive(west, resources.getString(R.string.west), LABEL_COLOR))
+            labels.add(TextPrimitive(zenith, resources.getString(R.string.zenith), LABEL_COLOR, 0f, 30))
+            labels.add(TextPrimitive(nadir, resources.getString(R.string.nadir), LABEL_COLOR, 0f, 30))
+            labels.add(TextPrimitive(north, resources.getString(R.string.north), LABEL_COLOR, 0f, 30))
+            labels.add(TextPrimitive(south, resources.getString(R.string.south), LABEL_COLOR, 0f, 30))
+            labels.add(TextPrimitive(east, resources.getString(R.string.east), LABEL_COLOR, 0f, 30))
+            labels.add(TextPrimitive(west, resources.getString(R.string.west), LABEL_COLOR, 0f, 30))
         }
     }
 }
