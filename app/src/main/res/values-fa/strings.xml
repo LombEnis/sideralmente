@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">نقشه‌ی آسمان</string>
     <string name="menu_settings">تنظیمات</string>
     <string name="menu_search">جستجو</string>
+    <string name="menu_video">Video</string>
     <string name="cancel">لغو</string>
     <string name="set" translation_description="Button label. Set the date to the given value">اعمال</string>
     <string name="go">برو!</string>

@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">星空地图</string>
     <string name="menu_settings">设置</string>
     <string name="menu_search">搜索</string>
+    <string name="menu_video">Video</string>
     <string name="cancel">取消</string>
     <string name="set">设置</string>
     <string name="go">开始！</string>

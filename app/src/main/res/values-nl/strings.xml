@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Instellingen</string>
     <string name="menu_search">Zoeken</string>
+    <string name="menu_video">Video</string>
     <string name="cancel">Annuleren</string>
     <string name="set">Instellen</string>
     <string name="go">Ga!</string>

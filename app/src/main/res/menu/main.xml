@@ -24,30 +24,37 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/menu_item_video"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="2"
+        android:title="@string/menu_video"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_item_dim"
         android:icon="@android:drawable/ic_menu_view"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="@string/menu_toggle_dim"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_settings"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:title="@string/menu_settings"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_item_gallery"
         android:icon="@android:drawable/ic_menu_gallery"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         android:title="@string/menu_gallery"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_time"
         android:icon="@drawable/time_travel_icon"
-        android:orderInCategory="5"
+        android:orderInCategory="6"
         android:title="@string/menu_time"
         app:showAsAction="ifRoom" />
 

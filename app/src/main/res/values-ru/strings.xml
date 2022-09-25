@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Карта звездного неба</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_search">Поиск</string>
+    <string name="menu_video">видео</string>
     <string name="cancel">Отмена</string>
     <string name="set">Настройка</string>
     <string name="go">Вперед!</string>

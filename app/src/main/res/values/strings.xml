@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
+    <string name="menu_video">Video</string>
     <string name="cancel">Cancel</string>
     <string name="set" translation_description="Button label. Set the date to the given value">Set</string>
     <string name="go">Go!</string>

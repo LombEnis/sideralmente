@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Налаштування</string>
     <string name="menu_search">Пошук</string>
+    <string name="menu_video">відео</string>
     <string name="cancel">Відміна</string>
     <string name="set">Налаштувати</string>
     <string name="go">Вперед!</string>

@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Skyマップ</string>
     <string name="menu_settings">設定</string>
     <string name="menu_search">検索</string>
+    <string name="menu_video">ビデオ</string>
     <string name="cancel">キャンセル</string>
     <string name="set" translation_description="Button label. Set the date to the given value">設定</string>
     <string name="go">Go!</string>

@@ -5,6 +5,7 @@
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">الإعدادات</string>
     <string name="menu_search">بحث</string>
+    <string name="menu_video">فيديو</string>
     <string name="cancel">إلغاء</string>
     <string name="set" translation_description="Button label. Set the date to the given value">حدد</string>
     <string name="go">انطلق!</string>

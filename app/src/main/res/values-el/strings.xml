@@ -3,6 +3,7 @@
     <string name="app_name" translation_description="Application Title">Sky Map</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="menu_search">Αναζήτηση</string>
+    <string name="menu_video">Video</string>
     <string name="cancel">Ακύρωση</string>
     <string name="set" translation_description="Button label. Set the date to the given value">Ορισμός</string>
     <string name="go">Πάμε!</string>
