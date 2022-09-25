@@ -21,7 +21,7 @@
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="1"
         android:title="@string/menu_search"
-        app:showAsAction="always" />
+        android:showAsAction="always" />
 
     <item
         android:id="@+id/menu_item_video"
@@ -29,65 +29,65 @@
         android:iconTint="#F8981D"
         android:orderInCategory="2"
         android:title="@string/menu_video"
-        app:showAsAction="always" />
+        android:showAsAction="always" />
 
     <item
         android:id="@+id/menu_item_dim"
         android:icon="@android:drawable/ic_menu_view"
         android:orderInCategory="3"
         android:title="@string/menu_toggle_dim"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="4"
         android:title="@string/menu_settings"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 
     <item
         android:id="@+id/menu_item_gallery"
         android:icon="@android:drawable/ic_menu_gallery"
         android:orderInCategory="5"
         android:title="@string/menu_gallery"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_time"
         android:icon="@drawable/time_travel_icon"
         android:orderInCategory="6"
         android:title="@string/menu_time"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_item_calibrate"
         android:orderInCategory="7"
         android:title="@string/menu_calibrate"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 
     <item
         android:id="@+id/menu_item_diagnostics"
         android:orderInCategory="8"
         android:title="@string/menu_diagnostics"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 
     <item
         android:id="@+id/menu_item_events_calendar"
         android:orderInCategory="9"
         android:title="@string/events_calendar"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 
     <item
         android:id="@+id/menu_item_help"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="10"
         android:title="@string/menu_help"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 
     <!-- TODO(serafini): We need an icon for this? -->
     <item
         android:id="@+id/menu_item_tos"
         android:orderInCategory="11"
         android:title="@string/menu_tos"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 </menu>

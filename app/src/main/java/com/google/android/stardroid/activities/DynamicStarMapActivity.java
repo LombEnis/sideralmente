@@ -370,17 +370,7 @@ public class DynamicStarMapActivity extends InjectableActivity
                     );
                     item.getIcon().setTint(Color.parseColor("#9999A7"));
                     // change video card view weight
-                    ValueAnimator videoCardViewWeightAnimator = ValueAnimator.ofFloat(0.4f, 0f);
-                    videoCardViewWeightAnimator.setDuration(400);
-                    videoCardViewWeightAnimator.addUpdateListener(animation -> {
-                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                0,
-                                Float.parseFloat(animation.getAnimatedValue().toString())
-                        );
-                        videoCardView.setLayoutParams(param);
-                    });
-                    videoCardViewWeightAnimator.start();
+                    startVideoCardViewWeightAnimation(0.4f, 0f);
                     videoOpened = false;
                 } else {
                     menuEventBundle.putString(
@@ -389,17 +379,8 @@ public class DynamicStarMapActivity extends InjectableActivity
                     );
                     item.getIcon().setTint(Color.parseColor("#F8981D"));
                     // change video card view weight
-                    ValueAnimator videoCardViewWeightAnimator = ValueAnimator.ofFloat(0f, 0.4f);
-                    videoCardViewWeightAnimator.setDuration(400);
-                    videoCardViewWeightAnimator.addUpdateListener(animation -> {
-                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                0,
-                                Float.parseFloat(animation.getAnimatedValue().toString())
-                        );
-                        videoCardView.setLayoutParams(param);
-                    });
-                    videoCardViewWeightAnimator.start();
+                    videoWebView.loadUrl("https://www.sideralmente.it/app/video/");
+                    startVideoCardViewWeightAnimation(0f, 0.4f);
                     videoOpened = true;
                 }
                 break;
@@ -518,6 +499,20 @@ public class DynamicStarMapActivity extends InjectableActivity
             handler.post(runnable);
         }
         Log.d(TAG, "-onResume at " + System.currentTimeMillis());
+    }
+
+    private void startVideoCardViewWeightAnimation(Float startWeight, Float endWeight) {
+        ValueAnimator videoCardViewWeightAnimator = ValueAnimator.ofFloat(startWeight, endWeight);
+        videoCardViewWeightAnimator.setDuration(400);
+        videoCardViewWeightAnimator.addUpdateListener(animation -> {
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    0,
+                    Float.parseFloat(animation.getAnimatedValue().toString())
+            );
+            videoCardView.setLayoutParams(param);
+        });
+        videoCardViewWeightAnimator.start();
     }
 
     public void setTimeTravelMode(Date newTime) {
