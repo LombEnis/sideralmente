@@ -4,11 +4,13 @@
     android:id="@+id/main_sky_view_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000040"
     android:orientation="vertical"
     android:theme="@android:style/Theme.Black">
 
     <FrameLayout
         android:id="@+id/main_sky_view"
+        android:foreground="@drawable/black_transparent_gradient"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7">
@@ -215,11 +217,18 @@
         </RelativeLayout>
     </FrameLayout>
 
-    <WebView
-        android:id="@+id/web_view"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3" />
+        android:layout_weight="0.3"
+        stardroid:cardCornerRadius="15dp">
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
 
