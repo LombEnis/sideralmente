@@ -25,7 +25,8 @@
 
     <item
         android:id="@+id/menu_item_video"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/video"
+        android:iconTint="#F8981D"
         android:orderInCategory="2"
         android:title="@string/menu_video"
         app:showAsAction="always" />

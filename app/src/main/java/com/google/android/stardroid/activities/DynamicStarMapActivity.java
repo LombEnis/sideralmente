@@ -14,11 +14,13 @@
 
 package com.google.android.stardroid.activities;
 
+import android.animation.ValueAnimator;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
@@ -40,9 +42,11 @@ import android.view.animation.Animation;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.stardroid.ApplicationConstants;
@@ -150,6 +154,7 @@ public class DynamicStarMapActivity extends InjectableActivity
     private RendererController rendererController;
     private boolean nightMode = false;
     private boolean searchMode = false;
+    private boolean videoOpened = true;
     private Vector3 searchTarget = CoordinateManipulationsKt.getGeocentricCoords(0, 0);
     private GLSurfaceView skyView;
     private PowerManager.WakeLock wakeLock;
@@ -165,6 +170,9 @@ public class DynamicStarMapActivity extends InjectableActivity
     private DragRotateZoomGestureDetector dragZoomRotateDetector;
     private ActivityLightLevelManager activityLightLevelManager;
     private long sessionStartTime;
+    // Views
+    private CardView videoCardView;
+    private WebView videoWebView;
 
     private static void updateViewDirectionMode(AstronomerModel model, SharedPreferences sharedPreferences) {
         String viewDirectionMode =
@@ -243,15 +251,16 @@ public class DynamicStarMapActivity extends InjectableActivity
         }
         Log.d(TAG, "-onCreate at " + System.currentTimeMillis());
 
-        setUpWebView();
+        setUpVideoViews();
     }
 
-    private void setUpWebView() {
-        WebView webView = findViewById(R.id.web_view);
-        WebSettings settings = webView.getSettings();
+    private void setUpVideoViews() {
+        videoCardView = findViewById(R.id.video_card_view);
+        videoWebView = findViewById(R.id.video_web_view);
+        WebSettings settings = videoWebView.getSettings();
         settings.setDomStorageEnabled(true);
         settings.setJavaScriptEnabled(true);
-        webView.loadUrl("https://www.sideralmente.it/app/video/");
+        videoWebView.loadUrl("https://www.sideralmente.it/app/video/");
     }
 
     private void checkForSensorsAndMaybeWarn() {
@@ -352,6 +361,48 @@ public class DynamicStarMapActivity extends InjectableActivity
                 menuEventBundle.putString(Analytics.MENU_ITEM_EVENT_VALUE, Analytics.SEARCH_REQUESTED_LABEL);
                 onSearchRequested();
                 break;
+            case R.id.menu_item_video:
+                Log.d(TAG, "Video");
+                if (videoOpened) {
+                    menuEventBundle.putString(
+                            Analytics.MENU_ITEM_EVENT_VALUE,
+                            Analytics.VIDEO_OPENED_LABEL
+                    );
+                    item.getIcon().setTint(Color.parseColor("#9999A7"));
+                    // change video card view weight
+                    ValueAnimator videoCardViewWeightAnimator = ValueAnimator.ofFloat(0.4f, 0f);
+                    videoCardViewWeightAnimator.setDuration(400);
+                    videoCardViewWeightAnimator.addUpdateListener(animation -> {
+                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                0,
+                                Float.parseFloat(animation.getAnimatedValue().toString())
+                        );
+                        videoCardView.setLayoutParams(param);
+                    });
+                    videoCardViewWeightAnimator.start();
+                    videoOpened = false;
+                } else {
+                    menuEventBundle.putString(
+                            Analytics.MENU_ITEM_EVENT_VALUE,
+                            Analytics.VIDEO_CLOSED_LABEL
+                    );
+                    item.getIcon().setTint(Color.parseColor("#F8981D"));
+                    // change video card view weight
+                    ValueAnimator videoCardViewWeightAnimator = ValueAnimator.ofFloat(0f, 0.4f);
+                    videoCardViewWeightAnimator.setDuration(400);
+                    videoCardViewWeightAnimator.addUpdateListener(animation -> {
+                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                0,
+                                Float.parseFloat(animation.getAnimatedValue().toString())
+                        );
+                        videoCardView.setLayoutParams(param);
+                    });
+                    videoCardViewWeightAnimator.start();
+                    videoOpened = true;
+                }
+                break;
             case R.id.menu_item_settings:
                 Log.d(TAG, "Settings");
                 menuEventBundle.putString(Analytics.MENU_ITEM_EVENT_VALUE, Analytics.SETTINGS_OPENED_LABEL);
@@ -404,6 +455,7 @@ public class DynamicStarMapActivity extends InjectableActivity
                 break;
             case R.id.menu_item_events_calendar:
                 Log.d(TAG, "Loading Events Calendar");
+                menuEventBundle.putString(Analytics.MENU_ITEM_EVENT_VALUE, Analytics.DIAGNOSTICS_OPENED_LABEL);
                 startActivity(new Intent(this, EventsCalendarActivity.class));
                 break;
             default:

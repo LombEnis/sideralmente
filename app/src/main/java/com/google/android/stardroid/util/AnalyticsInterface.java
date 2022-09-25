@@ -50,6 +50,8 @@ public interface AnalyticsInterface {
     String MENU_ITEM_EVENT_VALUE = "menu_item";
     String TOGGLED_NIGHT_MODE_LABEL = "night_mode";
     String SEARCH_REQUESTED_LABEL = "search_requested";
+    String VIDEO_OPENED_LABEL = "video_opened";
+    String VIDEO_CLOSED_LABEL = "video_closed";
     String SETTINGS_OPENED_LABEL = "settings_opened";
     String HELP_OPENED_LABEL = "help_opened";
     String CALIBRATION_OPENED_LABEL = "calibration_opened";
@@ -57,6 +59,7 @@ public interface AnalyticsInterface {
     String GALLERY_OPENED_LABEL = "gallery_opened";
     String TOS_OPENED_LABEL = "TOS_opened";
     String DIAGNOSTICS_OPENED_LABEL = "diagnostics_opened";
+    String EVENTS_CALENDAR_OPENED_LABEL = "events_calendar_opened";
     String SEARCH_EVENT = FirebaseAnalytics.Event.SEARCH;
     String SEARCH_TERM = FirebaseAnalytics.Param.SEARCH_TERM;
     String SEARCH_SUCCESS = "search_success";
