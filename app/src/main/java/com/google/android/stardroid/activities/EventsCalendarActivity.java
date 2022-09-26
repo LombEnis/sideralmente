@@ -2,6 +2,7 @@ package com.google.android.stardroid.activities;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.stardroid.R;
 
@@ -23,7 +24,14 @@ public class EventsCalendarActivity extends InjectableActivity {
     }
 
     private void setUpWebView() {
-        webView.loadUrl("https://www.google.com");
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        webView.loadUrl("https://www.sideralmente.it/app/eventi");
     }
 
 }
