@@ -24,13 +24,7 @@ public class EventsCalendarActivity extends InjectableActivity {
     }
 
     private void setUpWebView() {
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+        webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://www.sideralmente.it/app/eventi");
     }
 
