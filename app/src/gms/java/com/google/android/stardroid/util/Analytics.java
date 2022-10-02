@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.android.stardroid.util;
+package com.google.android.sideralmente.util;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.tasks.Task;
-import com.google.android.stardroid.StardroidApplication;
+import com.google.android.sideralmente.StardroidApplication;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import javax.inject.Inject;

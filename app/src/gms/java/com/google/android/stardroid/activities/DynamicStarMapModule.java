@@ -1,7 +1,7 @@
-package com.google.android.stardroid.activities;
+package com.google.android.sideralmente.activities;
 
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.stardroid.inject.PerActivity;
+import com.google.android.sideralmente.inject.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;

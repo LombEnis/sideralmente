@@ -1,4 +1,4 @@
-package com.google.android.stardroid.activities.util;
+package com.google.android.sideralmente.activities.util;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.stardroid.R;
-import com.google.android.stardroid.activities.DynamicStarMapActivity;
-import com.google.android.stardroid.activities.dialogs.LocationPermissionRationaleFragment;
-import com.google.android.stardroid.control.LocationController;
+import com.google.android.sideralmente.R;
+import com.google.android.sideralmente.activities.DynamicStarMapActivity;
+import com.google.android.sideralmente.activities.dialogs.LocationPermissionRationaleFragment;
+import com.google.android.sideralmente.control.LocationController;
 
 import javax.inject.Inject;
 

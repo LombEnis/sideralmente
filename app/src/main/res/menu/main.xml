@@ -13,81 +13,80 @@
      limitations under the License.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_item_search"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="1"
-        android:title="@string/menu_search"
-        android:showAsAction="always" />
+        android:showAsAction="always"
+        android:title="@string/menu_search" />
 
     <item
         android:id="@+id/menu_item_video"
         android:icon="@drawable/video"
         android:iconTint="#F8981D"
         android:orderInCategory="2"
-        android:title="@string/menu_video"
-        android:showAsAction="always" />
+        android:showAsAction="always"
+        android:title="@string/menu_video" />
 
     <item
         android:id="@+id/menu_item_events_calendar"
         android:orderInCategory="3"
-        android:title="@string/events_calendar"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/events_calendar" />
 
     <item
         android:id="@+id/menu_item_dim"
         android:icon="@android:drawable/ic_menu_view"
         android:orderInCategory="4"
-        android:title="@string/menu_toggle_dim"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_toggle_dim" />
 
     <item
         android:id="@+id/menu_item_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="5"
-        android:title="@string/menu_settings"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_settings" />
 
     <item
         android:id="@+id/menu_item_gallery"
         android:icon="@android:drawable/ic_menu_gallery"
         android:orderInCategory="6"
-        android:title="@string/menu_gallery"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_gallery" />
 
     <item
         android:id="@+id/menu_item_time"
         android:icon="@drawable/time_travel_icon"
         android:orderInCategory="7"
-        android:title="@string/menu_time"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_time" />
 
     <item
         android:id="@+id/menu_item_calibrate"
         android:orderInCategory="8"
-        android:title="@string/menu_calibrate"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_calibrate" />
 
     <item
         android:id="@+id/menu_item_diagnostics"
         android:orderInCategory="9"
-        android:title="@string/menu_diagnostics"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_diagnostics" />
 
     <item
         android:id="@+id/menu_item_help"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="10"
-        android:title="@string/menu_help"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_help" />
 
     <!-- TODO(serafini): We need an icon for this? -->
     <item
         android:id="@+id/menu_item_tos"
         android:orderInCategory="11"
-        android:title="@string/menu_tos"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        android:title="@string/menu_tos" />
 </menu>

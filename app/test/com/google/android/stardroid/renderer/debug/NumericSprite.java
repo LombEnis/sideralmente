@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.stardroid.renderer.debug;
+package com.google.android.sideralmente.renderer.debug;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -24,8 +24,8 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.opengl.GLUtils;
 
-import com.google.android.stardroid.renderer.util.TextureManager;
-import com.google.android.stardroid.renderer.util.TextureReference;
+import com.google.android.sideralmente.renderer.util.TextureManager;
+import com.google.android.sideralmente.renderer.util.TextureReference;
 
 import java.nio.CharBuffer;
 import java.nio.FloatBuffer;
@@ -185,6 +185,7 @@ class LabelMaker {
     private int mLineHeight;
     private ArrayList<Label> mLabels = new ArrayList<Label>();
     private int mState;
+
     /**
      * Create a label maker
      * or maximum compatibility with various OpenGL ES implementations,
@@ -526,6 +527,7 @@ class LabelMaker {
         public float height;
         public float baseline;
         public int[] mCrop;
+
         public Label(Grid grid, float width, float height, float baseLine,
                      int cropU, int cropV, int cropW, int cropH) {
             this.grid = grid;

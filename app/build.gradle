@@ -9,7 +9,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "com.google.android.stardroid"
+        applicationId "com.google.android.sideralmente"
         minSdkVersion 26
         targetSdkVersion 31
         versionCode 1541

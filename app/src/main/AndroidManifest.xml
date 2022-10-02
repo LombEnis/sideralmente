@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.android.stardroid"
+    package="com.google.android.sideralmente"
     android:installLocation="auto"
     android:vmSafeMode="false">
 
@@ -44,12 +44,12 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".StardroidApplication"
-        android:icon="@drawable/skymap_logo"
+        android:name="com.google.android.sideralmente.StardroidApplication"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name="com.google.android.sideralmente.activities.SplashScreenActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DynamicStarMapActivity"
+            android:name="com.google.android.sideralmente.activities.DynamicStarMapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
             android:label="@string/app_name"
@@ -79,29 +79,29 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".activities.EditSettingsActivity"
+            android:name="com.google.android.sideralmente.activities.EditSettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ImageGalleryActivity"
+            android:name="com.google.android.sideralmente.activities.ImageGalleryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ImageDisplayActivity"
+            android:name="com.google.android.sideralmente.activities.ImageDisplayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.DiagnosticActivity"
+            android:name="com.google.android.sideralmente.activities.DiagnosticActivity"
             android:label="@string/title_activity_diagnostic"
             android:screenOrientation="portrait"></activity> <!-- Provides search suggestions. -->
         <activity
-            android:name=".activities.EventsCalendarActivity"
+            android:name="com.google.android.sideralmente.activities.EventsCalendarActivity"
             android:screenOrientation="portrait" />
         <provider
-            android:name=".search.SearchTermsProvider"
-            android:authorities="com.google.android.stardroid.searchterms"
+            android:name="com.google.android.sideralmente.search.SearchTermsProvider"
+            android:authorities="com.google.android.sideralmente.searchterms"
             android:exported="false"
             android:syncable="false" />
 
         <activity
-            android:name=".activities.CompassCalibrationActivity"
+            android:name="com.google.android.sideralmente.activities.CompassCalibrationActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"></activity>
     </application>

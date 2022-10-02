@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.android.stardroid.renderer.debug;
+package com.google.android.sideralmente.renderer.debug;
 
 import java.util.ArrayList;
 
@@ -24,11 +24,11 @@ import android.graphics.Paint;
 import android.os.SystemClock;
 import android.util.FloatMath;
 
-import com.google.android.stardroid.renderer.SkyRenderer;
-import com.google.android.stardroid.source.LinePrimitive;
-import com.google.android.stardroid.source.PointPrimitive;
-import com.google.android.stardroid.source.TextPrimitive;
-import com.google.android.stardroid.math.CoordinateManipulations;
+import com.google.android.sideralmente.renderer.SkyRenderer;
+import com.google.android.sideralmente.source.LinePrimitive;
+import com.google.android.sideralmente.source.PointPrimitive;
+import com.google.android.sideralmente.source.TextPrimitive;
+import com.google.android.sideralmente.math.CoordinateManipulations;
 
 // This class is for debugging the sky renderer.
 public class DebugSkyRenderer extends SkyRenderer {
