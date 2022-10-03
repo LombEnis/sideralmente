@@ -4,5 +4,5 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scaleType="centerCrop"
-    android:src="@drawable/stardroid_big_image"
+    android:src="@drawable/sideralente_big_image"
     android:theme="@android:style/Theme.Black" />
