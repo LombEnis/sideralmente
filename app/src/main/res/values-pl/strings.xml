@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
-    <string name="app_name" translation_description="Application Title">Sky Map</string>
+    <string name="app_name" translation_description="Application Title">Sideralmente</string>
     <string name="menu_settings">Ustawienia</string>
     <string name="menu_search">Szukaj</string>
     <string name="menu_video">Video</string>

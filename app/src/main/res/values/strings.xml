@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Please add  translation_description="" attributes to Strings to assist the translators. -->
 <resources>
-    <string name="app_name" translation_description="Application Title">Sideralmente - guida del cielo</string>
+    <string name="app_name" translation_description="Application Title">Sideralmente</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
     <string name="menu_video">Video</string>

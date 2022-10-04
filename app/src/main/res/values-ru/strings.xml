@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translation_description="Application Title">Карта звездного неба</string>
+    <string name="app_name" translation_description="Application Title">Sideralmente</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_search">Поиск</string>
     <string name="menu_video">видео</string>
