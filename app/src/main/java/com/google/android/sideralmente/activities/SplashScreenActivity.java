@@ -26,7 +26,6 @@ import android.view.animation.Animation.AnimationListener;
 import com.google.android.sideralmente.ApplicationConstants;
 import com.google.android.sideralmente.R;
 import com.google.android.sideralmente.StardroidApplication;
-import com.google.android.sideralmente.activities.dialogs.EulaDialogFragment;
 import com.google.android.sideralmente.activities.dialogs.WhatsNewDialogFragment;
 import com.google.android.sideralmente.activities.util.ConstraintsChecker;
 import com.google.android.sideralmente.inject.HasComponent;
@@ -39,11 +38,9 @@ import javax.inject.Inject;
  * Shows a splash screen, then launch the next activity.
  */
 public class SplashScreenActivity extends InjectableActivity
-        implements EulaDialogFragment.EulaAcceptanceListener, WhatsNewDialogFragment.CloseListener,
+        implements WhatsNewDialogFragment.CloseListener,
         HasComponent<SplashScreenComponent> {
     private final static String TAG = MiscUtil.getTag(SplashScreenActivity.class);
-    // Update this with new versions of the EULA
-    private static final int EULA_VERSION_CODE = 1;
     @Inject
     StardroidApplication app;
     @Inject
@@ -52,8 +49,6 @@ public class SplashScreenActivity extends InjectableActivity
     SharedPreferences sharedPreferences;
     @Inject
     Animation fadeAnimation;
-    @Inject
-    EulaDialogFragment eulaDialogFragmentWithButtons;
     @Inject
     FragmentManager fragmentManager;
     @Inject
@@ -95,13 +90,7 @@ public class SplashScreenActivity extends InjectableActivity
     public void onResume() {
         Log.d(TAG, "onResume");
         super.onResume();
-        boolean eulaShowing = maybeShowEula();
-        Log.d(TAG, "Eula showing " + eulaShowing);
-        if (!eulaShowing) {
-            // User has previously accepted - let's get on with it!
-            Log.d(TAG, "EULA already accepted");
-            graphic.startAnimation(fadeAnimation);
-        }
+        graphic.startAnimation(fadeAnimation);
     }
 
     @Override
@@ -119,32 +108,6 @@ public class SplashScreenActivity extends InjectableActivity
     public void onDestroy() {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
-    }
-
-    private boolean maybeShowEula() {
-        boolean eulaAlreadyConfirmed = (sharedPreferences.getInt(
-                ApplicationConstants.READ_TOS_PREF_VERSION, -1) == EULA_VERSION_CODE);
-        if (!eulaAlreadyConfirmed) {
-            eulaDialogFragmentWithButtons.show(fragmentManager, "Eula Dialog");
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public void eulaAccepted() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(ApplicationConstants.READ_TOS_PREF_VERSION, EULA_VERSION_CODE);
-        editor.commit();
-        // Let's go.
-        graphic.startAnimation(fadeAnimation);
-    }
-
-    @Override
-    public void eulaRejected() {
-        Log.d(TAG, "Sorry chum, no accept, no app.");
-        finish();
     }
 
     private void maybeShowWhatsNewAndEnd() {

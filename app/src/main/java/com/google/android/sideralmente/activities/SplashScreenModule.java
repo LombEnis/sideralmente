@@ -6,7 +6,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.google.android.sideralmente.R;
-import com.google.android.sideralmente.activities.dialogs.EulaDialogFragment;
 import com.google.android.sideralmente.activities.dialogs.WhatsNewDialogFragment;
 import com.google.android.sideralmente.inject.PerActivity;
 
@@ -22,14 +21,6 @@ public class SplashScreenModule {
 
     public SplashScreenModule(SplashScreenActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    @PerActivity
-    EulaDialogFragment provideEulaDialogFragment() {
-        EulaDialogFragment fragment = new EulaDialogFragment();
-        fragment.setEulaAcceptanceListener(activity);
-        return fragment;
     }
 
     @Provides
