@@ -44,7 +44,7 @@ class ProtobufAstronomicalRenderable(
         // Ideally we'd get this from Context.getPackageName but for some reason passing it in as a
         // string via the contructor results in it always being null when I need it. Buggered if
         // I know why - it's certainly a concern. Hopefully this class won't be around for much longer.
-        const val PACKAGE = "com.google.android.stardroid"
+        const val PACKAGE = "com.google.android.sideralmente"
         private fun getCoords(proto: SourceProto.GeocentricCoordinatesProto): Vector3 {
             return getGeocentricCoords(proto.rightAscension, proto.declination)
         }
