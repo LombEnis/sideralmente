@@ -9,7 +9,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "com.stellaria.sideralmente"
+        applicationId "com.test.sideralmente"
         minSdkVersion 26
         targetSdkVersion 31
         versionCode 1
